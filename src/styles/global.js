@@ -29,5 +29,16 @@ export default createGlobalStyle`
   button:hover, a:hover {
     filter: brightness(0.7);
   }
+  ::-webkit-scrollbar {
+  width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #2c2c31;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #9e9ea0;
+  }
 
 `
