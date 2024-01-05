@@ -1,9 +1,10 @@
 import { Container } from './style'
+import { Header } from '../../components/Header'
 
 export function Home() {
   return (
     <Container>
-      <h1> Bora desanima não</h1>
+      <Header />
     </Container>
   )
 }

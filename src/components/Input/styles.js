@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  width: 100%;
   display: flex;
+  height: 3rem;
+  flex: 2;
   align-items: center;
 
   background: ${({ theme }) => theme.COLORS.BACKGROUND_900};
@@ -26,8 +27,8 @@ export const Container = styled.div`
   }
 
   > svg {
-    margin-left: 1rem;
+    margin-left: 5rem;
     font-size: 1.5rem;
-    color: ${({ theme }) => theme.COLORS.GRAY_300};
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
   }
 `
