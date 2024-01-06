@@ -54,7 +54,9 @@ export const Container = styled.div`
     }
   }
   .swiper-pagination-bullet {
+    //background-color colocar cor
   }
   .swiper-scrollbar {
+    //background-color colocar cor
   }
 `

@@ -1,13 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Container } from './style'
-import { register } from 'swiper/element/bundle'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Button } from '../../components/Button'
 import { ButtonText } from '../../components/ButtonText'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules'
-
-register()
 
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -15,7 +12,6 @@ import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 
 export function Sliders() {
-  const [slidePerview, setSlidePerview] = useState()
   const data = [
     {
       id: 1,
@@ -66,9 +62,11 @@ export function Sliders() {
         'https://images.unsplash.com/photo-1607013251379-e6eecfffe234?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YnVyZ2Vyc3xlbnwwfHwwfHx8Mg%3D%3D'
     }
   ]
+  const [slidePerview, setSlidePerview] = useState(3)
+
   useEffect(() => {
     function handleResize() {
-      if (window.innerWidth < 420) {
+      if (window.innerWidth < 720) {
         setSlidePerview(1)
       } else {
         setSlidePerview(2)
@@ -88,8 +86,10 @@ export function Sliders() {
         spaceBetween={27}
         slidesPerView={slidePerview}
         navigation
-        pagination={{ clickable: true }}
+        pagination={false}
         scrollbar={{ draggable: true }}
+        onSwiper={swiper => console.log(swiper)}
+        onSlideChange={() => console.log('slide change')}
       >
         {data.map(item => (
           <SwiperSlide key={item.id} className="slider">
