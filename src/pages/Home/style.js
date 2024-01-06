@@ -3,7 +3,7 @@ export const Container = styled.div`
   display: grid;
   grid-template-areas: 'header' 'content' 'footer';
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   grid-template-rows: 5rem auto 3rem;
 `
 export const Content = styled.section`
@@ -30,9 +30,4 @@ export const Content = styled.section`
     font-size: 0.87rem;
     color: ${({ theme }) => theme.COLORS.LIGHT_400};
   }
-`
-export const Footer = styled.footer`
-  grid-area: footer;
-  padding: 1rem 7.75rem;
-  background-color: ${({ theme }) => theme.COLORS.BACKGROUND_600};
 `
