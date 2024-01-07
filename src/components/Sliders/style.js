@@ -13,6 +13,9 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     row-gap: 15px;
+    &:first-child {
+      //colocar box shadow
+    }
     h2 {
       font-size: 24px;
       font-weight: 700;
