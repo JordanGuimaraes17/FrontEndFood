@@ -13,9 +13,7 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     row-gap: 15px;
-    &:first-child {
-      //colocar box shadow
-    }
+
     h2 {
       font-size: 24px;
       font-weight: 700;
@@ -57,11 +55,5 @@ export const Container = styled.div`
     &::after {
       font-size: 40px;
     }
-  }
-  .swiper-pagination-bullet {
-    //background-color colocar cor
-  }
-  .swiper-scrollbar {
-    //background-color colocar cor
   }
 `
