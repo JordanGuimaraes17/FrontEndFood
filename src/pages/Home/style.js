@@ -3,7 +3,7 @@ export const Container = styled.div`
   display: grid;
   grid-template-areas: 'header' 'main' 'footer';
   min-height: 100vh;
-  grid-template-rows: 5.4rem auto 3.5rem;
+  grid-template-rows: 5.4rem auto 4rem;
 `
 export const Content = styled.section`
   margin: 0 auto;

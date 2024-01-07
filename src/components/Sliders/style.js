@@ -3,6 +3,7 @@ export const Container = styled.div`
   width: 70rem;
 
   .slider {
+    cursor: grab;
     height: 27rem;
     max-width: 19rem;
     padding: 24px;
@@ -12,7 +13,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: 15px;
+    gap: 0.4rem;
 
     h2 {
       font-size: 24px;
@@ -20,6 +21,7 @@ export const Container = styled.div`
       line-height: 33.6px;
     }
     p {
+      text-align: center;
       font-size: 14px;
 
       color: ${({ theme }) => theme.COLORS.LIGHT_400};
