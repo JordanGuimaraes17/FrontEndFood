@@ -4,8 +4,8 @@ export const Container = styled.div`
 
   .slider {
     cursor: grab;
-    height: 27rem;
-    max-width: 19rem;
+    height: 26rem;
+    max-width: 18rem;
     padding: 24px;
     background: ${({ theme }) => theme.COLORS.BACKGROUND_300};
     border-radius: 8px;
@@ -47,8 +47,8 @@ export const Container = styled.div`
     }
   }
   .slide-item {
-    width: 176px;
-    height: 176px;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
   }
   .swiper-button-next,
