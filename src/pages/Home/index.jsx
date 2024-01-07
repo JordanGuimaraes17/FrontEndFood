@@ -10,18 +10,23 @@ export function Home() {
     <Container>
       <Header />
       <Content>
-        <div className="box">
-          <img src={HomeIMG} alt="Chuva de hambúrgueres" />
-          <div className="text">
-            <h2>Sabores inigualáveis</h2>
-            <span>
-              Sinta o cuidado do preparo com ingredientes selecionados
-            </span>
-          </div>
-        </div>
-
         <main>
+          <div className="box">
+            <img src={HomeIMG} alt="Chuva de hambúrgueres" />
+            <div className="text">
+              <h2>Sabores inigualáveis</h2>
+              <span>
+                Sinta o cuidado do preparo com ingredientes selecionados
+              </span>
+            </div>
+          </div>
           <Section className="sliders" title="Refeições">
+            <Sliders />
+          </Section>
+          <Section className="sliders" title="Sobremessas">
+            <Sliders />
+          </Section>
+          <Section className="sliders" title="Bebidas">
             <Sliders />
           </Section>
         </main>

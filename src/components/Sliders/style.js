@@ -3,7 +3,7 @@ export const Container = styled.div`
   width: 70rem;
 
   .slider {
-    height: 28.8rem;
+    height: 27rem;
     max-width: 19rem;
     padding: 24px;
     background: ${({ theme }) => theme.COLORS.BACKGROUND_300};

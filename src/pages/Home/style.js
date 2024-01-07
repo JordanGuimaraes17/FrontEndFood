@@ -3,7 +3,7 @@ export const Container = styled.div`
   display: grid;
   grid-template-areas: 'header' 'main' 'footer';
   min-height: 100vh;
-  grid-template-rows: 5rem auto 3.5rem;
+  grid-template-rows: 5.4rem auto 3.5rem;
 `
 export const Content = styled.section`
   margin: 0 auto;
@@ -17,13 +17,16 @@ export const Content = styled.section`
     width: 70rem;
     display: flex;
     align-items: center;
-    margin-top: 9.5rem;
-    height: 16.25rem;
+    margin-top: 7rem;
+    height: 13rem;
     background: ${({ theme }) => theme.COLORS.BACKGROUND_600};
   }
   .box img {
-    margin-top: -9rem;
-    flex-shrink: 0;
+    width: 450px;
+    height: 290px;
+    margin-top: -5rem;
+
+    object-fit: cover;
   }
   .text h2 {
     font-weight: 500;
