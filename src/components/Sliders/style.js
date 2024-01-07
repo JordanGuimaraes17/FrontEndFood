@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 export const Container = styled.div`
+  width: 70rem;
+
   .slider {
-    height: 462px;
-    max-width: 304px;
+    height: 28.8rem;
+    max-width: 19rem;
     padding: 24px;
     background: ${({ theme }) => theme.COLORS.BACKGROUND_300};
     border-radius: 8px;

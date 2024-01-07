@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Container } from './style'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Button } from '../../components/Button'
-import { ButtonText } from '../../components/ButtonText'
+import { Button } from '../Button'
+import { ButtonText } from '../ButtonText'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules'
 

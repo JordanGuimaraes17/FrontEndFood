@@ -3,6 +3,7 @@ import HomeIMG from '../../assets/HomeIMG.png'
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { Section } from '../../components/Section'
+import { Sliders } from '../../components/Sliders'
 
 export function Home() {
   return (
@@ -18,8 +19,14 @@ export function Home() {
             </span>
           </div>
         </div>
-        <Section title="Refeições"></Section>
+
+        <main>
+          <Section className="sliders" title="Refeições">
+            <Sliders />
+          </Section>
+        </main>
       </Content>
+
       <Footer />
     </Container>
   )
