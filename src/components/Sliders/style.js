@@ -3,8 +3,6 @@ export const Container = styled.div`
   width: 70rem;
   .slider {
     cursor: grab;
-    height: 26rem;
-    max-width: 18rem;
     padding: 24px;
     background: ${({ theme }) => theme.COLORS.BACKGROUND_300};
     border-radius: 8px;
