@@ -82,9 +82,15 @@ const data = [
   }
 ]
 
-export function Sliders() {
+export function Sliders({ updateOrderItems }) {
   const [slidePerview, setSlidePerview] = useState(3)
   const [itemQuantities, setItemQuantities] = useState({})
+  const [orderItems, setOrderItems] = useState([])
+
+  function handleIncludeItem(item) {
+    setOrderItems(prevItems => [...prevItems, item])
+    updateOrderItems(prevItems => [...prevItems, item])
+  }
 
   function handleIncrement(id) {
     setItemQuantities(prevQuantities => {
@@ -95,6 +101,7 @@ export function Sliders() {
       return updatedQuantities
     })
   }
+
   function handleDecrement(id) {
     setItemQuantities(prevQuantities => {
       const updatedQuantities = {
@@ -103,6 +110,12 @@ export function Sliders() {
       }
       return updatedQuantities
     })
+    // Verifica se o item está no pedido e, se sim, o remove
+    if (orderItems.some(item => item.id === id)) {
+      const updatedOrderItems = orderItems.filter(item => item.id !== id)
+      setOrderItems(updatedOrderItems)
+      updateOrderItems(updatedOrderItems)
+    }
   }
 
   useEffect(() => {
@@ -119,6 +132,7 @@ export function Sliders() {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
+
   useEffect(() => {
     const initialQuantities = {}
     data.forEach(item => {
@@ -153,7 +167,7 @@ export function Sliders() {
                 icon={AiOutlinePlus}
                 onClick={() => handleIncrement(item.id)}
               />
-              <Button title="incluir" />
+              <Button title="Incluir" onClick={() => handleIncludeItem(item)} />
             </footer>
           </SwiperSlide>
         ))}

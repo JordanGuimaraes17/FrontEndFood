@@ -1,14 +1,23 @@
+// Home.js
+
 import { Container, Content } from './style'
 import HomeIMG from '../../assets/HomeIMG.png'
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { Section } from '../../components/Section'
 import { Sliders } from '../../components/Sliders'
+import { useState } from 'react'
 
 export function Home() {
+  const [orderItems, setOrderItems] = useState([])
+
+  function updateOrderItems(items) {
+    setOrderItems(items)
+  }
+
   return (
     <Container>
-      <Header />
+      <Header orderItemCount={orderItems.length} />
       <Content>
         <main>
           <div className="box">
@@ -21,17 +30,28 @@ export function Home() {
             </div>
           </div>
           <Section className="sliders" title="Refeições">
-            <Sliders />
+            {/* Passando o estado orderItems para Sliders */}
+            <Sliders
+              updateOrderItems={updateOrderItems}
+              orderItems={orderItems}
+            />
           </Section>
           <Section className="sliders" title="Sobremessas">
-            <Sliders />
+            {/* Passando o estado orderItems para Sliders */}
+            <Sliders
+              updateOrderItems={updateOrderItems}
+              orderItems={orderItems}
+            />
           </Section>
           <Section className="sliders" title="Bebidas">
-            <Sliders />
+            {/* Passando o estado orderItems para Sliders */}
+            <Sliders
+              updateOrderItems={updateOrderItems}
+              orderItems={orderItems}
+            />
           </Section>
         </main>
       </Content>
-
       <Footer />
     </Container>
   )
