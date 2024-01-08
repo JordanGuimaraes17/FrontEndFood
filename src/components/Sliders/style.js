@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 export const Container = styled.div`
   width: 70rem;
-
   .slider {
     cursor: grab;
     height: 26rem;

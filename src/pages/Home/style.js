@@ -25,6 +25,7 @@ export const Content = styled.section`
     margin-top: 7rem;
     height: 13rem;
     background: ${({ theme }) => theme.COLORS.BACKGROUND_600};
+    padding: 2rem;
   }
   .box img {
     width: 450px;
