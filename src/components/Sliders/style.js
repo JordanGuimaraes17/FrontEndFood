@@ -14,10 +14,6 @@ export const Container = styled.div`
     align-items: center;
     gap: 0.4rem;
 
-    &:first-child {
-      opacity: 0.8;
-    }
-
     h2 {
       font-size: 24px;
       font-weight: 700;
