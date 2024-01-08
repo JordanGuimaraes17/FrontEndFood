@@ -14,6 +14,10 @@ export const Container = styled.div`
     align-items: center;
     gap: 0.4rem;
 
+    &:first-child {
+      opacity: 0.8;
+    }
+
     h2 {
       font-size: 24px;
       font-weight: 700;
@@ -52,9 +56,9 @@ export const Container = styled.div`
   }
   .swiper-button-next,
   .swiper-button-prev {
-    color: ${({ theme }) => theme.COLORS.LIGHT_300};
+    color: ${({ theme }) => theme.COLORS.CAKE_100};
     &::after {
-      font-size: 40px;
+      font-size: 35px;
     }
   }
 `
