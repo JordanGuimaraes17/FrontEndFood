@@ -34,6 +34,7 @@ export const Container = styled.div`
     }
 
     footer {
+      cursor: pointer;
       gap: 14px;
       font-size: 14px;
       display: flex;
