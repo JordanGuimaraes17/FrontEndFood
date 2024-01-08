@@ -100,6 +100,19 @@ export function Sliders({ updateOrderDishes }) {
       }
       return updatedQuantities
     })
+
+    // Verifica se o item está no pedido
+    const orderItemIndex = orderDishes.findIndex(item => item.id === id)
+    if (orderItemIndex !== -1) {
+      // Se o item está no pedido, cria uma cópia do array de pedidos
+      const updatedOrderItems = [...orderDishes]
+
+      // Atualiza a quantidade do prato no array de pedidos
+      updatedOrderItems[orderItemIndex].quantity++
+
+      setOrderDishes(updatedOrderItems)
+      updateOrderDishes(updatedOrderItems)
+    }
   }
 
   function handleDecrement(id) {
@@ -110,9 +123,21 @@ export function Sliders({ updateOrderDishes }) {
       }
       return updatedQuantities
     })
-    // Verifica se o item está no pedido e, se sim, o remove
-    if (orderDishes.some(item => item.id === id)) {
-      const updatedOrderItems = orderDishes.filter(item => item.id !== id)
+
+    // Verifica se o item está no pedido
+    const orderItemIndex = orderDishes.findIndex(item => item.id === id)
+    if (orderItemIndex !== -1) {
+      // Se o item está no pedido, cria uma cópia do array de pedidos
+      const updatedOrderItems = [...orderDishes]
+
+      // Se a quantidade do prato for maior que 1, decrementa a quantidade
+      if (updatedOrderItems[orderItemIndex].quantity > 1) {
+        updatedOrderItems[orderItemIndex].quantity--
+      } else {
+        // Se a quantidade for 1, remove o item do array de pedidos
+        updatedOrderItems.splice(orderItemIndex, 1)
+      }
+
       setOrderDishes(updatedOrderItems)
       updateOrderDishes(updatedOrderItems)
     }
@@ -141,11 +166,15 @@ export function Sliders({ updateOrderDishes }) {
     setDishesQuantities(initialQuantities)
   }, [])
 
+  useEffect(() => {
+    console.log('Pedido após incluir prato:', orderDishes)
+  }, [orderDishes])
+
   return (
     <Container>
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
-        spaceBetween={27}
+        spaceBetween={20}
         slidesPerView={slidePerview}
         navigation
         pagination={false}
