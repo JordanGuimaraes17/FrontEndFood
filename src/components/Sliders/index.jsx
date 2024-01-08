@@ -83,7 +83,6 @@ const data = [
 ]
 
 export function Sliders({ updateOrderDishes }) {
-  const [slidePerview, setSlidePerview] = useState(3)
   const [dishesQuantities, setDishesQuantities] = useState({})
   const [orderDishes, setOrderDishes] = useState([])
 
@@ -144,21 +143,6 @@ export function Sliders({ updateOrderDishes }) {
   }
 
   useEffect(() => {
-    function handleResize() {
-      if (window.innerWidth < 720) {
-        setSlidePerview(1)
-      } else {
-        setSlidePerview(2)
-      }
-    }
-    handleResize()
-    window.addEventListener('resize', handleResize)
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
-  useEffect(() => {
     const initialQuantities = {}
     data.forEach(item => {
       initialQuantities[item.id] = 1
@@ -175,7 +159,7 @@ export function Sliders({ updateOrderDishes }) {
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={20}
-        slidesPerView={slidePerview}
+        slidesPerView={3.4}
         navigation
         pagination={false}
         scrollbar={{ draggable: true }}
