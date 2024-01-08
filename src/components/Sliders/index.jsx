@@ -82,18 +82,18 @@ const data = [
   }
 ]
 
-export function Sliders({ updateOrderItems }) {
+export function Sliders({ updateOrderDishes }) {
   const [slidePerview, setSlidePerview] = useState(3)
-  const [itemQuantities, setItemQuantities] = useState({})
-  const [orderItems, setOrderItems] = useState([])
+  const [dishesQuantities, setDishesQuantities] = useState({})
+  const [orderDishes, setOrderDishes] = useState([])
 
-  function handleIncludeItem(item) {
-    setOrderItems(prevItems => [...prevItems, item])
-    updateOrderItems(prevItems => [...prevItems, item])
+  function handleIncludeDishes(item) {
+    setOrderDishes(prevItems => [...prevItems, item])
+    updateOrderDishes(prevItems => [...prevItems, item])
   }
 
   function handleIncrement(id) {
-    setItemQuantities(prevQuantities => {
+    setDishesQuantities(prevQuantities => {
       const updatedQuantities = {
         ...prevQuantities,
         [id]: Math.min((prevQuantities[id] || 0) + 1, 5)
@@ -103,7 +103,7 @@ export function Sliders({ updateOrderItems }) {
   }
 
   function handleDecrement(id) {
-    setItemQuantities(prevQuantities => {
+    setDishesQuantities(prevQuantities => {
       const updatedQuantities = {
         ...prevQuantities,
         [id]: Math.max((prevQuantities[id] || 1) - 1, 1)
@@ -111,10 +111,10 @@ export function Sliders({ updateOrderItems }) {
       return updatedQuantities
     })
     // Verifica se o item está no pedido e, se sim, o remove
-    if (orderItems.some(item => item.id === id)) {
-      const updatedOrderItems = orderItems.filter(item => item.id !== id)
-      setOrderItems(updatedOrderItems)
-      updateOrderItems(updatedOrderItems)
+    if (orderDishes.some(item => item.id === id)) {
+      const updatedOrderItems = orderDishes.filter(item => item.id !== id)
+      setOrderDishes(updatedOrderItems)
+      updateOrderDishes(updatedOrderItems)
     }
   }
 
@@ -138,7 +138,7 @@ export function Sliders({ updateOrderItems }) {
     data.forEach(item => {
       initialQuantities[item.id] = 1
     })
-    setItemQuantities(initialQuantities)
+    setDishesQuantities(initialQuantities)
   }, [])
 
   return (
@@ -162,12 +162,15 @@ export function Sliders({ updateOrderItems }) {
                 icon={AiOutlineMinus}
                 onClick={() => handleDecrement(item.id)}
               />
-              <span>0{itemQuantities[item.id] || 0}</span>
+              <span>0{dishesQuantities[item.id] || 0}</span>
               <ButtonText
                 icon={AiOutlinePlus}
                 onClick={() => handleIncrement(item.id)}
               />
-              <Button title="Incluir" onClick={() => handleIncludeItem(item)} />
+              <Button
+                title="Incluir"
+                onClick={() => handleIncludeDishes(item)}
+              />
             </footer>
           </SwiperSlide>
         ))}

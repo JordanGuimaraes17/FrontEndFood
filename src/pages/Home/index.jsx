@@ -9,15 +9,15 @@ import { Sliders } from '../../components/Sliders'
 import { useState } from 'react'
 
 export function Home() {
-  const [orderItems, setOrderItems] = useState([])
+  const [orderDishes, setOrderDishes] = useState([])
 
-  function updateOrderItems(items) {
-    setOrderItems(items)
+  function updateOrderDishes(items) {
+    setOrderDishes(items)
   }
 
   return (
     <Container>
-      <Header orderItemCount={orderItems.length} />
+      <Header orderItemCount={orderDishes.length} />
       <Content>
         <main>
           <div className="box">
@@ -32,22 +32,22 @@ export function Home() {
           <Section className="sliders" title="Refeições">
             {/* Passando o estado orderItems para Sliders */}
             <Sliders
-              updateOrderItems={updateOrderItems}
-              orderItems={orderItems}
+              updateOrderDishes={updateOrderDishes}
+              orderDishes={orderDishes}
             />
           </Section>
           <Section className="sliders" title="Sobremessas">
             {/* Passando o estado orderItems para Sliders */}
             <Sliders
-              updateOrderItems={updateOrderItems}
-              orderItems={orderItems}
+              updateOrderDishes={updateOrderDishes}
+              orderDishes={orderDishes}
             />
           </Section>
           <Section className="sliders" title="Bebidas">
             {/* Passando o estado orderItems para Sliders */}
             <Sliders
-              updateOrderItems={updateOrderItems}
-              orderItems={orderItems}
+              updateOrderDishes={updateOrderDishes}
+              orderDishes={orderDishes}
             />
           </Section>
         </main>
