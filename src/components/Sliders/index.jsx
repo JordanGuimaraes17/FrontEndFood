@@ -84,6 +84,26 @@ const data = [
 
 export function Sliders() {
   const [slidePerview, setSlidePerview] = useState(3)
+  const [itemQuantities, setItemQuantities] = useState({})
+
+  function handleIncrement(id) {
+    setItemQuantities(prevQuantities => {
+      const updatedQuantities = {
+        ...prevQuantities,
+        [id]: Math.min((prevQuantities[id] || 0) + 1, 5)
+      }
+      return updatedQuantities
+    })
+  }
+  function handleDecrement(id) {
+    setItemQuantities(prevQuantities => {
+      const updatedQuantities = {
+        ...prevQuantities,
+        [id]: Math.max((prevQuantities[id] || 1) - 1, 1)
+      }
+      return updatedQuantities
+    })
+  }
 
   useEffect(() => {
     function handleResize() {
@@ -98,6 +118,13 @@ export function Sliders() {
     return () => {
       window.removeEventListener('resize', handleResize)
     }
+  }, [])
+  useEffect(() => {
+    const initialQuantities = {}
+    data.forEach(item => {
+      initialQuantities[item.id] = 1
+    })
+    setItemQuantities(initialQuantities)
   }, [])
 
   return (
@@ -115,11 +142,17 @@ export function Sliders() {
             <img src={item.image} alt="slider" className="slide-item" />
             <h2>{item.name}</h2>
             <p>{item.description}</p>
-            <span>R$ {item.price}</span>
+            <span>R$ {item.price} </span>
             <footer>
-              <ButtonText icon={AiOutlineMinus} />
-              <span>01</span>
-              <ButtonText icon={AiOutlinePlus} />
+              <ButtonText
+                icon={AiOutlineMinus}
+                onClick={() => handleDecrement(item.id)}
+              />
+              <span>0{itemQuantities[item.id] || 0}</span>
+              <ButtonText
+                icon={AiOutlinePlus}
+                onClick={() => handleIncrement(item.id)}
+              />
               <Button title="incluir" />
             </footer>
           </SwiperSlide>
