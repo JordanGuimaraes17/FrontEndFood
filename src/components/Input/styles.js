@@ -23,6 +23,7 @@ export const Container = styled.div`
 
     &::placeholder {
       color: ${({ theme }) => theme.COLORS.LIGHT_500};
+      color: ${({ theme }) => theme.COLORS.LIGHT_500};
     }
   }
 

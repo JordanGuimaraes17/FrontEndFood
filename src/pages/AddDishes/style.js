@@ -1,2 +1,57 @@
 import styled from 'styled-components'
-export const Container = styled.div``
+export const Container = styled.div`
+  display: grid;
+  grid-template-areas: 'header' 'main' 'footer';
+  min-height: 100vh;
+  grid-template-rows: 5.4rem auto 3.5rem;
+`
+export const Content = styled.section`
+  grid-area: main;
+
+  main {
+  }
+  form {
+    padding: 30px 80px;
+
+    .input-wrapper label {
+      margin-bottom: 8px;
+    }
+
+    .input-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .input-wrapper select {
+      height: 3.5rem;
+      width: 100%;
+      font-size: 1rem;
+      padding: 0.75rem;
+
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 10L12 14L16 10' stroke='%239C98A6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+      background-repeat: no-repeat;
+      background-position: right 24px top 50%;
+    }
+    select {
+      border: none;
+      border-radius: 0.43rem;
+      background: ${({ theme }) => theme.COLORS.BACKGROUND_900};
+      color: ${({ theme }) => theme.COLORS.LIGHT_500};
+
+      > svg {
+        color: ${({ theme }) => theme.COLORS.LIGHT_100};
+      }
+    }
+    .input-wrapper textarea {
+      margin-top: 0;
+    }
+
+    .col-1 {
+      display: flex;
+      flex: 1;
+      gap: 22px;
+    }
+  }
+`
