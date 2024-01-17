@@ -19,7 +19,7 @@ export const Container = styled.div`
     background: none;
   }
   .button-delete {
-    color: ${({ theme }) => theme.COLORS.RED};
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
   }
   .button-add {
     color: ${({ theme }) => theme.COLORS.ORANGE};
@@ -28,11 +28,11 @@ export const Container = styled.div`
     height: 32px;
     width: 100%;
     padding: 12px;
-    color: ${({ theme }) => theme.COLORS.WHITE};
+    color: ${({ theme }) => theme.COLORS.BACKGROUND_200};
     background: transparent;
     border: none;
     &&placeholder {
-      color: ${({ theme }) => theme.COLORS.GRAY_300};
+      color: ${({ theme }) => theme.COLORS.BACKGROUND_200};
     }
   }
 `

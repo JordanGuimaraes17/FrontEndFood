@@ -21,12 +21,12 @@ export function AddDishes() {
               <div className="col-1">
                 <div className="input-wrapper">
                   <label>Imagem do prato</label>
-                  <Input icon={GoUpload} type="file" />
+                  <Input className="load" icon={GoUpload} type="file" />
                 </div>
 
                 <div className="input-wrapper">
                   <label>Nome</label>
-                  <Input type="text" />
+                  <Input placeholder="Ex: Salada Ceasar" type="text" />
                 </div>
 
                 <div className="input-wrapper">

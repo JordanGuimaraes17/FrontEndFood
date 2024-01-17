@@ -1,11 +1,18 @@
 import { createGlobalStyle } from 'styled-components'
 export default createGlobalStyle`
 * {
+   min-width: 0;
     margin: 0;
     padding: 0;
+   
+  }
+
+  *,*::before,*::after{
     box-sizing: border-box;
   }
+  
   body {
+    min-height: 100dvh;
     background-color: ${({ theme }) => theme.COLORS.BACKGROUND_400};
     color: ${({ theme }) => theme.COLORS.LIGHT_300};
     -webkit-font-smoothing: antialiased;
@@ -16,6 +23,7 @@ export default createGlobalStyle`
     font-size: 16px;
     outline: none;
   }
+
 
   a {
     text-decoration: none;
