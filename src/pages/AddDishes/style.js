@@ -13,7 +13,6 @@ export const Content = styled.section`
     .buttonText {
       margin-bottom: 20px;
       font-size: 18px;
-
       font-weight: 700;
       line-height: 33.6px;
     }
@@ -66,7 +65,6 @@ export const Content = styled.section`
       align-items: center;
       border-radius: 0.43rem;
       height: 3.5rem;
-      width: 100%;
       background: ${({ theme }) => theme.COLORS.BACKGROUND_900};
       color: ${({ theme }) => theme.COLORS.LIGHT_500};
     }

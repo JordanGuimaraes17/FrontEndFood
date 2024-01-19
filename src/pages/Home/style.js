@@ -11,7 +11,7 @@ export const Content = styled.section`
   main {
     grid-area: main;
     overflow-y: auto;
-    max-height: calc(100vh - 9.4rem);
+    max-height: calc(100dvh - 9.4rem);
     &::-webkit-scrollbar {
       width: 0; /* Oculta a barra de rolagem no Chrome/Safari/Opera */
     }

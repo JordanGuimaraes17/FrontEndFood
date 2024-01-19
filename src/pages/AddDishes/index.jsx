@@ -51,8 +51,8 @@ export function AddDishes() {
                 <div className="input-wrapper">
                   <label>Ingredientes</label>
                   <div className="col-2">
-                    <DishesItem />
-                    <DishesItem />
+                    <DishesItem value="cebola" />
+                    <DishesItem value="pão" />
                   </div>
                 </div>
 

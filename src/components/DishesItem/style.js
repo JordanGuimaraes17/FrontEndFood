@@ -25,9 +25,7 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.COLORS.ORANGE};
   }
   > input {
-    width: 100%;
-
-    color: ${({ theme }) => theme.COLORS.BACKGROUND_200};
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
     background: transparent;
     border: none;
     &&placeholder {
