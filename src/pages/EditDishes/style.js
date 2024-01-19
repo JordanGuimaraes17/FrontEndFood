@@ -3,15 +3,16 @@ export const Container = styled.div`
   display: grid;
   grid-template-areas: 'header' 'main' 'footer';
   min-height: 100dvh;
-  grid-template-rows: 5.4rem auto 3.5rem;
+  grid-template-rows: 5.2rem auto 3.3rem;
 `
 export const Content = styled.section`
   main {
     grid-area: main;
   }
   form {
-    padding: 1.2rem 7.68rem;
+    padding: 0 7.68rem;
     .buttonText {
+      margin: 1rem 0 1rem;
       font-size: 1.12rem;
       font-weight: 700;
       line-height: 2.1rem;
@@ -36,10 +37,11 @@ export const Content = styled.section`
         margin: 0px 10px 0 10px;
       }
     }
-    h1 {
-      font-size: 32px;
+    h2 {
+      margin-bottom: 0.4rem;
+      font-size: 2rem;
       font-weight: 500;
-      line-height: 44.8px;
+      line-height: 2.8rem;
       color: ${({ theme }) => theme.COLORS.LIGHT_300};
     }
 
@@ -97,7 +99,7 @@ export const Content = styled.section`
     }
 
     footer {
-      margin-top: 2rem;
+      margin-top: 1.5rem;
       gap: 1rem;
       display: flex;
       float: right;
