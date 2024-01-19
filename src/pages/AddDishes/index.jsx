@@ -14,14 +14,18 @@ export function AddDishes() {
     <Container>
       <Header />
       <Content>
-        <ButtonText icon={HiOutlineChevronLeft} title="voltar" />
         <main>
           <form>
-            <div className="fieldset-wrapper">
+            <ButtonText
+              className="buttonText"
+              icon={HiOutlineChevronLeft}
+              title="voltar"
+            />
+            <div className="input-wrapper">
               <div className="col-1">
                 <div className="input-wrapper">
                   <label>Imagem do prato</label>
-                  <Input className="load" icon={GoUpload} type="file" />
+                  <Input icon={GoUpload} type="file" />
                 </div>
 
                 <div className="input-wrapper">
@@ -32,20 +36,25 @@ export function AddDishes() {
                 <div className="input-wrapper">
                   <label>Categoria</label>
                   <select id="" required>
-                    <option value="pedro">Pedro</option>
-                    <option value="paulo">Paulo</option>
-                    <option value="joão">João</option>
+                    <option value="">Pedro</option>
+                    <option value="">Paulo</option>
+                    <option value="">João</option>
                   </select>
                 </div>
               </div>
+
               <div className="col-1">
                 <div className="input-wrapper">
                   <label>Ingredientes</label>
-                  <DishesItem title="pao" />
+                  <div className="col-2">
+                    <DishesItem />
+                    <DishesItem />
+                  </div>
                 </div>
+
                 <div className="input-wrapper">
                   <label>Preço</label>
-                  <Input type="number" />
+                  <Input placeholder="R$ 00,00" type="number" />
                 </div>
               </div>
             </div>
@@ -54,7 +63,8 @@ export function AddDishes() {
               <label>Descrição</label>
               <TextArea placeholder="Fale brevemente sobre o prato, seus ingredientes e composição" />
             </div>
-            <Button title="Salvar alterações" />
+
+            <Button className="button" title="Salvar alterações" />
           </form>
         </main>
       </Content>
