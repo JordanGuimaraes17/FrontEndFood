@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
   display: flex;
   align-items: center;
+
   background-color: ${({ theme, $isnew }) =>
     $isnew ? 'transparent' : theme.COLORS.LIGHT_600};
 
@@ -24,6 +25,7 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.COLORS.LIGHT_600};
   }
   > input {
+    width: 100%;
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
     background: transparent;
     border: none;

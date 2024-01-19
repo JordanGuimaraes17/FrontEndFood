@@ -56,9 +56,14 @@ export function AddDishes() {
                   </div>
                 </div>
 
-                <div className="input-wrapper">
+                <div className="price">
                   <label>Preço</label>
-                  <Input placeholder="R$ 00,00" type="number" />
+                  <Input
+                    style={{ width: '100%' }}
+                    className="price"
+                    placeholder="R$ 00,00"
+                    type="number"
+                  />
                 </div>
               </div>
             </div>

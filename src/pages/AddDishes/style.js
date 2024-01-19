@@ -65,6 +65,12 @@ export const Content = styled.section`
       background: ${({ theme }) => theme.COLORS.BACKGROUND_900};
       color: ${({ theme }) => theme.COLORS.LIGHT_500};
     }
+    .price {
+      display: flex;
+      width: 30%;
+      flex-direction: column;
+    }
+
     .button {
       margin-top: 32px;
       align-self: flex-end;
