@@ -49,7 +49,7 @@ export const Content = styled.section`
       width: 100%;
     }
     .input-wrapper label {
-      margin: 10px 0 10px;
+      margin: 0.62rem 0 0.62rem;
     }
 
     .input-wrapper select {
@@ -93,7 +93,7 @@ export const Content = styled.section`
       flex-direction: column;
     }
     p {
-      margin: 10px 0 10px;
+      margin: 0.62rem 0 0.62rem;
     }
 
     .button {
