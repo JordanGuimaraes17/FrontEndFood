@@ -10,16 +10,16 @@ export const Content = styled.section`
     grid-area: main;
   }
   form {
-    padding: 20px 123px;
+    padding: 1.2rem 7.68rem;
     .buttonText {
-      font-size: 18px;
+      font-size: 1.12rem;
       font-weight: 700;
-      line-height: 33.6px;
+      line-height: 2.1rem;
     }
     .avatar {
       align-items: center;
       display: flex;
-      gap: 16px;
+      gap: 1rem;
       padding: 4px 8px;
       align-items: center;
       border-radius: 0.43rem;
@@ -49,7 +49,7 @@ export const Content = styled.section`
       width: 100%;
     }
     .input-wrapper label {
-      margin: 8px 0 8px;
+      margin: 10px 0 10px;
     }
 
     .input-wrapper select {
@@ -74,12 +74,12 @@ export const Content = styled.section`
 
     .col-1 {
       display: flex;
-      gap: 22px;
+      gap: 1.37rem;
     }
     .col-2 {
       align-items: center;
       display: flex;
-      gap: 16px;
+      gap: 1rem;
       padding: 4px 8px;
       align-items: center;
       border-radius: 0.43rem;
@@ -93,12 +93,12 @@ export const Content = styled.section`
       flex-direction: column;
     }
     p {
-      margin: 8px 0 8px;
+      margin: 10px 0 10px;
     }
 
     .button {
       float: right;
-      margin-top: 32px;
+      margin-top: 2rem;
       background: ${({ theme }) => theme.COLORS.TOMATO_400};
     }
   }
