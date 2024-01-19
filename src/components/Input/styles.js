@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
   display: flex;
   height: 3rem;
-  flex: 2;
+  flex: 1;
   align-items: center;
 
   background: ${({ theme }) => theme.COLORS.BACKGROUND_900};
@@ -12,7 +12,6 @@ export const Container = styled.div`
   border-radius: 0.43rem;
 
   > input {
-    height: 3.5rem;
     width: 100%;
     font-size: 1rem;
     padding: 0.75rem;
@@ -28,7 +27,7 @@ export const Container = styled.div`
   }
 
   > svg {
-    margin-left: 5rem;
+    margin-left: 2rem;
     font-size: 1.5rem;
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
   }

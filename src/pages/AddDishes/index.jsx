@@ -25,7 +25,11 @@ export function AddDishes() {
               <div className="col-1">
                 <div className="input-wrapper">
                   <label>Imagem do prato</label>
-                  <Input icon={GoUpload} type="file" />
+                  <Input
+                    icon={GoUpload}
+                    type="file"
+                    accept=".jpg, .jpeg, .png"
+                  />
                 </div>
 
                 <div className="input-wrapper">
