@@ -10,24 +10,46 @@ export const Content = styled.section`
     grid-area: main;
   }
   form {
+    padding: 20px 123px;
     .buttonText {
-      margin-bottom: 20px;
       font-size: 18px;
       font-weight: 700;
       line-height: 33.6px;
     }
-    display: flex;
-    flex-direction: column;
-    padding: 20px 80px;
+    .avatar {
+      align-items: center;
+      display: flex;
+      gap: 16px;
+      padding: 4px 8px;
+      align-items: center;
+      border-radius: 0.43rem;
+      height: 3.5rem;
+      background: ${({ theme }) => theme.COLORS.BACKGROUND_900};
+      color: ${({ theme }) => theme.COLORS.LIGHT_100};
 
-    .input-wrapper label {
-      margin-bottom: 8px;
+      input {
+        display: none;
+      }
+
+      svg {
+        cursor: pointer;
+        margin: 0px 10px 0 10px;
+      }
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 44.8px;
+      color: ${({ theme }) => theme.COLORS.LIGHT_300};
     }
 
     .input-wrapper {
       display: flex;
       flex-direction: column;
       width: 100%;
+    }
+    .input-wrapper label {
+      margin: 8px 0 8px;
     }
 
     .input-wrapper select {
@@ -51,11 +73,11 @@ export const Content = styled.section`
     }
 
     .col-1 {
-      margin-bottom: 32px;
       display: flex;
       gap: 22px;
     }
     .col-2 {
+      align-items: center;
       display: flex;
       gap: 16px;
       padding: 4px 8px;
@@ -70,11 +92,27 @@ export const Content = styled.section`
       width: 30%;
       flex-direction: column;
     }
+    p {
+      margin: 8px 0 8px;
+    }
 
     .button {
+      float: right;
       margin-top: 32px;
-      align-self: flex-end;
       background: ${({ theme }) => theme.COLORS.TOMATO_400};
     }
+  }
+`
+export const Header = styled.header`
+  grid-area: header;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  justify-content: space-between;
+  padding: 0 5rem;
+  background-color: ${({ theme }) => theme.COLORS.BACKGROUND_600};
+  .new {
+    width: 17%;
   }
 `

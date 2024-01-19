@@ -1,5 +1,7 @@
-import { Container, Content } from './style'
-import { Header } from '../../components/Header'
+import { Container, Content, Header } from './style'
+import { CiLogin, CiSearch } from 'react-icons/ci'
+import PolygonSvg from '../../assets/Polygon 1.svg'
+
 import { Input } from '../../components/Input'
 import { HiOutlineChevronLeft } from 'react-icons/hi2'
 import { Footer } from '../../components/Footer'
@@ -12,7 +14,17 @@ import { Button } from '../../components/Button'
 export function AddDishes() {
   return (
     <Container>
-      <Header />
+      <Header>
+        <img src={PolygonSvg} alt="logo" />
+        <h1>food explorer</h1>
+        <Input
+          placeholder="Busque por pratos ou ingredientes"
+          icon={CiSearch}
+        />
+        <Button className="new" title="Novo prato" />
+
+        <ButtonText icon={CiLogin} />
+      </Header>
       <Content>
         <main>
           <form>
@@ -21,22 +33,28 @@ export function AddDishes() {
               icon={HiOutlineChevronLeft}
               title="voltar"
             />
+            <h1>Adicionar prato</h1>
             <div className="input-wrapper">
               <div className="col-1">
                 <div className="input-wrapper">
                   <label>Imagem do prato</label>
-                  <Input
-                    icon={GoUpload}
-                    type="file"
-                    accept=".jpg, .jpeg, .png"
-                  />
-                </div>
 
+                  <div className="avatar">
+                    <label>
+                      <GoUpload />
+                      Imagem do prato
+                      <input
+                        placeholder="Imagem do prato"
+                        type="file"
+                        accept=".jpg, .jpeg, .png"
+                      />
+                    </label>
+                  </div>
+                </div>
                 <div className="input-wrapper">
                   <label>Nome</label>
                   <Input placeholder="Ex: Salada Ceasar" type="text" />
                 </div>
-
                 <div className="input-wrapper">
                   <label>Categoria</label>
                   <select id="" required>
@@ -68,10 +86,8 @@ export function AddDishes() {
               </div>
             </div>
 
-            <div className="input-wrapper">
-              <label>Descrição</label>
-              <TextArea placeholder="Fale brevemente sobre o prato, seus ingredientes e composição" />
-            </div>
+            <p className="label">Descrição</p>
+            <TextArea placeholder="Fale brevemente sobre o prato, seus ingredientes e composição" />
 
             <Button className="button" title="Salvar alterações" />
           </form>
