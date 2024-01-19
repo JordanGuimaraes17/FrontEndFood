@@ -52,7 +52,7 @@ export function AddDishes() {
                   <label>Ingredientes</label>
                   <div className="col-2">
                     <DishesItem value="cebola" />
-                    <DishesItem value="pão" />
+                    <DishesItem isNew placeholder="Adicionar" />
                   </div>
                 </div>
 

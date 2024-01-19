@@ -18,7 +18,6 @@ export const Content = styled.section`
     }
     display: flex;
     flex-direction: column;
-
     padding: 20px 80px;
 
     .input-wrapper label {
@@ -26,7 +25,6 @@ export const Content = styled.section`
     }
 
     .input-wrapper {
-      margin: 0 auto;
       display: flex;
       flex-direction: column;
       width: 100%;
@@ -55,7 +53,6 @@ export const Content = styled.section`
     .col-1 {
       margin-bottom: 32px;
       display: flex;
-      flex: 1;
       gap: 22px;
     }
     .col-2 {
@@ -71,6 +68,7 @@ export const Content = styled.section`
     .button {
       margin-top: 32px;
       align-self: flex-end;
+      background: ${({ theme }) => theme.COLORS.TOMATO_400};
     }
   }
 `

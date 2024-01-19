@@ -9,8 +9,7 @@ export const Container = styled.div`
   color: ${({ theme }) => theme.COLORS.LIGHT_100};
 
   border: ${({ theme, $isnew }) =>
-    $isnew ? `1px dashed ${theme.COLORS.LIGHT_500}` : 'none'};
-  height: 32px;
+    $isnew ? `1px dashed ${theme.COLORS.LIGHT_600}` : 'none'};
   border-radius: 8px;
   padding: 10px 16px;
 
@@ -22,7 +21,7 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
   }
   .button-add {
-    color: ${({ theme }) => theme.COLORS.ORANGE};
+    color: ${({ theme }) => theme.COLORS.LIGHT_600};
   }
   > input {
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
