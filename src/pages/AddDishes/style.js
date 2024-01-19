@@ -89,7 +89,7 @@ export const Content = styled.section`
     }
     .price {
       display: flex;
-      width: 15%;
+      width: 25%;
       flex-direction: column;
     }
     p {

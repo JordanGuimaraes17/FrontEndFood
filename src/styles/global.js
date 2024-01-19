@@ -20,7 +20,7 @@ export default createGlobalStyle`
 
   body, input, button, textarea {
     font-family: 'Inter', sans-serif;
-    font-size: 16px;
+    font-size: 1rem;
     outline: none;
   }
 

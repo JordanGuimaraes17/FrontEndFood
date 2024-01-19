@@ -33,7 +33,7 @@ export function AddDishes() {
               icon={HiOutlineChevronLeft}
               title="voltar"
             />
-            <h1>Adicionar prato</h1>
+            <h2>Adicionar prato</h2>
             <div className="input-wrapper">
               <div className="col-1">
                 <div className="input-wrapper">

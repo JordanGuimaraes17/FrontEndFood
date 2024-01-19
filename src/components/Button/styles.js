@@ -9,14 +9,13 @@ export const Container = styled.button`
   padding: 0 1rem;
   font-weight: 500;
   border-radius: 0.43rem;
-
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.31rem;
 
   > span {
-    font-size: 1rem;
+    font-size: 0.87rem;
   }
 
   > svg {
