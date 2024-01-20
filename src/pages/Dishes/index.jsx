@@ -20,21 +20,10 @@ export function Dishes() {
           <div>
             <h1>Salada Ravanello</h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero
-              illum autem error reprehenderit omnis quas necessitatibus eius
-              aliquam ex provident, inventore a, fugit ipsa aspernatur ducimus
-              soluta similique officia ad. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Libero illum autem error
-              reprehenderit omnis quas necessitatibus eius aliquam ex provident,
-              inventore a, fugit ipsa aspernatur ducimus soluta similique
-              officia ad. Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Libero illum autem error reprehenderit omnis quas
-              necessitatibus eius aliquam ex provident, inventore a, fugit ipsa
-              aspernatur ducimus soluta similique officia ad. Lorem ipsum dolor
-              sit amet consectetur adipisicing elit. Libero illum autem error
-              reprehenderit omnis quas necessitatibus eius aliquam ex provident,
-              inventore a, fugit ipsa aspernatur ducimus soluta similique
-              officia ad. Lorem ipsum dolor sit amet consectetur adipisicing
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui,
+              ipsum quia molestias eum doloremque a sequi! Animi, magnam!
+              Corporis rerum nihil sequi consequatur, quam nam qui incidunt quos
+              recusandae facilis?
             </p>
 
             <Tag title="arroz" />

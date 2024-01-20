@@ -3,22 +3,25 @@ import styled from 'styled-components'
 export const Container = styled.div`
   display: grid;
   grid-template-areas: 'header' 'main' 'footer';
-  min-height: 100vh;
-  grid-template-rows: 5.4rem auto 3.5rem;
+  min-height: 100dvh;
+  grid-template-rows: 5.2rem auto 3.3rem;
 `
 
 export const Content = styled.section`
   grid-area: main;
-  padding: 0 50px;
+  padding: 1.5rem 7.5rem;
+
   > button {
-    margin: 24px 42px;
+    font-weight: 700;
+    line-height: 2rem;
+    margin-bottom: 2.6rem;
     font-size: 1.2rem;
   }
 
   main {
-    justify-content: center;
-    gap: 48px;
+    gap: 3rem;
     display: flex;
+    justify-content: center;
     align-items: center;
     > img {
       object-fit: cover;
@@ -26,16 +29,18 @@ export const Content = styled.section`
       width: 25rem;
     }
     div {
+      flex: 1;
       h1 {
-        margin-bottom: 24px;
-        font-size: 40px;
-        line-height: 56px;
+        margin-bottom: 1.5rem;
+        font-size: 2.5rem;
+        line-height: 3.5rem;
         font-weight: 500;
       }
       p {
-        margin-bottom: 24px;
-        font-size: 20px;
-        word-wrap: break-word;
+        font-size: 1.5rem;
+
+        line-height: 2rem;
+        margin-bottom: 1.5rem;
       }
 
       footer {
@@ -43,7 +48,7 @@ export const Content = styled.section`
           font-size: 1.8rem;
         }
         gap: 1rem;
-        margin-top: 48px;
+        margin-top: 3rem;
         display: flex;
         align-items: center;
       }
