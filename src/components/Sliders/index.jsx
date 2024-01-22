@@ -4,11 +4,12 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Button } from '../Button'
 import { ButtonText } from '../ButtonText'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules'
+import { Navigation, Pagination, EffectCoverflow } from 'swiper/modules'
 import Image01 from '../../assets/Mask group-1.png'
 import Image02 from '../../assets/Mask group-2.png'
 
 import 'swiper/css'
+import 'swiper/css/effect-coverflow'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
@@ -157,12 +158,21 @@ export function Sliders({ updateOrderDishes }) {
   return (
     <Container>
       <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
-        spaceBetween={20}
+        effect={'coverflow'}
+        modules={[Navigation, Pagination, EffectCoverflow]}
+        spaceBetween={15}
         slidesPerView={3.4}
+        grabCursor={true}
+        centeredSlides={true}
+        loop={true}
         navigation
         pagination={false}
-        scrollbar={{ draggable: true }}
+        coverflowEffect={{
+          rotate: 0,
+          stretch: 0,
+          depth: 100,
+          modifier: 2.5
+        }}
       >
         {data.map(item => (
           <SwiperSlide key={item.id} className="slider">
