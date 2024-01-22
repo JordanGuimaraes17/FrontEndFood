@@ -7,14 +7,24 @@ import { HiOutlineChevronLeft } from 'react-icons/hi2'
 import Image01 from '../../assets/Mask group-1.png'
 import { Button } from '../../components/Button'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
+import { useNavigate } from 'react-router-dom'
 
 export function Dishes() {
+  const navigate = useNavigate()
+
+  function handleClick() {
+    navigate(-1)
+  }
   return (
     <Container>
       <Header />
 
       <Content>
-        <ButtonText title="voltar" icon={HiOutlineChevronLeft} />
+        <ButtonText
+          title="voltar"
+          icon={HiOutlineChevronLeft}
+          onClick={handleClick}
+        />
         <main>
           <img src={Image01} alt="" />
           <div>

@@ -5,6 +5,7 @@ import { Button } from '../Button'
 import { ButtonText } from '../ButtonText'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import { Navigation, Pagination, EffectCoverflow } from 'swiper/modules'
+import { useNavigate } from 'react-router-dom'
 import Image01 from '../../assets/Mask group-1.png'
 import Image02 from '../../assets/Mask group-2.png'
 
@@ -84,6 +85,11 @@ const data = [
 ]
 
 export function Sliders({ updateOrderDishes }) {
+  const navigate = useNavigate()
+  function handleClick() {
+    navigate('/dishes')
+  }
+
   const [dishesQuantities, setDishesQuantities] = useState({})
   const [orderDishes, setOrderDishes] = useState([])
 
@@ -161,12 +167,10 @@ export function Sliders({ updateOrderDishes }) {
         effect={'coverflow'}
         modules={[Navigation, Pagination, EffectCoverflow]}
         spaceBetween={15}
-        slidesPerView={3.4}
-        grabCursor={true}
+        slidesPerView={3.8}
         centeredSlides={true}
         loop={true}
         navigation
-        pagination={false}
         coverflowEffect={{
           rotate: 0,
           stretch: 0,
@@ -176,7 +180,12 @@ export function Sliders({ updateOrderDishes }) {
       >
         {data.map(item => (
           <SwiperSlide key={item.id} className="slider">
-            <img src={item.image} alt="slider" className="slide-item" />
+            <img
+              src={item.image}
+              alt="slider"
+              onClick={handleClick}
+              className="slide-item"
+            />
             <h2>{item.name}</h2>
             <p>{item.description}</p>
             <span>R$ {item.price} </span>

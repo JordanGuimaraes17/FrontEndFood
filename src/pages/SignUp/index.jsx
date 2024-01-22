@@ -1,12 +1,18 @@
 import { Container, Form } from './style'
-import { Input } from '../../Components/Input'
-import { Button } from '../../Components/Button'
-import { ButtonText } from '../../Components/ButtonText'
+import { Input } from '../../components/Input'
+import { Button } from '../../components/Button'
+import { ButtonText } from '../../components/ButtonText'
 import { FiLock, FiMail } from 'react-icons/fi'
 import PolygonSvg from '../../assets/Polygon 1.svg'
 import { BsPerson } from 'react-icons/bs'
+import { useNavigate } from 'react-router-dom'
 
 export function SignUp() {
+  const navigate = useNavigate()
+
+  function handleClick() {
+    navigate(-1)
+  }
   return (
     <Container>
       <div>
@@ -41,7 +47,11 @@ export function SignUp() {
         </div>
 
         <Button title="Criar conta" />
-        <ButtonText className="register" title="Já tenho uma conta" />
+        <ButtonText
+          className="register"
+          title="Já tenho uma conta"
+          onClick={handleClick}
+        />
       </Form>
     </Container>
   )

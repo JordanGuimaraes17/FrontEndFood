@@ -4,8 +4,14 @@ import { Button } from '../../Components/Button'
 import { ButtonText } from '../../Components/ButtonText'
 import { FiLock, FiMail } from 'react-icons/fi'
 import PolygonSvg from '../../assets/Polygon 1.svg'
+import { useNavigate } from 'react-router-dom'
 
 export function SignIn() {
+  const navigate = useNavigate()
+
+  function handleClick() {
+    navigate('/register')
+  }
   return (
     <Container>
       <div>
@@ -35,7 +41,11 @@ export function SignIn() {
         </div>
 
         <Button title="Entrar" />
-        <ButtonText className="register" title="Criar uma conta" />
+        <ButtonText
+          className="register"
+          title="Criar uma conta"
+          onClick={handleClick}
+        />
       </Form>
     </Container>
   )
