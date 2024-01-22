@@ -11,7 +11,11 @@ export function Header({ orderItemCount }) {
       <img src={PolygonSvg} alt="logo" />
       <h1>food explorer</h1>
       <Input placeholder="Busque por pratos ou ingredientes" icon={CiSearch} />
-      <Button icon={CiReceipt} title={`Pedidos ${orderItemCount}`} />
+      <Button
+        className="new"
+        icon={CiReceipt}
+        title={`Pedidos ${orderItemCount}`}
+      />
       <ButtonText icon={CiLogin} />
     </Container>
   )

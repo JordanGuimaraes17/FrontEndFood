@@ -115,6 +115,9 @@ export const Header = styled.header`
   justify-content: space-between;
   padding: 0 5rem;
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND_600};
+  div {
+    flex: 1;
+  }
   .new {
     width: 17%;
   }
