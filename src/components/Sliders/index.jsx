@@ -86,8 +86,9 @@ const data = [
 
 export function Sliders({ updateOrderDishes }) {
   const navigate = useNavigate()
-  function handleClick() {
-    navigate('/dishes')
+
+  const handleNavegacao = rota => {
+    navigate(rota)
   }
 
   const [dishesQuantities, setDishesQuantities] = useState({})
@@ -183,7 +184,7 @@ export function Sliders({ updateOrderDishes }) {
             <img
               src={item.image}
               alt="slider"
-              onClick={handleClick}
+              onClick={() => handleNavegacao('/dishesAdmin')}
               className="slide-item"
             />
             <h2>{item.name}</h2>

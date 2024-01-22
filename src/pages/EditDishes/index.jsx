@@ -1,7 +1,4 @@
-import { Container, Content, Header } from './style'
-import { CiLogin, CiSearch } from 'react-icons/ci'
-import PolygonSvg from '../../assets/Polygon 1.svg'
-
+import { Container, Content } from './style'
 import { Input } from '../../components/Input'
 import { HiOutlineChevronLeft } from 'react-icons/hi2'
 import { Footer } from '../../components/Footer'
@@ -10,21 +7,18 @@ import { ButtonText } from '../../components/ButtonText'
 import { TextArea } from '../../components/TextArea'
 import { DishesItem } from '../../components/DishesItem'
 import { Button } from '../../components/Button'
+import { Header02 } from '../../components/Header02'
+import { useNavigate } from 'react-router-dom'
 
 export function EditDishes() {
+  const navigate = useNavigate()
+  const handleNavegacao = rota => {
+    navigate(rota)
+  }
+
   return (
     <Container>
-      <Header>
-        <img src={PolygonSvg} alt="logo" />
-        <h1>food explorer</h1>
-        <Input
-          placeholder="Busque por pratos ou ingredientes"
-          icon={CiSearch}
-        />
-        <Button className="new" title="Novo prato" />
-
-        <ButtonText icon={CiLogin} />
-      </Header>
+      <Header02 />
       <Content>
         <main>
           <form>
@@ -32,6 +26,9 @@ export function EditDishes() {
               className="buttonText"
               icon={HiOutlineChevronLeft}
               title="voltar"
+              onClick={() => {
+                handleNavegacao(-1)
+              }}
             />
             <h2>Editar prato</h2>
             <div className="input-wrapper">

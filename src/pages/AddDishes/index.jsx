@@ -10,8 +10,13 @@ import { ButtonText } from '../../components/ButtonText'
 import { TextArea } from '../../components/TextArea'
 import { DishesItem } from '../../components/DishesItem'
 import { Button } from '../../components/Button'
+import { useNavigate } from 'react-router-dom'
 
 export function AddDishes() {
+  const navigate = useNavigate()
+  const handleNavegacao = rota => {
+    navigate(rota)
+  }
   return (
     <Container>
       <Header>
@@ -32,6 +37,7 @@ export function AddDishes() {
               className="buttonText"
               icon={HiOutlineChevronLeft}
               title="voltar"
+              onClick={() => handleNavegacao(-1)}
             />
             <h2>Adicionar prato</h2>
             <div className="input-wrapper">
