@@ -21,7 +21,7 @@ export const Content = styled.section`
   .box {
     display: flex;
     align-items: center;
-    margin-top: 7rem;
+    margin-top: 6rem;
     height: 13rem;
     background: ${({ theme }) => theme.COLORS.BACKGROUND_600};
   }
@@ -35,7 +35,6 @@ export const Content = styled.section`
   .text h2 {
     font-weight: 500;
     font-size: 2.5rem;
-    line-height: 3.5rem;
   }
   .text span {
     font-size: 0.87rem;

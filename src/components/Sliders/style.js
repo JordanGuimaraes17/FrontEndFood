@@ -3,7 +3,7 @@ export const Container = styled.div`
   width: 70rem;
   .slider {
     cursor: pointer;
-    padding: 24px;
+    padding: 1.5rem;
     background: ${({ theme }) => theme.COLORS.BACKGROUND_300};
     border-radius: 8px;
     border: 1px solid ${({ theme }) => theme.COLORS.BACKGROUND_200};
@@ -13,9 +13,9 @@ export const Container = styled.div`
     gap: 0.4rem;
 
     h2 {
-      font-size: 24px;
+      font-size: 1.5rem;
       font-weight: 700;
-      line-height: 33.6px;
+      line-height: 2rem;
     }
     p {
       text-align: center;
@@ -23,11 +23,11 @@ export const Container = styled.div`
 
       color: ${({ theme }) => theme.COLORS.LIGHT_400};
 
-      line-height: 22.4px;
+      line-height: 1.4rem;
     }
     > span {
-      font-size: 32px;
-      line-height: 51.2px;
+      font-size: 2rem;
+      line-height: 3.2rem;
       color: ${({ theme }) => theme.COLORS.CAKE_200};
     }
 
@@ -38,22 +38,22 @@ export const Container = styled.div`
       display: flex;
       align-items: center;
       span {
-        font-size: 20px;
+        font-size: 1rem;
         font-weight: 700;
-        line-height: 32px;
+        line-height: 2rem;
       }
     }
   }
   .slide-item {
-    width: 150px;
-    height: 150px;
+    width: 9rem;
+    height: 9rem;
     object-fit: cover;
   }
   .swiper-button-next,
   .swiper-button-prev {
     color: ${({ theme }) => theme.COLORS.CAKE_100};
     &::after {
-      font-size: 35px;
+      font-size: 2rem;
     }
   }
 `
