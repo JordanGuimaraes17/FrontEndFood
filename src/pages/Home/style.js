@@ -19,20 +19,18 @@ export const Content = styled.section`
   }
 
   .box {
-    width: 70rem;
     display: flex;
     align-items: center;
     margin-top: 7rem;
     height: 13rem;
     background: ${({ theme }) => theme.COLORS.BACKGROUND_600};
-    padding: 2rem;
   }
   .box img {
-    width: 450px;
-    height: 290px;
+    width: 30rem;
+    height: 18rem;
     margin-top: -5rem;
 
-    object-fit: cover;
+    object-fit: contain;
   }
   .text h2 {
     font-weight: 500;
