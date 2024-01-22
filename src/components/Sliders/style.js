@@ -2,6 +2,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
   width: 70rem;
   .slider {
+    position: relative;
     cursor: pointer;
     padding: 1.5rem;
     background: ${({ theme }) => theme.COLORS.BACKGROUND_300};
@@ -11,6 +12,11 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 0.4rem;
+    .svg {
+      position: absolute;
+      right: 1rem;
+      font-size: 1rem;
+    }
 
     h2 {
       font-size: 1.5rem;

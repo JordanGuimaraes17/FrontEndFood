@@ -3,6 +3,7 @@ import { Container } from './style'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Button } from '../Button'
 import { ButtonText } from '../ButtonText'
+import { GoPencil } from 'react-icons/go'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import { Navigation, Pagination, EffectCoverflow } from 'swiper/modules'
 import { useNavigate } from 'react-router-dom'
@@ -181,10 +182,16 @@ export function Sliders({ updateOrderDishes }) {
       >
         {data.map(item => (
           <SwiperSlide key={item.id} className="slider">
+            <ButtonText
+              icon={GoPencil}
+              className="svg"
+              onClick={() => handleNavegacao('/editDishes/:id')}
+            />
+
             <img
               src={item.image}
               alt="slider"
-              onClick={() => handleNavegacao('/dishesAdmin')}
+              onClick={() => handleNavegacao('/dishes')}
               className="slide-item"
             />
             <h2>{item.name}</h2>
