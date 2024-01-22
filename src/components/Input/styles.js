@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
   display: flex;
   height: 3rem;
-  flex: 1;
+
   align-items: center;
 
   background: ${({ theme }) => theme.COLORS.BACKGROUND_900};

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
   display: grid;
   grid-template-areas: 'header' 'main' 'footer';
-  min-height: 100vh;
+  min-height: 100dvh;
   grid-template-rows: 5.4rem auto 3.5rem;
 `
 export const Content = styled.section`
