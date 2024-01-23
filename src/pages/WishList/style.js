@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-
 export const Container = styled.div`
   > header {
     background: ${({ theme }) => theme.COLORS.BACKGROUND_200};
@@ -13,7 +12,7 @@ export const Container = styled.div`
     padding: 0 30px;
     .page-title {
       font-size: 40px;
-      padding: 50px 0;
+      padding: 40px 0;
       text-align: center;
     }
     .content {
@@ -24,12 +23,11 @@ export const Container = styled.div`
         flex: 1;
         .qty {
           border-radius: 20px;
-
           background: ${({ theme }) => theme.COLORS.BACKGROUND_400};
           display: inline-flex;
           align-items: center;
-
           gap: 10px;
+
           button {
             padding: 10px 15px;
             svg {
@@ -39,14 +37,40 @@ export const Container = styled.div`
         }
       }
       aside {
-        background: ${({ theme }) => theme.COLORS.GRAY_300};
+        background: ${({ theme }) => theme.COLORS.BACKGROUND_400};
 
         .box {
+          margin-left: 20px;
+          margin-bottom: 15px;
+          border: 1px solid ${({ theme }) => theme.COLORS.LIGHT_700};
+          header {
+            padding: 15px 20px;
+            font-size: 18px;
+          }
+          .info {
+            padding: 20px;
+            > div {
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 10px;
+            }
+            > button {
+              font-size: 16px;
+              color: ${({ theme }) => theme.COLORS.CAKE_200};
+            }
+          }
+          footer {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: ${({ theme }) => theme.COLORS.GRAY_300};
+          }
         }
-        > button {
+        .button-car {
+          margin-left: 20px;
+
+          width: 93.5%;
           text-transform: uppercase;
         }
-        min-width: 250px;
       }
     }
   }
@@ -82,8 +106,9 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     img {
-      width: 50px;
-      height: 50px;
+      margin-left: 15px;
+      width: 80px;
+      height: 80px;
     }
     .info {
       margin-left: 20px;

@@ -105,15 +105,10 @@ export function WishList() {
                   <span>Frete</span>
                   <span>Gratuito</span>
                 </div>
-                <div>
-                  <button>
-                    Adicionar cupom de desconto
-                    <i className="bx bx-right-arrow-alt"></i>
-                  </button>
-                </div>
+                <ButtonText title="Adicionar cupom de desconto" />
               </div>
               <footer>
-                <span>Total</span>
+                <span>Total </span>
                 <span>
                   R${' '}
                   {data
@@ -122,7 +117,8 @@ export function WishList() {
                 </span>
               </footer>
             </div>
-            <Button title="Finalizar Compra" />
+
+            <Button className="button-car" title="Finalizar Compra" />
           </aside>
         </div>
       </main>
