@@ -2,11 +2,18 @@ import { Container } from './style'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import { IoIosClose } from 'react-icons/io'
 import { ButtonText } from '../../components/ButtonText'
+import { HiOutlineChevronLeft } from 'react-icons/hi2'
 import { Button } from '../../components/Button'
+import PolygonSvg from '../../assets/Polygon 1.svg'
 import Image01 from '../../assets/Mask group-1.png'
 import Image02 from '../../assets/Mask group-2.png'
+import { useNavigate } from 'react-router-dom'
 
 export function WishList() {
+  const navigate = useNavigate()
+  const handleNavegacao = rota => {
+    navigate(rota)
+  }
   const data = [
     {
       price: 25.15,
@@ -40,6 +47,16 @@ export function WishList() {
   return (
     <Container>
       <header>
+        <ButtonText
+          icon={HiOutlineChevronLeft}
+          title="voltar"
+          onClick={() => handleNavegacao(-1)}
+        />
+
+        <h3>
+          {' '}
+          <img src={PolygonSvg} alt="logo" /> food explorer
+        </h3>
         <span>
           Lista de compras do <b>fernandev</b>
         </span>

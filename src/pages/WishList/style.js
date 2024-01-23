@@ -2,23 +2,34 @@ import styled from 'styled-components'
 export const Container = styled.div`
   > header {
     background: ${({ theme }) => theme.COLORS.BACKGROUND_200};
-    font-size: 24px;
-    padding: 20px 0;
+    font-size: 20px;
+    padding: 20px 30px;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    h3 {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    button {
+      font-size: 18px;
+    }
   }
 
   main {
-    padding: 0 30px;
+    padding: 0 30px 30px;
     .page-title {
+      font-weight: 700;
+      margin: 0 auto;
       font-size: 40px;
       padding: 40px 0;
-      text-align: center;
     }
     .content {
       border-radius: 8px;
       background: ${({ theme }) => theme.COLORS.BACKGROUND_300};
       display: flex;
+
       section {
         flex: 1;
         .qty {
