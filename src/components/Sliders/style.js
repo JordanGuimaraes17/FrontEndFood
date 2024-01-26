@@ -2,6 +2,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
   width: 70rem;
   .slider {
+    min-height: 28rem;
     position: relative;
     cursor: pointer;
     padding: 1.5rem;
