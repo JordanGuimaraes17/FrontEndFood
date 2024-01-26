@@ -1,16 +1,9 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { api } from '../services/api'
-export const AuthContext = createContext({
-  signIn: async () => {},
-  signOut: () => {},
-  user: null
-})
+export const AuthContext = createContext({})
 
 function AuthProvider({ children }) {
-  const [data, setData] = useState({
-    user: null,
-    token: null
-  })
+  const [data, setData] = useState({})
 
   async function signIn({ email, password }) {
     try {
@@ -20,7 +13,7 @@ function AuthProvider({ children }) {
       localStorage.setItem('@foodexplorer:user', JSON.stringify(user))
       localStorage.setItem('@foodexplorer:token', token)
 
-      api.defaults.headers.common['authorization'] = `Bearer ${token}`
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
       setData({ user, token })
     } catch (error) {
@@ -35,14 +28,14 @@ function AuthProvider({ children }) {
   function signOut() {
     localStorage.removeItem('@foodexplorer:token')
     localStorage.removeItem('@foodexplorer:user')
-    setData({ user: null, token: null })
+    setData({})
   }
 
   useEffect(() => {
     const token = localStorage.getItem('@foodexplorer:token')
     const user = localStorage.getItem('@foodexplorer:user')
     if (token && user) {
-      api.defaults.headers.common['authorization'] = `Bearer ${token}`
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`
       setData({
         token,
         user: JSON.parse(user)

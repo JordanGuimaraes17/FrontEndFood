@@ -1,5 +1,3 @@
-// Home.js
-
 import { Container, Content } from './style'
 import HomeIMG from '../../assets/HomeIMG.png'
 import { Header } from '../../components/Header'

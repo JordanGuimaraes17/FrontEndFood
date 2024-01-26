@@ -16,24 +16,24 @@ export function SignUp() {
   const navigate = useNavigate()
 
   function handleSignUp() {
-    if (!name || !email || !password) {
-      return alert('prencha todos campos!')
-    }
-    // Verificar se o nome possui um formato específico (apenas letras e espaços)
     const nameRegex = /^[a-zA-Z\s]+$/
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const minLength = 6
+
     if (!nameRegex.test(name)) {
       return alert('O nome deve conter apenas letras e espaços!')
     }
-    // Verificar se o e-mail possui um formato válido
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
     if (!emailRegex.test(email)) {
       return alert('Digite um e-mail válido!')
     }
 
-    // Verificar se a senha atende ao comprimento mínimo (exemplo: 6 caracteres)
-    const minLength = 6
     if (password.length < minLength) {
       return alert(`A senha deve ter pelo menos ${minLength} caracteres!`)
+    }
+
+    if (!name || !email || !password) {
+      return alert('Preencha todos os campos!')
     }
 
     api
@@ -44,9 +44,9 @@ export function SignUp() {
       })
       .catch(error => {
         if (error.response) {
-          alert(error.response.data.message)
+          alert(error.response.data.message || 'Erro ao cadastrar usuário.')
         } else {
-          alert('não foi possivel cadastar')
+          alert('Não foi possível cadastrar o usuário.')
         }
       })
   }

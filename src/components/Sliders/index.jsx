@@ -22,6 +22,7 @@ const data = [
     description:
       'Presunto de parma e rúcula em um pão com fermentação natural.',
     name: 'Imagem 1',
+    ingredients: 'arroz, feijão, ovos, carnes',
     image: Image01
   },
   {
