@@ -5,9 +5,15 @@ import { Input } from '../Input'
 import PolygonSvg from '../../assets/Polygon 1.svg'
 import { CiLogin, CiReceipt, CiSearch } from 'react-icons/ci'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../hooks/auth'
 
 export function Header({ orderItemCount }) {
+  const { signOut, user } = useAuth()
   const navigate = useNavigate()
+  function handleSignOut() {
+    navigate('/')
+    signOut()
+  }
   const handleNavegacao = rota => {
     navigate(rota)
   }
@@ -22,7 +28,7 @@ export function Header({ orderItemCount }) {
         title={`Pedidos ${orderItemCount}`}
         onClick={() => handleNavegacao('/wish/:id')}
       />
-      <ButtonText icon={CiLogin} />
+      <ButtonText icon={CiLogin} onClick={handleSignOut} />
     </Container>
   )
 }

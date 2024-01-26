@@ -1,13 +1,22 @@
 import { Container, Form } from './style'
-import { Input } from '../../Components/Input'
-import { Button } from '../../Components/Button'
-import { ButtonText } from '../../Components/ButtonText'
+import { Input } from '../../components/Input'
+import { Button } from '../../components/Button'
+import { ButtonText } from '../../components/ButtonText'
 import { FiLock, FiMail } from 'react-icons/fi'
 import PolygonSvg from '../../assets/Polygon 1.svg'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { useAuth } from '../../hooks/auth'
 
 export function SignIn() {
   const navigate = useNavigate()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const { signIn } = useAuth()
+
+  function handleSignIn() {
+    signIn({ email, password })
+  }
 
   function handleClick() {
     navigate('/register')
@@ -28,6 +37,7 @@ export function SignIn() {
             placeholder="Ex: exemplo@exemplo.com"
             type="text"
             icon={FiMail}
+            onChange={e => setEmail(e.target.value)}
           />
         </div>
 
@@ -37,10 +47,11 @@ export function SignIn() {
             placeholder="No mínimo 6 caracteres"
             type="password"
             icon={FiLock}
+            onChange={e => setPassword(e.target.value)}
           />
         </div>
 
-        <Button title="Entrar" />
+        <Button title="Entrar" onClick={handleSignIn} />
         <ButtonText
           className="register"
           title="Criar uma conta"
