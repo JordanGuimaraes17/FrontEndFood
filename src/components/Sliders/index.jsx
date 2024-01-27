@@ -34,7 +34,7 @@ export function Sliders() {
     }
 
     fetchData()
-  }, []) // Chama a API apenas uma vez quando o componente é montado
+  }, [])
 
   return (
     <Container>

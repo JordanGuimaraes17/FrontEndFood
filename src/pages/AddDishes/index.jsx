@@ -11,11 +11,23 @@ import { TextArea } from '../../components/TextArea'
 import { DishesItem } from '../../components/DishesItem'
 import { Button } from '../../components/Button'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 export function AddDishes() {
+  const [ingredients, setIngredients] = useState([])
+  const [newIngredient, setNewIngredient] = useState('')
   const navigate = useNavigate()
   const handleNavegacao = rota => {
     navigate(rota)
+  }
+  function handleRemoveIngredient(deleted) {
+    setIngredients(prevState =>
+      prevState.filter(ingredient => ingredient !== deleted)
+    )
+  }
+  function handleAddIngredient() {
+    setIngredients(prevState => [...prevState, newIngredient])
+    setNewIngredient('')
   }
   return (
     <Container>
@@ -75,8 +87,21 @@ export function AddDishes() {
                 <div className="input-wrapper">
                   <label>Ingredientes</label>
                   <div className="col-2">
-                    <DishesItem value="cebola" />
-                    <DishesItem isNew placeholder="Adicionar" />
+                    {ingredients.map((ingredient, index) => (
+                      <DishesItem
+                        key={String(index)}
+                        value={ingredient}
+                        onClick={() => {
+                          handleRemoveIngredient(ingredient)
+                        }}
+                      />
+                    ))}
+                    <DishesItem
+                      isNew
+                      placeholder="Adicionar"
+                      onChange={e => setNewIngredient(e.target.value)}
+                      onClick={handleAddIngredient}
+                    />
                   </div>
                 </div>
 
