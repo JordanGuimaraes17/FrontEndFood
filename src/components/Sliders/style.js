@@ -2,6 +2,9 @@ import styled from 'styled-components'
 export const Container = styled.div`
   width: 70rem;
   .slider {
+    overflow: hidden;
+    text-overflow: ellipsis;
+
     min-height: 28rem;
     position: relative;
     cursor: pointer;

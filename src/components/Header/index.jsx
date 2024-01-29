@@ -7,8 +7,8 @@ import { CiLogin, CiReceipt, CiSearch } from 'react-icons/ci'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 
-export function Header({ orderItemCount }) {
-  const { signOut, user } = useAuth()
+export function Header() {
+  const { signOut } = useAuth()
   const navigate = useNavigate()
   function handleSignOut() {
     navigate('/')
@@ -25,7 +25,7 @@ export function Header({ orderItemCount }) {
       <Button
         className="new"
         icon={CiReceipt}
-        title={`Pedidos ${orderItemCount}`}
+        title={`Pedidos `}
         onClick={() => handleNavegacao('/wish/:id')}
       />
       <ButtonText icon={CiLogin} onClick={handleSignOut} />

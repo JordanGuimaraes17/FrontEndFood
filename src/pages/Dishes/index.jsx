@@ -6,26 +6,35 @@ import { Tag } from '../../components/Tag'
 import { HiOutlineChevronLeft } from 'react-icons/hi2'
 import { Button } from '../../components/Button'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { api } from '../../services/api'
+import { useState, useEffect } from 'react'
 
 export function Dishes() {
-  const data = [
-    {
-      price: 25.15,
-      id: 1,
-      description:
-        'Presunto de parma e rúcula em um pão com fermentação natural.',
-      name: 'Imagem 1',
-      ingredients: 'arroz, feijão, ovos, carnes',
-      image:
-        'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YnVyZ2Vyc3xlbnwwfHwwfHx8Mg%3D%3D'
-    }
-  ]
+  const params = useParams()
+  const [dishData, setDishData] = useState({
+    name: '',
+    description: '',
+    ingredients: '',
+    price: ''
+  })
   const navigate = useNavigate()
-
   function handleClick() {
     navigate(-1)
   }
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await api.get(`/dishes/${params.id}`)
+        setDishData(response.data)
+      } catch (error) {
+        console.error('Erro ao obter dados dos pratos', error)
+      }
+    }
+
+    fetchData()
+  }, [params.id])
   return (
     <Container>
       <Header />
@@ -36,27 +45,26 @@ export function Dishes() {
           icon={HiOutlineChevronLeft}
           onClick={handleClick}
         />
-        {data.map(item => (
-          <main key={item.id}>
-            <img src={item.image} alt="" />
-            <div>
-              <h1>{item.name}</h1>
-              <p>{item.description}</p>
 
-              {/* Dividindo a string de ingredientes em um array */}
-              {item.ingredients.split(', ').map((ingredient, index) => (
-                <Tag key={index} title={ingredient} />
-              ))}
+        <main>
+          <img src={dishData.image} alt="" />
+          <div>
+            <h1>{dishData.name}</h1>
+            <p>{dishData.description}</p>
 
-              <footer>
-                <ButtonText icon={AiOutlineMinus} />
-                <span>01</span>
-                <ButtonText icon={AiOutlinePlus} />
-                <Button title={`incluir ∙ ${item.price}`} />
-              </footer>
-            </div>
-          </main>
-        ))}
+            {/* Dividindo a string de ingredientes em um array */}
+            {dishData.ingredients.split(', ').map((ingredient, index) => (
+              <Tag key={index} title={ingredient} />
+            ))}
+
+            <footer>
+              <ButtonText icon={AiOutlineMinus} />
+              <span>01</span>
+              <ButtonText icon={AiOutlinePlus} />
+              <Button title={`incluir ∙ ${dishData.price}`} />
+            </footer>
+          </div>
+        </main>
       </Content>
       <Footer />
     </Container>
