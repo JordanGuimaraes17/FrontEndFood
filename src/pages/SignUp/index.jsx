@@ -9,16 +9,19 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { api } from '../../services/api'
 
+const nameRegex = /^[a-zA-Z\s]+$/
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const minLength = 6
+const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d|\W).+$/
+
 export function SignUp() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
 
-  function handleSignUp() {
-    const nameRegex = /^[a-zA-Z\s]+$/
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    const minLength = 6
+  function handleSignUp(event) {
+    event.preventDefault()
 
     if (!nameRegex.test(name)) {
       return alert('O nome deve conter apenas letras e espaços!')
@@ -28,8 +31,10 @@ export function SignUp() {
       return alert('Digite um e-mail válido!')
     }
 
-    if (password.length < minLength) {
-      return alert(`A senha deve ter pelo menos ${minLength} caracteres!`)
+    if (password.length < minLength || !passwordRegex.test(password)) {
+      return alert(
+        `A senha deve ter pelo menos ${minLength} caracteres e incluir pelo menos um número ou caractere especial!`
+      )
     }
 
     if (!name || !email || !password) {
@@ -43,7 +48,7 @@ export function SignUp() {
         navigate(-1)
       })
       .catch(error => {
-        if (error.response) {
+        if (error.response && error.response.data) {
           alert(error.response.data.message || 'Erro ao cadastrar usuário.')
         } else {
           alert('Não foi possível cadastrar o usuário.')
@@ -54,13 +59,14 @@ export function SignUp() {
   function handleClick() {
     navigate(-1)
   }
+
   return (
     <Container>
       <div>
         <img src={PolygonSvg} alt="logo" />
         <h1>food explorer</h1>
       </div>
-      <Form>
+      <Form onSubmit={handleSignUp}>
         <div>
           <h1>Crie sua conta</h1>
         </div>
@@ -68,7 +74,7 @@ export function SignUp() {
           <label htmlFor="name">Seu nome</label>
           <Input
             placeholder="Ex: Maria da Silva"
-            type="name"
+            type="text"
             icon={BsPerson}
             onChange={e => setName(e.target.value)}
           />
@@ -94,7 +100,7 @@ export function SignUp() {
           />
         </div>
 
-        <Button title="Criar conta" onClick={handleSignUp} />
+        <Button type="submit" title="Criar conta" />
         <ButtonText
           className="register"
           title="Já tenho uma conta"

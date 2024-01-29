@@ -4,18 +4,11 @@ import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { Section } from '../../components/Section'
 import { Sliders } from '../../components/Sliders'
-import { useState } from 'react'
 
 export function Home() {
-  const [orderDishes, setOrderDishes] = useState([])
-
-  function updateOrderDishes(items) {
-    setOrderDishes(items)
-  }
-
   return (
     <Container>
-      <Header orderItemCount={orderDishes.length} />
+      <Header />
       <Content>
         <main>
           <div className="box">
@@ -28,25 +21,13 @@ export function Home() {
             </div>
           </div>
           <Section className="sliders" title="Refeições">
-            {/* Passando o estado orderItems para Sliders */}
-            <Sliders
-              updateOrderDishes={updateOrderDishes}
-              orderDishes={orderDishes}
-            />
+            <Sliders />
           </Section>
           <Section className="sliders" title="Sobremessas">
-            {/* Passando o estado orderItems para Sliders */}
-            <Sliders
-              updateOrderDishes={updateOrderDishes}
-              orderDishes={orderDishes}
-            />
+            <Sliders />
           </Section>
           <Section className="sliders" title="Bebidas">
-            {/* Passando o estado orderItems para Sliders */}
-            <Sliders
-              updateOrderDishes={updateOrderDishes}
-              orderDishes={orderDishes}
-            />
+            <Sliders />
           </Section>
         </main>
       </Content>
