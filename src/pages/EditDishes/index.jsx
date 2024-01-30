@@ -82,26 +82,56 @@ export function EditDishes() {
     const imagePreview = URL.createObjectURL(file)
     setAvatar(imagePreview)
   }
-
   function validateName() {
-    return name.trim() !== ''
+    if (name.trim() === '') {
+      throw new Error('Por favor, preencha o nome do prato.')
+    }
+    return true
   }
 
   function validatePrice() {
-    return !isNaN(price) && parseFloat(price) >= 0
+    if (price === '' || isNaN(price) || parseFloat(price) <= 0) {
+      throw new Error('Por favor, insira um preço válido maior que zero.')
+    }
+    return true
   }
 
   function validateDescription() {
-    return description.trim() !== ''
+    if (description.trim() === '') {
+      throw new Error('Por favor, preencha a descrição do prato.')
+    }
+    return true
+  }
+
+  function validateCategory() {
+    if (!selectedCategory) {
+      throw new Error('Por favor, selecione uma categoria para o prato.')
+    }
+    return true
+  }
+  function validateIngredients() {
+    if (dishData.ingredients.trim() === '') {
+      throw new Error('Por favor, adicione pelo menos um ingrediente ao prato.')
+    }
+    return true
   }
 
   function validateForm() {
-    return validateName() && validatePrice() && validateDescription()
+    try {
+      validateName()
+      validateDescription()
+      validatePrice()
+      validateCategory()
+      validateIngredients()
+      return true
+    } catch (error) {
+      alert(error.message)
+      return false
+    }
   }
 
   async function handleUpdateDish() {
     if (!validateForm()) {
-      alert('Por favor, preencha todos os campos corretamente.')
       return
     }
 
@@ -116,6 +146,7 @@ export function EditDishes() {
 
       const response = await api.put(`/dishes/${params.id}`, updatedData)
       alert('Prato atualizado com sucesso.')
+      navigate(`/dishes/${params.id}`)
     } catch (error) {
       if (error.response) {
         alert(error.response.data.error)
