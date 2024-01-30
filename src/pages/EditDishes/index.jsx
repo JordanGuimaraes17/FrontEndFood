@@ -83,9 +83,38 @@ export function EditDishes() {
     setAvatar(imagePreview)
   }
 
-  async function updateDish(id, data) {
+  function validateName() {
+    return name.trim() !== ''
+  }
+
+  function validatePrice() {
+    return !isNaN(price) && parseFloat(price) >= 0
+  }
+
+  function validateDescription() {
+    return description.trim() !== ''
+  }
+
+  function validateForm() {
+    return validateName() && validatePrice() && validateDescription()
+  }
+
+  async function handleUpdateDish() {
+    if (!validateForm()) {
+      alert('Por favor, preencha todos os campos corretamente.')
+      return
+    }
+
     try {
-      const response = await api.put(`/dishes/${id}`, data)
+      const updatedData = {
+        name,
+        description,
+        price,
+        ingredients: dishData.ingredients,
+        category_id: selectedCategory
+      }
+
+      const response = await api.put(`/dishes/${params.id}`, updatedData)
       alert('Prato atualizado com sucesso.')
     } catch (error) {
       if (error.response) {
@@ -94,16 +123,6 @@ export function EditDishes() {
         alert('Não foi possível atualizar o prato.')
       }
     }
-  }
-  function handleUpdate() {
-    const updatedData = {
-      name,
-      description,
-      price,
-      ingredients: dishData.ingredients,
-      category_id: selectedCategory
-    }
-    updateDish(params.id, updatedData)
   }
 
   useEffect(() => {
@@ -240,7 +259,7 @@ export function EditDishes() {
               <Button
                 className="button"
                 title="Salvar alterações"
-                onClick={handleUpdate}
+                onClick={handleUpdateDish}
               />
             </footer>
           </form>
