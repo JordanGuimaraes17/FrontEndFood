@@ -48,12 +48,15 @@ export function EditDishes() {
   }
 
   function handleRemoveIngredient(deleted) {
-    const updatedIngredients = dishData.ingredients
-      .split(', ')
-      .filter(ingredient => ingredient !== deleted)
-      .join(', ')
+    const updatedIngredients = ingredients.filter(
+      ingredient => ingredient !== deleted
+    )
+    setIngredients(updatedIngredients)
 
-    setDishData(prevData => ({ ...prevData, ingredients: updatedIngredients }))
+    setDishData(prevData => ({
+      ...prevData,
+      ingredients: updatedIngredients.join(', ')
+    }))
   }
 
   async function handleDeleteDish() {
