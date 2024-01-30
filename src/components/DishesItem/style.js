@@ -3,6 +3,8 @@ import styled from 'styled-components'
 export const Container = styled.div`
   display: flex;
   align-items: center;
+  text-align: center;
+  justify-content: center;
 
   background-color: ${({ theme, $isnew }) =>
     $isnew ? 'transparent' : theme.COLORS.LIGHT_600};
@@ -15,6 +17,8 @@ export const Container = styled.div`
   padding: 10px 16px;
 
   > button {
+    display: flex;
+    align-items: center;
     border: none;
     background: none;
   }

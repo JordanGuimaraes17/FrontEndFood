@@ -22,18 +22,21 @@ export function EditDishes() {
   const [selectedCategory, setSelectedCategory] = useState('')
   const [ingredients, setIngredients] = useState([])
   const [newIngredient, setNewIngredient] = useState('')
-  const [avataFile, setAvatarFile] = useState(null)
+  const [avatarFile, setAvatarFile] = useState(null)
   const [avatar, setAvatar] = useState(null)
   const [dishData, setDishData] = useState({
     name: '',
     description: '',
     ingredients: '',
-    price: ''
+    price: '',
+    category_id: ''
   })
   const navigate = useNavigate()
+
   const handleNavegacao = rota => {
     navigate(rota)
   }
+
   function handleAddIngredient() {
     setDishData(prevData => ({
       ...prevData,
@@ -43,6 +46,7 @@ export function EditDishes() {
     }))
     setNewIngredient('')
   }
+
   function handleRemoveIngredient(deleted) {
     const updatedIngredients = dishData.ingredients
       .split(', ')
@@ -50,6 +54,20 @@ export function EditDishes() {
       .join(', ')
 
     setDishData(prevData => ({ ...prevData, ingredients: updatedIngredients }))
+  }
+
+  async function handleDeleteDish() {
+    try {
+      await api.delete(`/dishes/${params.id}`)
+      alert('Prato excluído com sucesso!')
+      navigate('/')
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data.message)
+      } else {
+        alert('Não foi possível excluir o prato.')
+      }
+    }
   }
 
   function handleChangeAvatar(event) {
@@ -65,33 +83,33 @@ export function EditDishes() {
     setAvatar(imagePreview)
   }
 
-  async function updateDish({ dish }) {
+  async function updateDish(id, data) {
     try {
-      const updatedDish = {
-        name: name || dishData.name,
-        description: description || dishData.description,
-        ingredients: dishData.ingredients,
-        price: price || dishData.price
-      }
-
-      const response = await api.put(`/editDishes/${params.id}`, updatedDish)
-      const updatedDishData = response.data
-
-      setDishData(prevData => ({ ...prevData, ...updatedDishData }))
+      const response = await api.put(`/dishes/${id}`, data)
+      alert('Prato atualizado com sucesso.')
     } catch (error) {
       if (error.response) {
-        alert(error.response.data.message)
+        alert(error.response.data.error)
       } else {
         alert('Não foi possível atualizar o prato.')
       }
     }
+  }
+  function handleUpdate() {
+    const updatedData = {
+      name,
+      description,
+      price,
+      ingredients: dishData.ingredients,
+      category_id: selectedCategory
+    }
+    updateDish(params.id, updatedData)
   }
 
   useEffect(() => {
     async function fetchCategories() {
       try {
         const response = await api.get('/category')
-
         setCategories(response.data)
       } catch (error) {
         console.error('Error fetching categories', error)
@@ -99,7 +117,8 @@ export function EditDishes() {
     }
 
     fetchCategories()
-  }, [])
+  }, [params.id])
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -137,9 +156,8 @@ export function EditDishes() {
                   <div className="avatar">
                     <label>
                       <GoUpload />
-                      Imagem do prato
+                      {avatar}
                       <input
-                        placeholder="Imagem do prato"
                         type="file"
                         accept=".jpg, .jpeg, .png"
                         onChange={handleChangeAvatar}
@@ -177,7 +195,6 @@ export function EditDishes() {
                 <div className="input-wrapper">
                   <label>Ingredientes</label>
                   <div className="col-2">
-                    {/* Dividindo a string de ingredientes em um array */}
                     {dishData.ingredients
                       .split(', ')
                       .filter(ingredient => ingredient.trim() !== '')
@@ -190,7 +207,6 @@ export function EditDishes() {
                           }}
                         />
                       ))}
-
                     <DishesItem
                       placeholder="Add"
                       isNew
@@ -216,12 +232,16 @@ export function EditDishes() {
 
             <p className="label">Descrição</p>
             <TextArea
-              placeholder={description}
+              placeholder={dishData.description}
               onChange={e => setDescription(e.target.value)}
             />
             <footer>
-              <Button title="Excluir prato" />
-              <Button className="button" title="Salvar alterações" />
+              <Button title="Excluir prato" onClick={handleDeleteDish} />
+              <Button
+                className="button"
+                title="Salvar alterações"
+                onClick={handleUpdate}
+              />
             </footer>
           </form>
         </main>
