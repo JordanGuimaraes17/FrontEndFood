@@ -18,6 +18,8 @@ export function EditDishes() {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState('')
+  const [categories, setCategories] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState('')
   const [ingredients, setIngredients] = useState([])
   const [newIngredient, setNewIngredient] = useState('')
   const [avataFile, setAvatarFile] = useState(null)
@@ -26,33 +28,85 @@ export function EditDishes() {
     name: '',
     description: '',
     ingredients: '',
-    price: '',
-    category: ''
+    price: ''
   })
   const navigate = useNavigate()
   const handleNavegacao = rota => {
     navigate(rota)
   }
   function handleAddIngredient() {
-    setIngredients(prevState => [...prevState, newIngredient])
+    setDishData(prevData => ({
+      ...prevData,
+      ingredients: [...prevData.ingredients.split(', '), newIngredient].join(
+        ', '
+      )
+    }))
     setNewIngredient('')
   }
   function handleRemoveIngredient(deleted) {
-    setIngredients(prevState =>
-      prevState.filter(ingredient => ingredient !== deleted)
-    )
+    const updatedIngredients = dishData.ingredients
+      .split(', ')
+      .filter(ingredient => ingredient !== deleted)
+      .join(', ')
+
+    setDishData(prevData => ({ ...prevData, ingredients: updatedIngredients }))
   }
+
   function handleChangeAvatar(event) {
     const file = event.target.files[0]
+
+    if (avatar) {
+      URL.revokeObjectURL(avatar)
+    }
+
     setAvatarFile(file)
+
     const imagePreview = URL.createObjectURL(file)
     setAvatar(imagePreview)
   }
+
+  async function updateDish({ dish }) {
+    try {
+      const updatedDish = {
+        name: name || dishData.name,
+        description: description || dishData.description,
+        ingredients: dishData.ingredients,
+        price: price || dishData.price
+      }
+
+      const response = await api.put(`/editDishes/${params.id}`, updatedDish)
+      const updatedDishData = response.data
+
+      setDishData(prevData => ({ ...prevData, ...updatedDishData }))
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data.message)
+      } else {
+        alert('Não foi possível atualizar o prato.')
+      }
+    }
+  }
+
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const response = await api.get('/category')
+
+        setCategories(response.data)
+      } catch (error) {
+        console.error('Error fetching categories', error)
+      }
+    }
+
+    fetchCategories()
+  }, [])
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await api.get(`/dishes/${params.id}`)
         setDishData(response.data)
+        setIngredients(response.data.ingredients.split(', '))
+        setSelectedCategory(response.data.category_id)
       } catch (error) {
         console.error('Erro ao obter dados dos pratos', error)
       }
@@ -96,17 +150,25 @@ export function EditDishes() {
                 <div className="input-wrapper">
                   <label>Nome</label>
                   <Input
-                    placeholder="Ex: Salada Ceasar"
+                    placeholder={dishData.name}
+                    value={name}
                     type="text"
-                    value={dishData.name}
+                    onChange={e => setName(e.target.value)}
                   />
                 </div>
                 <div className="input-wrapper">
                   <label>Categoria</label>
-                  <select id="" required>
-                    <option value="">Pedro</option>
-                    <option value="">Paulo</option>
-                    <option value="">João</option>
+                  <select
+                    value={selectedCategory}
+                    onChange={e => setSelectedCategory(e.target.value)}
+                    required
+                  >
+                    {Array.isArray(categories) &&
+                      categories.map(categoryItem => (
+                        <option key={categoryItem.id} value={categoryItem.id}>
+                          {categoryItem.name}
+                        </option>
+                      ))}
                   </select>
                 </div>
               </div>
@@ -115,27 +177,27 @@ export function EditDishes() {
                 <div className="input-wrapper">
                   <label>Ingredientes</label>
                   <div className="col-2">
-                    {ingredients.map((ingredient, index) => (
-                      <DishesItem
-                        key={String(index)}
-                        onClick={() => {
-                          handleRemoveIngredient(ingredient)
-                        }}
-                      />
-                    ))}
                     {/* Dividindo a string de ingredientes em um array */}
                     {dishData.ingredients
                       .split(', ')
+                      .filter(ingredient => ingredient.trim() !== '')
                       .map((ingredient, index) => (
                         <DishesItem
                           key={index}
-                          title={ingredient}
-                          isNew
-                          placeholder={ingredient}
-                          onChange={e => setNewIngredient(e.target.value)}
-                          onClick={handleAddIngredient}
+                          value={ingredient}
+                          onClick={() => {
+                            handleRemoveIngredient(ingredient)
+                          }}
                         />
                       ))}
+
+                    <DishesItem
+                      placeholder="Add"
+                      isNew
+                      value={newIngredient}
+                      onChange={e => setNewIngredient(e.target.value)}
+                      onClick={handleAddIngredient}
+                    />
                   </div>
                 </div>
 
@@ -144,7 +206,7 @@ export function EditDishes() {
                   <Input
                     style={{ width: '100%' }}
                     className="price"
-                    value={dishData.price}
+                    placeholder={dishData.price}
                     type="number"
                     onChange={e => setPrice(e.target.value)}
                   />
@@ -153,7 +215,10 @@ export function EditDishes() {
             </div>
 
             <p className="label">Descrição</p>
-            <TextArea placeholder={dishData.description} />
+            <TextArea
+              placeholder={description}
+              onChange={e => setDescription(e.target.value)}
+            />
             <footer>
               <Button title="Excluir prato" />
               <Button className="button" title="Salvar alterações" />
