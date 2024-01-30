@@ -273,7 +273,6 @@ export function EditDishes() {
                 <div className="price">
                   <label>Preço</label>
                   <Input
-                    style={{ width: '100%' }}
                     className="price"
                     placeholder={dishData.price}
                     type="number"

@@ -2,23 +2,20 @@ import styled from 'styled-components'
 export const Container = styled.div`
   width: 70rem;
   .slider {
-    overflow: hidden;
-    text-overflow: ellipsis;
-
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     min-height: 28rem;
-    position: relative;
     cursor: pointer;
     padding: 1.5rem;
     background: ${({ theme }) => theme.COLORS.BACKGROUND_300};
     border-radius: 8px;
     border: 1px solid ${({ theme }) => theme.COLORS.BACKGROUND_200};
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     gap: 0.4rem;
     .svg {
-      position: absolute;
-      right: 1rem;
+      margin-left: auto;
       font-size: 1rem;
     }
 

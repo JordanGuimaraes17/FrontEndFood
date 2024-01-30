@@ -93,6 +93,9 @@ export const Content = styled.section`
       display: flex;
       width: 25%;
       flex-direction: column;
+      input {
+        width: 100%;
+      }
     }
     p {
       margin: 0.62rem 0 0.62rem;
