@@ -27,6 +27,9 @@ export const Content = styled.section`
       height: 3.5rem;
       background: ${({ theme }) => theme.COLORS.BACKGROUND_900};
       color: ${({ theme }) => theme.COLORS.LIGHT_100};
+      label {
+        cursor: pointer;
+      }
 
       input {
         display: none;

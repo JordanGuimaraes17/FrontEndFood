@@ -14,6 +14,14 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 export function EditDishes() {
+  const [dishData, setDishData] = useState({
+    name: '',
+    description: '',
+    ingredients: '',
+    price: '',
+    avatar: '',
+    category_id: ''
+  })
   const params = useParams()
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
@@ -23,14 +31,8 @@ export function EditDishes() {
   const [ingredients, setIngredients] = useState([])
   const [newIngredient, setNewIngredient] = useState('')
   const [avatarFile, setAvatarFile] = useState(null)
-  const [avatar, setAvatar] = useState(null)
-  const [dishData, setDishData] = useState({
-    name: '',
-    description: '',
-    ingredients: '',
-    price: '',
-    category_id: ''
-  })
+  const [avatar, setAvatar] = useState(dishData.avatar)
+
   const navigate = useNavigate()
 
   const handleNavegacao = rota => {
@@ -75,15 +77,9 @@ export function EditDishes() {
 
   function handleChangeAvatar(event) {
     const file = event.target.files[0]
-
-    if (avatar) {
-      URL.revokeObjectURL(avatar)
-    }
-
     setAvatarFile(file)
-
-    const imagePreview = URL.createObjectURL(file)
-    setAvatar(imagePreview)
+    const fileName = file ? file.name : ''
+    setAvatar(fileName)
   }
   function validateName() {
     if (name.trim() === '') {
@@ -118,14 +114,34 @@ export function EditDishes() {
     }
     return true
   }
+  async function validateAvatar() {
+    try {
+      const fileUploadForm = new FormData()
+      fileUploadForm.append('avatar', avatarFile)
 
-  function validateForm() {
+      const response = await api.patch(
+        `/dishes/avatar/${params.id}`,
+        fileUploadForm
+      )
+      setDishData(prevData => ({
+        ...prevData,
+        avatar: response.data.avatar
+      }))
+    } catch (error) {
+      console.error('Erro no upload do avatar:', error)
+      // Trate o erro adequadamente
+      throw new Error('Erro ao fazer upload do avatar.')
+    }
+  }
+
+  async function validateForm() {
     try {
       validateName()
       validateDescription()
       validatePrice()
       validateCategory()
       validateIngredients()
+      await validateAvatar()
       return true
     } catch (error) {
       alert(error.message)
@@ -144,6 +160,7 @@ export function EditDishes() {
         description,
         price,
         ingredients: dishData.ingredients,
+        avatar: avatarFile,
         category_id: selectedCategory
       }
 
@@ -178,6 +195,7 @@ export function EditDishes() {
         const response = await api.get(`/dishes/${params.id}`)
         setDishData(response.data)
         setIngredients(response.data.ingredients.split(', '))
+        setAvatar(response.data.avatar)
         setSelectedCategory(response.data.category_id)
       } catch (error) {
         console.error('Erro ao obter dados dos pratos', error)
@@ -209,7 +227,8 @@ export function EditDishes() {
                   <div className="avatar">
                     <label>
                       <GoUpload />
-                      {avatar}
+                      {avatar ? avatar : 'Selecione um arquivo...'}
+
                       <input
                         type="file"
                         accept=".jpg, .jpeg, .png"
