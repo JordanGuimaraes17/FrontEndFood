@@ -30,8 +30,8 @@ export function EditDishes() {
   const [selectedCategory, setSelectedCategory] = useState('')
   const [ingredients, setIngredients] = useState([])
   const [newIngredient, setNewIngredient] = useState('')
+  const [avatar, setAvatar] = useState('')
   const [avatarFile, setAvatarFile] = useState(null)
-  const [avatar, setAvatar] = useState(dishData.avatar)
 
   const navigate = useNavigate()
 
@@ -75,12 +75,6 @@ export function EditDishes() {
     }
   }
 
-  function handleChangeAvatar(event) {
-    const file = event.target.files[0]
-    setAvatarFile(file)
-    const fileName = file ? file.name : ''
-    setAvatar(fileName)
-  }
   function validateName() {
     if (name.trim() === '') {
       throw new Error('Por favor, preencha o nome do prato.')
@@ -108,30 +102,12 @@ export function EditDishes() {
     }
     return true
   }
+
   function validateIngredients() {
     if (dishData.ingredients.trim() === '') {
       throw new Error('Por favor, adicione pelo menos um ingrediente ao prato.')
     }
     return true
-  }
-  async function validateAvatar() {
-    try {
-      const fileUploadForm = new FormData()
-      fileUploadForm.append('avatar', avatarFile)
-
-      const response = await api.patch(
-        `/dishes/avatar/${params.id}`,
-        fileUploadForm
-      )
-      setDishData(prevData => ({
-        ...prevData,
-        avatar: response.data.avatar
-      }))
-    } catch (error) {
-      console.error('Erro no upload do avatar:', error)
-      // Trate o erro adequadamente
-      throw new Error('Erro ao fazer upload do avatar.')
-    }
   }
 
   async function validateForm() {
@@ -141,11 +117,29 @@ export function EditDishes() {
       validatePrice()
       validateCategory()
       validateIngredients()
-      await validateAvatar()
+
       return true
     } catch (error) {
       alert(error.message)
       return false
+    }
+  }
+  async function updateAvatar() {
+    try {
+      if (avatarFile) {
+        const fileUploadForm = new FormData()
+        fileUploadForm.append('avatar', avatarFile)
+        const resp = await api.patch(
+          `/dishes/avatar/${params.id}`,
+          fileUploadForm
+        )
+        setDishData(prevData => ({
+          ...prevData,
+          avatar: resp.data.avatar
+        }))
+      }
+    } catch (error) {
+      console.error('Erro ao atualizar avatar', error)
     }
   }
 
@@ -155,17 +149,21 @@ export function EditDishes() {
     }
 
     try {
+      await updateAvatar()
+
       const updatedData = {
         name,
         description,
         price,
         ingredients: dishData.ingredients,
-        avatar: avatarFile,
+        avatar: dishData.avatar, // Usa a URL do avatar atualizada de dishData
         category_id: selectedCategory
       }
 
       const response = await api.put(`/dishes/${params.id}`, updatedData)
+
       alert('Prato atualizado com sucesso.')
+
       navigate(`/dishes/${params.id}`)
     } catch (error) {
       if (error.response) {
@@ -174,6 +172,13 @@ export function EditDishes() {
         alert('Não foi possível atualizar o prato.')
       }
     }
+  }
+
+  function handleChangeAvatar(event) {
+    const file = event.target.files[0]
+    setAvatarFile(file)
+    const imagePreview = URL.createObjectURL(file)
+    setAvatar(imagePreview)
   }
 
   useEffect(() => {
@@ -195,7 +200,7 @@ export function EditDishes() {
         const response = await api.get(`/dishes/${params.id}`)
         setDishData(response.data)
         setIngredients(response.data.ingredients.split(', '))
-        setAvatar(response.data.avatar)
+
         setSelectedCategory(response.data.category_id)
       } catch (error) {
         console.error('Erro ao obter dados dos pratos', error)
@@ -227,7 +232,7 @@ export function EditDishes() {
                   <div className="avatar">
                     <label>
                       <GoUpload />
-                      {avatar ? avatar : 'Selecione um arquivo...'}
+                      {avatarFile ? avatarFile.name : 'Selecione uma imagem'}
 
                       <input
                         type="file"
@@ -237,9 +242,10 @@ export function EditDishes() {
                     </label>
                   </div>
                 </div>
-                <div className="input-wrapper">
+                <div className="input-wrapper2">
                   <label>Nome</label>
                   <Input
+                    className="input"
                     placeholder={dishData.name}
                     value={name}
                     type="text"
@@ -292,7 +298,7 @@ export function EditDishes() {
                 <div className="price">
                   <label>Preço</label>
                   <Input
-                    className="price"
+                    className="Input"
                     placeholder={dishData.price}
                     type="number"
                     onChange={e => setPrice(e.target.value)}
@@ -306,6 +312,7 @@ export function EditDishes() {
               placeholder={dishData.description}
               onChange={e => setDescription(e.target.value)}
             />
+
             <footer>
               <Button title="Excluir prato" onClick={handleDeleteDish} />
               <Button

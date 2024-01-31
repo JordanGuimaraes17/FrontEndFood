@@ -47,12 +47,21 @@ export const Content = styled.section`
       line-height: 2.8rem;
       color: ${({ theme }) => theme.COLORS.LIGHT_300};
     }
+    .input-wrapper2 {
+      > div {
+        height: 3.5rem;
+      }
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
 
     .input-wrapper {
       display: flex;
       flex-direction: column;
       width: 100%;
     }
+
     .input-wrapper label {
       margin: 0.62rem 0 0.62rem;
     }
@@ -94,10 +103,9 @@ export const Content = styled.section`
     }
     .price {
       display: flex;
-      width: 25%;
       flex-direction: column;
-      input {
-        width: 100%;
+      > div {
+        height: 3.5rem;
       }
     }
     p {

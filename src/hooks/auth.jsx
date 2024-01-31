@@ -48,6 +48,7 @@ function AuthProvider({ children }) {
       value={{
         signIn,
         signOut,
+
         user: data.user
       }}
     >

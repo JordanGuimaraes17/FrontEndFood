@@ -44,7 +44,7 @@ export function Sliders() {
         spaceBetween={15}
         slidesPerView={3.4}
         centeredSlides={true}
-        loop={true}
+        loop={false}
         navigation
         coverflowEffect={{
           rotate: 0,
@@ -62,7 +62,7 @@ export function Sliders() {
             />
 
             <img
-              src={item.image}
+              src={''}
               alt="slider"
               onClick={() => handleClick('/dishes', item.id)}
               className="slide-item"
