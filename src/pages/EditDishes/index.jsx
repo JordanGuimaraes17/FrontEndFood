@@ -110,7 +110,7 @@ export function EditDishes() {
     return true
   }
 
-  async function validateForm() {
+  function validateForm() {
     try {
       validateName()
       validateDescription()
