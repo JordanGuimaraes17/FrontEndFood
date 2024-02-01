@@ -30,8 +30,8 @@ export function EditDishes() {
   const [selectedCategory, setSelectedCategory] = useState('')
   const [ingredients, setIngredients] = useState([])
   const [newIngredient, setNewIngredient] = useState('')
-  const [avatar, setAvatar] = useState('')
   const [avatarFile, setAvatarFile] = useState(null)
+  const [avatar, setAvatar] = useState('')
 
   const navigate = useNavigate()
 
@@ -137,6 +137,7 @@ export function EditDishes() {
           ...prevData,
           avatar: resp.data.avatar
         }))
+        setAvatar(`${api.defaults.baseURL}/files/${resp.data.avatar}`)
       }
     } catch (error) {
       console.error('Erro ao atualizar avatar', error)
@@ -200,6 +201,9 @@ export function EditDishes() {
         const response = await api.get(`/dishes/${params.id}`)
         setDishData(response.data)
         setIngredients(response.data.ingredients.split(', '))
+
+        const avatarUrl = `${api.defaults.baseURL}/files/${response.data.avatar}`
+        setAvatar(avatarUrl)
 
         setSelectedCategory(response.data.category_id)
       } catch (error) {
