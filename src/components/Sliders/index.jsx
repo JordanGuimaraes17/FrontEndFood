@@ -17,7 +17,8 @@ import 'swiper/css/scrollbar'
 
 export function Sliders() {
   const navigate = useNavigate()
-  const [dishesData, setDishData] = useState([])
+  const [categories, setCategories] = useState([])
+  const [dishesByCategory, setDishesByCategory] = useState({})
 
   const handleClick = (rota, id) => {
     navigate(`${rota}/${id}`)
@@ -26,14 +27,30 @@ export function Sliders() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await api.get(`/dishes`)
-        const updatedDishesData = response.data.map(item => ({
+        // Obter pratos
+        const responseDishes = await api.get(`/dishes`)
+        const dishesData = responseDishes.data.map(item => ({
           ...item,
           avatar: `${api.defaults.baseURL}/files/${item.avatar}`
         }))
-        setDishData(updatedDishesData)
+
+        // Obter categorias
+        const responseCategories = await api.get('/category')
+        const categoriesData = responseCategories.data
+
+        // Agrupar pratos por categoria
+        const groupedDishes = {}
+        dishesData.forEach(item => {
+          if (!groupedDishes[item.category_id]) {
+            groupedDishes[item.category_id] = []
+          }
+          groupedDishes[item.category_id].push(item)
+        })
+
+        setCategories(categoriesData)
+        setDishesByCategory(groupedDishes)
       } catch (error) {
-        console.error('Erro ao obter dados dos pratos', error)
+        console.error('Erro ao obter dados dos pratos e categorias', error)
       }
     }
 
@@ -42,47 +59,49 @@ export function Sliders() {
 
   return (
     <Container>
-      <Swiper
-        effect={'coverflow'}
-        modules={[Navigation, Pagination, EffectCoverflow]}
-        spaceBetween={15}
-        slidesPerView={3.4}
-        centeredSlides={true}
-        loop={false}
-        navigation
-        coverflowEffect={{
-          rotate: 0,
-          stretch: 0,
-          depth: 100,
-          modifier: 2.5
-        }}
-      >
-        {dishesData.map(item => (
-          <SwiperSlide key={item.id} className="slider">
-            <ButtonText
-              icon={GoPencil}
-              className="svg"
-              onClick={() => handleClick('/editDishes', item.id)}
-            />
-
-            <img
-              src={item.avatar}
-              alt="slider"
-              onClick={() => handleClick('/dishes', item.id)}
-              className="slide-item"
-            />
-            <h2>{item.name}</h2>
-            <p>{item.description}</p>
-            <span>R$ {item.price} </span>
-            <footer>
-              <ButtonText icon={AiOutlineMinus} />
-              <span> 0</span>
-              <ButtonText icon={AiOutlinePlus} />
-              <Button title="Incluir" />
-            </footer>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {categories.map(category => (
+        <Swiper
+          key={category.id}
+          effect={'coverflow'}
+          modules={[Navigation, Pagination, EffectCoverflow]}
+          spaceBetween={15}
+          slidesPerView={3.4}
+          centeredSlides={true}
+          loop={false}
+          navigation
+          coverflowEffect={{
+            rotate: 0,
+            stretch: 0,
+            depth: 100,
+            modifier: 2.5
+          }}
+        >
+          {dishesByCategory[category.id]?.map(item => (
+            <SwiperSlide key={item.id} className="slider">
+              <ButtonText
+                icon={GoPencil}
+                className="svg"
+                onClick={() => handleClick('/editDishes', item.id)}
+              />
+              <img
+                src={item.avatar}
+                alt="slider"
+                onClick={() => handleClick('/dishes', item.id)}
+                className="slide-item"
+              />
+              <h2>{item.name}</h2>
+              <p>{item.description}</p>
+              <span>R$ {item.price} </span>
+              <footer>
+                <ButtonText icon={AiOutlineMinus} />
+                <span> 0</span>
+                <ButtonText icon={AiOutlinePlus} />
+                <Button title="Incluir" />
+              </footer>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      ))}
     </Container>
   )
 }
