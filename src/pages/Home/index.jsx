@@ -4,8 +4,25 @@ import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { Section } from '../../components/Section'
 import { Sliders } from '../../components/Sliders'
+import { useState, useEffect } from 'react'
+import { api } from '../../services/api'
 
 export function Home() {
+  const [categories, setCategories] = useState([])
+
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const response = await api.get('/category')
+        setCategories(response.data)
+      } catch (error) {
+        console.error('Error fetching categories', error)
+      }
+    }
+
+    fetchCategories()
+  }, [])
+
   return (
     <Container>
       <Header />
@@ -20,15 +37,15 @@ export function Home() {
               </span>
             </div>
           </div>
-          <Section className="sliders" title="Refeições">
-            <Sliders />
-          </Section>
-          <Section className="sliders" title="Sobremessas">
-            <Sliders />
-          </Section>
-          <Section className="sliders" title="Bebidas">
-            <Sliders />
-          </Section>
+          {categories.map(category => (
+            <Section
+              key={category.id}
+              className="sliders"
+              title={category.name}
+            >
+              <Sliders />
+            </Section>
+          ))}
         </main>
       </Content>
       <Footer />
