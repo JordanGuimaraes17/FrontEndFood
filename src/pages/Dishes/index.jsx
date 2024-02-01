@@ -16,6 +16,7 @@ export function Dishes() {
     name: '',
     description: '',
     ingredients: '',
+    avatar: '',
     price: ''
   })
   const navigate = useNavigate()
@@ -28,6 +29,12 @@ export function Dishes() {
       try {
         const response = await api.get(`/dishes/${params.id}`)
         setDishData(response.data)
+
+        const avatarUrl = `${api.defaults.baseURL}/files/${response.data.avatar}`
+        setDishData(prevState => ({
+          ...prevState,
+          avatar: avatarUrl
+        }))
       } catch (error) {
         console.error('Erro ao obter dados dos pratos', error)
       }
@@ -35,6 +42,7 @@ export function Dishes() {
 
     fetchData()
   }, [params.id])
+
   return (
     <Container>
       <Header />
@@ -47,7 +55,7 @@ export function Dishes() {
         />
 
         <main>
-          <img src={dishData.image} alt="" />
+          <img src={dishData.avatar} alt="" />
           <div>
             <h1>{dishData.name}</h1>
             <p>{dishData.description}</p>

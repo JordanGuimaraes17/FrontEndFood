@@ -17,7 +17,7 @@ import 'swiper/css/scrollbar'
 
 export function Sliders() {
   const navigate = useNavigate()
-  const [dishesData, setDishesData] = useState([])
+  const [dishesData, setDishData] = useState([])
 
   const handleClick = (rota, id) => {
     navigate(`${rota}/${id}`)
@@ -26,8 +26,12 @@ export function Sliders() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await api.get('/dishes')
-        setDishesData(response.data)
+        const response = await api.get(`/dishes`)
+        const updatedDishesData = response.data.map(item => ({
+          ...item,
+          avatar: `${api.defaults.baseURL}/files/${item.avatar}`
+        }))
+        setDishData(updatedDishesData)
       } catch (error) {
         console.error('Erro ao obter dados dos pratos', error)
       }
@@ -62,7 +66,7 @@ export function Sliders() {
             />
 
             <img
-              src={''}
+              src={item.avatar}
               alt="slider"
               onClick={() => handleClick('/dishes', item.id)}
               className="slide-item"
