@@ -20,7 +20,7 @@ export function Header() {
   return (
     <Container>
       <img src={PolygonSvg} alt="logo" />
-      <h1>food explorer</h1>
+      <h1 onClick={() => handleNavegacao('/')}>food explorer</h1>
       <Input placeholder="Busque por pratos ou ingredientes" icon={CiSearch} />
       <Button
         className="new"

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 export const Container = styled.header`
+  cursor: pointer;
   grid-area: header;
   width: 100%;
   display: flex;

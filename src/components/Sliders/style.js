@@ -52,8 +52,8 @@ export const Container = styled.div`
     }
   }
   .slide-item {
-    width: 9rem;
-    height: 9rem;
+    width: 10rem;
+    height: 10rem;
     object-fit: cover;
   }
   .swiper-button-next,
