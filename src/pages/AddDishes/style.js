@@ -13,7 +13,6 @@ export const Content = styled.section`
     padding: 0 7.68rem;
     .buttonText {
       margin: 1rem 0 1rem;
-
       font-size: 1.12rem;
       font-weight: 700;
       line-height: 2.1rem;
@@ -28,6 +27,9 @@ export const Content = styled.section`
       height: 3.5rem;
       background: ${({ theme }) => theme.COLORS.BACKGROUND_900};
       color: ${({ theme }) => theme.COLORS.LIGHT_100};
+      label {
+        cursor: pointer;
+      }
 
       input {
         display: none;
@@ -45,12 +47,21 @@ export const Content = styled.section`
       line-height: 2.8rem;
       color: ${({ theme }) => theme.COLORS.LIGHT_300};
     }
+    .input-wrapper2 {
+      > div {
+        height: 3.5rem;
+      }
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
 
     .input-wrapper {
       display: flex;
       flex-direction: column;
       width: 100%;
     }
+
     .input-wrapper label {
       margin: 0.62rem 0 0.62rem;
     }
@@ -92,17 +103,29 @@ export const Content = styled.section`
     }
     .price {
       display: flex;
-      width: 25%;
       flex-direction: column;
+      > div {
+        height: 3.5rem;
+      }
     }
     p {
       margin: 0.62rem 0 0.62rem;
     }
 
-    .button {
-      float: right;
+    footer {
       margin-top: 1.5rem;
+      gap: 1rem;
+      display: flex;
+      float: right;
+    }
+    footer button:first-child {
+      background: ${({ theme }) => theme.COLORS.BACKGROUND_800};
+    }
+    footer button:nth-child(2) {
       background: ${({ theme }) => theme.COLORS.TOMATO_400};
+    }
+    .button {
+      margin-top: 1rem;
     }
   }
 `
