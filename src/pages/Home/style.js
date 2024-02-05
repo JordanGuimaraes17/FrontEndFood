@@ -45,4 +45,7 @@ export const Content = styled.section`
     font-size: 0.87rem;
     color: ${({ theme }) => theme.COLORS.LIGHT_400};
   }
+  .container {
+    padding: 1rem;
+  }
 `

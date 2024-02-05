@@ -36,11 +36,17 @@ export function Home() {
               </span>
             </div>
           </div>
-          {categories.map(item => (
-            <Section key={item.id} title={item.name} className="sliders">
-              <Sliders />
-            </Section>
-          ))}
+          <div className="container">
+            {categories.map(category => (
+              <Section
+                key={category.id}
+                title={category.name}
+                className="sliders"
+              >
+                <Sliders category={category} />
+              </Section>
+            ))}
+          </div>
         </main>
       </Content>
       <Footer />

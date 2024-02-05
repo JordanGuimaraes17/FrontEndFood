@@ -15,9 +15,9 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 
-export function Sliders() {
+export function Sliders({ category }) {
   const navigate = useNavigate()
-  const [categories, setCategories] = useState([])
+
   const [dishesByCategory, setDishesByCategory] = useState({})
 
   const handleClick = (rota, id) => {
@@ -34,10 +34,6 @@ export function Sliders() {
           avatar: `${api.defaults.baseURL}/files/${item.avatar}`
         }))
 
-        // Obter categorias
-        const responseCategories = await api.get('/category')
-        const categoriesData = responseCategories.data
-
         // Agrupar pratos por categoria
         const groupedDishes = {}
         dishesData.forEach(item => {
@@ -47,10 +43,9 @@ export function Sliders() {
           groupedDishes[item.category_id].push(item)
         })
 
-        setCategories(categoriesData)
         setDishesByCategory(groupedDishes)
       } catch (error) {
-        console.error('Erro ao obter dados dos pratos e categorias', error)
+        console.error('Erro ao obter dados dos pratos', error)
       }
     }
 
@@ -59,49 +54,46 @@ export function Sliders() {
 
   return (
     <Container>
-      {categories.map(category => (
-        <Swiper
-          key={category.id}
-          effect={'coverflow'}
-          modules={[Navigation, Pagination, EffectCoverflow]}
-          spaceBetween={15}
-          slidesPerView={3.4}
-          centeredSlides={true}
-          loop={false}
-          navigation
-          coverflowEffect={{
-            rotate: 0,
-            stretch: 0,
-            depth: 100,
-            modifier: 2.5
-          }}
-        >
-          {dishesByCategory[category.id]?.map(item => (
-            <SwiperSlide key={item.id} className="slider">
-              <ButtonText
-                icon={GoPencil}
-                className="svg"
-                onClick={() => handleClick('/editDishes', item.id)}
-              />
-              <img
-                src={item.avatar}
-                alt="slider"
-                onClick={() => handleClick('/dishes', item.id)}
-                className="slide-item"
-              />
-              <h2>{item.name}</h2>
-              <p>{item.description}</p>
-              <span>R$ {item.price} </span>
-              <footer>
-                <ButtonText icon={AiOutlineMinus} />
-                <span> 0</span>
-                <ButtonText icon={AiOutlinePlus} />
-                <Button title="Incluir" />
-              </footer>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      ))}
+      <Swiper
+        effect={'coverflow'}
+        modules={[Navigation, Pagination, EffectCoverflow]}
+        spaceBetween={15}
+        slidesPerView={3.4}
+        centeredSlides={true}
+        loop={true}
+        navigation
+        coverflowEffect={{
+          rotate: 0,
+          stretch: 0,
+          depth: 100,
+          modifier: 2.5
+        }}
+      >
+        {dishesByCategory[category.id]?.map(item => (
+          <SwiperSlide key={item.id} className="slider">
+            <ButtonText
+              icon={GoPencil}
+              className="svg"
+              onClick={() => handleClick('/editDishes', item.id)}
+            />
+            <img
+              src={item.avatar}
+              alt="slider"
+              onClick={() => handleClick('/dishes', item.id)}
+              className="slide-item"
+            />
+            <h2>{item.name}</h2>
+            <p>{item.description}</p>
+            <span>R$ {item.price} </span>
+            <footer>
+              <ButtonText icon={AiOutlineMinus} />
+              <span> 0</span>
+              <ButtonText icon={AiOutlinePlus} />
+              <Button title="Incluir" />
+            </footer>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </Container>
   )
 }
