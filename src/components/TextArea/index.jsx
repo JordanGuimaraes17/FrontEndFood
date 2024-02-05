@@ -1,9 +1,5 @@
-import { Container } from "./style";
-export function TextArea ( {value,...rest}) {
-  return(
-    <Container {...rest}>
-      {value}
+import { Container } from './style'
 
-    </Container>
-  )
+export function TextArea({ value, onChange, ...rest }) {
+  return <Container {...rest} value={value} onChange={onChange} />
 }

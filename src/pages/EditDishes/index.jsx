@@ -225,6 +225,9 @@ export function EditDishes() {
         setAvatar(avatarUrl)
 
         setSelectedCategory(response.data.category_id)
+        setName(response.data.name)
+        setPrice(response.data.price)
+        setDescription(response.data.description)
       } catch (error) {
         console.error('Erro ao obter dados dos pratos', error)
       }
@@ -269,7 +272,6 @@ export function EditDishes() {
                   <label>Nome</label>
                   <Input
                     className="input"
-                    placeholder={dishData.name}
                     value={name}
                     type="text"
                     onChange={e => setName(e.target.value)}
@@ -322,7 +324,7 @@ export function EditDishes() {
                   <label>Preço</label>
                   <Input
                     className="Input"
-                    placeholder={dishData.price}
+                    value={price}
                     type="number"
                     onChange={e => setPrice(e.target.value)}
                   />
@@ -332,8 +334,10 @@ export function EditDishes() {
 
             <p className="label">Descrição</p>
             <TextArea
-              placeholder={dishData.description}
-              onChange={e => setDescription(e.target.value)}
+              value={description}
+              onChange={e => {
+                setDescription(e.target.value)
+              }}
             />
 
             <footer>
