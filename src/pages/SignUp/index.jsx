@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { api } from '../../services/api'
 
-const nameRegex = /^[a-zA-Z\s]+$/
+const nameRegex = /^[a-zA-Z\u00C0-\u017F\s]+$/
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const minLength = 6
 const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d|\W).+$/

@@ -40,12 +40,27 @@ export function EditDishes() {
   }
 
   function handleAddIngredient() {
-    setDishData(prevData => ({
-      ...prevData,
-      ingredients: [...prevData.ingredients.split(', '), newIngredient].join(
-        ', '
-      )
-    }))
+    if (newIngredient.trim() === '') {
+      // Impede a adição de ingredientes vazios
+      return
+    }
+
+    setIngredients(prevIngredients => [...prevIngredients, newIngredient])
+
+    setDishData(prevData => {
+      const updatedIngredients = [
+        ...prevData.ingredients.split(', '),
+        newIngredient
+      ]
+        .map(ingredient => ingredient.trim())
+        .filter(Boolean) // Remove strings vazias
+
+      return {
+        ...prevData,
+        ingredients: updatedIngredients.join(', ')
+      }
+    })
+
     setNewIngredient('')
   }
 
@@ -200,7 +215,11 @@ export function EditDishes() {
       try {
         const response = await api.get(`/dishes/${params.id}`)
         setDishData(response.data)
-        setIngredients(response.data.ingredients.split(', '))
+        const trimmedIngredients = response.data.ingredients
+          .split(',')
+          .map(ingredient => ingredient.trim())
+          .filter(Boolean)
+        setIngredients(trimmedIngredients)
 
         const avatarUrl = `${api.defaults.baseURL}/files/${response.data.avatar}`
         setAvatar(avatarUrl)
