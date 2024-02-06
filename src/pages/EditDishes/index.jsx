@@ -199,13 +199,23 @@ export function EditDishes() {
     async function fetchData() {
       try {
         const response = await api.get(`/dishes/${params.id}`)
-        setDishData(response.data)
-        setIngredients(response.data.ingredients.split(', '))
+        const { name, description, price, category_id, ingredients, avatar } =
+          response.data
 
-        const avatarUrl = `${api.defaults.baseURL}/files/${response.data.avatar}`
+        setName(name)
+        setDescription(description)
+        setPrice(price)
+        setSelectedCategory(category_id)
+        setDishData({
+          ...dishData,
+          ingredients: ingredients,
+          avatar: avatar
+        })
+
+        const avatarUrl = `${api.defaults.baseURL}/files/${avatar}`
         setAvatar(avatarUrl)
 
-        setSelectedCategory(response.data.category_id)
+        setIngredients(ingredients.split(', '))
       } catch (error) {
         console.error('Erro ao obter dados dos pratos', error)
       }
@@ -250,7 +260,6 @@ export function EditDishes() {
                   <label>Nome</label>
                   <Input
                     className="input"
-                    placeholder={dishData.name}
                     value={name}
                     type="text"
                     onChange={e => setName(e.target.value)}
@@ -290,7 +299,7 @@ export function EditDishes() {
                         />
                       ))}
                     <DishesItem
-                      placeholder="Add"
+                      placeholder="Adicionar"
                       isNew
                       value={newIngredient}
                       onChange={e => setNewIngredient(e.target.value)}
@@ -303,7 +312,7 @@ export function EditDishes() {
                   <label>Preço</label>
                   <Input
                     className="Input"
-                    placeholder={dishData.price}
+                    value={price}
                     type="number"
                     onChange={e => setPrice(e.target.value)}
                   />
@@ -313,7 +322,7 @@ export function EditDishes() {
 
             <p className="label">Descrição</p>
             <TextArea
-              placeholder={dishData.description}
+              value={description}
               onChange={e => setDescription(e.target.value)}
             />
 

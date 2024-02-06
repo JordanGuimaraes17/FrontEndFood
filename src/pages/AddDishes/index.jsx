@@ -9,11 +9,12 @@ import { ButtonText } from '../../components/ButtonText'
 import { TextArea } from '../../components/TextArea'
 import { DishesItem } from '../../components/DishesItem'
 import { Button } from '../../components/Button'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { api } from '../../services/api'
 
 export function AddDishes() {
+  const params = useParams()
   const [ingredients, setIngredients] = useState([])
   const [newIngredient, setNewIngredient] = useState('')
   const [name, setName] = useState('')
@@ -135,7 +136,7 @@ export function AddDishes() {
 
       alert('Prato criado com sucesso.')
 
-      navigate(`/dishes`)
+      navigate(`/dishes/${params.id}`)
     } catch (error) {
       if (error.response) {
         alert(error.response.data.error)
