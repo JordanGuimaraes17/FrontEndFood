@@ -9,11 +9,12 @@ import { ButtonText } from '../../components/ButtonText'
 import { TextArea } from '../../components/TextArea'
 import { DishesItem } from '../../components/DishesItem'
 import { Button } from '../../components/Button'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { api } from '../../services/api'
 
 export function AddDishes() {
+  const params = useParams()
   const [newDishIngredients, setNewDishIngredients] = useState([])
   const [newIngredient, setNewIngredient] = useState('')
   const [name, setName] = useState('')
@@ -90,7 +91,7 @@ export function AddDishes() {
     try {
       await api.post('/dishes', formData)
       alert('Prato criado com sucesso')
-      navigate('/')
+      navigate(`/dishes/${params.id}`)
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message)
@@ -121,7 +122,7 @@ export function AddDishes() {
     <Container>
       <Header>
         <img src={PolygonSvg} alt="logo" />
-        <h1>food explorer</h1>
+        <h1 onClick={() => handleNavegacao('/')}>food explorer</h1>
         <Input
           placeholder="Busque por pratos ou ingredientes"
           icon={CiSearch}
