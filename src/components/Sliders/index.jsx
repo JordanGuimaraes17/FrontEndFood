@@ -60,7 +60,7 @@ export function Sliders({ category }) {
         spaceBetween={15}
         slidesPerView={3.4}
         centeredSlides={true}
-        loop={true}
+        loop={false}
         navigation
         coverflowEffect={{
           rotate: 0,

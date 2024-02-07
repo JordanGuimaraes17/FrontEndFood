@@ -38,15 +38,17 @@ export function EditDishes() {
   const handleNavegacao = rota => {
     navigate(rota)
   }
-
   function handleAddIngredient() {
-    setDishData(prevData => ({
-      ...prevData,
-      ingredients: [...prevData.ingredients.split(', '), newIngredient].join(
-        ', '
-      )
-    }))
-    setNewIngredient('')
+    // Verifica se o novo ingrediente não está vazio antes de adicioná-lo
+    if (newIngredient.trim() !== '') {
+      setDishData(prevData => ({
+        ...prevData,
+        ingredients: [...prevData.ingredients.split(', '), newIngredient]
+          .filter(ingredient => ingredient.trim() !== '') // Filtra os ingredientes para remover espaços vazios
+          .join(', ')
+      }))
+      setNewIngredient('')
+    }
   }
 
   function handleRemoveIngredient(deleted) {
