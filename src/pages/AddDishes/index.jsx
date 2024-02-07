@@ -14,7 +14,7 @@ import { useState, useEffect } from 'react'
 import { api } from '../../services/api'
 
 export function AddDishes() {
-  const [ingredients, setIngredients] = useState([])
+  const [newDishIngredients, setNewDishIngredients] = useState([])
   const [newIngredient, setNewIngredient] = useState('')
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
@@ -29,25 +29,26 @@ export function AddDishes() {
     navigate(rota)
   }
 
-  function handleAddIngredient() {
+  function handleAddNewIngredient() {
     if (newIngredient.trim() === '') {
       return
     }
-    setIngredients(prevIngredients => [...prevIngredients, newIngredient])
+    setNewDishIngredients(prevData => [...prevData, newIngredient])
     setNewIngredient('')
   }
 
-  function handleRemoveIngredient(deleted) {
-    const updatedIngredients = ingredients.filter(
+  function handleRemoveNewIngredient(deleted) {
+    const updatedIngredients = newDishIngredients.filter(
       ingredient => ingredient !== deleted
     )
-    setIngredients(updatedIngredients)
+    setNewDishIngredients(updatedIngredients)
   }
 
   function handleChangeAvatar(event) {
     const file = event.target.files[0]
     setAvatar(file)
   }
+
   async function handleNewDish() {
     if (!name) {
       return alert('Digite o nome do prato')
@@ -74,7 +75,7 @@ export function AddDishes() {
     if (!avatar) {
       return alert('Por favor, faça upload/escolha uma imagem.')
     }
-    if (ingredients.length == 0) {
+    if (newDishIngredients.length === 0) {
       return alert('Por favor, adicione pelo menos um ingrediente.')
     }
 
@@ -82,24 +83,23 @@ export function AddDishes() {
     formData.append('name', name)
     formData.append('description', description)
     formData.append('price', price)
-    formData.append('ingredients', ingredients.join(','))
+    formData.append('ingredients', newDishIngredients.join(', '))
     formData.append('image', avatar)
     formData.append('category_id', selectedCategory)
 
-    await api
-      .post('/dishes', formData)
-      .then(() => {
-        alert('Prato criado com sucesso')
-        navigate('/')
-      })
-      .catch(error => {
-        if (error.response) {
-          alert(error.response.data.message)
-        } else {
-          alert('Não foi possível cadastrar o prato')
-        }
-      })
+    try {
+      await api.post('/dishes', formData)
+      alert('Prato criado com sucesso')
+      navigate('/')
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data.message)
+      } else {
+        alert('Não foi possível cadastrar o prato')
+      }
+    }
   }
+
   useEffect(() => {
     async function fetchCategories() {
       try {
@@ -185,12 +185,12 @@ export function AddDishes() {
                 <div className="input-wrapper">
                   <label>Ingredientes</label>
                   <div className="col-2">
-                    {ingredients.map((ingredient, index) => (
+                    {newDishIngredients.map((ingredient, index) => (
                       <DishesItem
                         key={index}
                         value={ingredient}
                         onClick={() => {
-                          handleRemoveIngredient(ingredient)
+                          handleRemoveNewIngredient(ingredient)
                         }}
                       />
                     ))}
@@ -199,7 +199,7 @@ export function AddDishes() {
                       isNew
                       value={newIngredient}
                       onChange={e => setNewIngredient(e.target.value)}
-                      onClick={handleAddIngredient}
+                      onClick={handleAddNewIngredient}
                     />
                   </div>
                 </div>
@@ -209,7 +209,7 @@ export function AddDishes() {
                   <Input
                     className="price"
                     placeholder="R$ 00,00"
-                    type="number"
+                    type="text"
                     onChange={e => setPrice(e.target.value)}
                   />
                 </div>
