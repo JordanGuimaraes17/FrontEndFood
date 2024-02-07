@@ -33,9 +33,7 @@ export function AddDishes() {
     if (newIngredient.trim() === '') {
       return
     }
-
     setIngredients(prevIngredients => [...prevIngredients, newIngredient])
-
     setNewIngredient('')
   }
 

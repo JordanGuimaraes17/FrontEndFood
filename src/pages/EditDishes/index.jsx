@@ -39,27 +39,25 @@ export function EditDishes() {
     navigate(rota)
   }
   function handleAddIngredient() {
-    // Verifica se o novo ingrediente não está vazio antes de adicioná-lo
     if (newIngredient.trim() !== '') {
       setDishData(prevData => ({
         ...prevData,
         ingredients: [...prevData.ingredients.split(', '), newIngredient]
-          .filter(ingredient => ingredient.trim() !== '') // Filtra os ingredientes para remover espaços vazios
+          .filter(ingredient => ingredient.trim() !== '')
           .join(', ')
       }))
       setNewIngredient('')
     }
   }
-
   function handleRemoveIngredient(deleted) {
-    const updatedIngredients = ingredients.filter(
-      ingredient => ingredient !== deleted
-    )
-    setIngredients(updatedIngredients)
+    const updatedIngredients = dishData.ingredients
+      .split(', ')
+      .filter(ingredient => ingredient !== deleted)
+      .join(', ')
 
     setDishData(prevData => ({
       ...prevData,
-      ingredients: updatedIngredients.join(', ')
+      ingredients: updatedIngredients
     }))
   }
 
@@ -159,7 +157,7 @@ export function EditDishes() {
         description,
         price,
         ingredients: dishData.ingredients,
-        avatar: dishData.avatar, // Usa a URL do avatar atualizada de dishData
+        avatar: dishData.avatar,
         category_id: selectedCategory
       }
 
@@ -216,8 +214,6 @@ export function EditDishes() {
 
         const avatarUrl = `${api.defaults.baseURL}/files/${avatar}`
         setAvatar(avatarUrl)
-
-        setIngredients(ingredients.split(', '))
       } catch (error) {
         console.error('Erro ao obter dados dos pratos', error)
       }
