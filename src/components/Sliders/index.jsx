@@ -79,7 +79,7 @@ export function Sliders({ category }) {
             <img
               src={item.avatar}
               alt="slider"
-              onClick={() => handleClick('/dishes', item.id)}
+              onClick={() => handleClick('/dishesAdmin', item.id)}
               className="slide-item"
             />
             <h2>{item.name}</h2>

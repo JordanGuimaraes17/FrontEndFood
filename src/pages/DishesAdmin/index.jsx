@@ -4,15 +4,44 @@ import { Footer } from '../../components/Footer'
 import { ButtonText } from '../../components/ButtonText'
 import { Tag } from '../../components/Tag'
 import { HiOutlineChevronLeft } from 'react-icons/hi2'
-import Image01 from '../../assets/Mask group-1.png'
 import { Button } from '../../components/Button'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { api } from '../../services/api'
 
 export function DishesAdmin() {
   const navigate = useNavigate()
+  const params = useParams()
   const handleNavegacao = rota => {
     navigate(rota)
   }
+
+  const [dishData, setDishData] = useState({
+    name: '',
+    description: '',
+    ingredients: '',
+    avatar: '',
+    price: ''
+  })
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await api.get(`/dishesAdmin/${params.id}`)
+        setDishData(response.data)
+
+        const avatarUrl = `${api.defaults.baseURL}/files/${response.data.avatar}`
+        setDishData(prevState => ({
+          ...prevState,
+          avatar: avatarUrl
+        }))
+      } catch (error) {
+        console.error('Erro ao obter dados dos pratos', error)
+      }
+    }
+
+    fetchData()
+  }, [params.id])
 
   return (
     <Container>
@@ -25,26 +54,19 @@ export function DishesAdmin() {
           onClick={() => handleNavegacao(-1)}
         />
         <main>
-          <img src={Image01} alt="" />
+          <img src={dishData.avatar} alt="imagem prato" />
           <div>
-            <h1>Salada Ravanello</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui,
-              ipsum quia molestias eum doloremque a sequi! Animi, magnam!
-              Corporis rerum nihil sequi consequatur, quam nam qui incidunt quos
-              recusandae facilis?
-            </p>
+            <h1>{dishData.name}</h1>
+            <p>{dishData.description}</p>
 
-            <Tag title="arroz" />
-            <Tag title="arroz" />
-            <Tag title="arroz" />
-            <Tag title="arroz" />
-            <Tag title="arroz" />
+            {dishData.ingredients.split(',').map((ingredient, index) => (
+              <Tag key={index} title={ingredient.trim()} />
+            ))}
 
             <footer>
               <Button
                 title="Editar prato"
-                onClick={() => handleNavegacao('/editDishes/:id')}
+                onClick={() => handleNavegacao(`/editDishes/${params.id}`)}
               />
             </footer>
           </div>
