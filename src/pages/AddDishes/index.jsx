@@ -68,6 +68,7 @@ export function AddDishes() {
       return alert('Digite alguma descrição sobre o prato.')
     }
     if (!price || !/^\d+(\.\d+)?$/.test(price)) {
+      console.log('Valor de price:', price)
       return alert(
         'Por favor, preencha um preço válido (apenas números inteiros ou decimais com ponto).'
       )
@@ -89,9 +90,10 @@ export function AddDishes() {
     formData.append('category_id', selectedCategory)
 
     try {
-      await api.post('/dishes', formData)
+      const response = await api.post('/dishes', formData)
+      const { dish_id } = response.data
       alert('Prato criado com sucesso')
-      navigate(`/dishes/${params.id}`)
+      navigate(`/dishes/${dish_id}`)
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message)
