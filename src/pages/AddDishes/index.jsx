@@ -9,12 +9,11 @@ import { ButtonText } from '../../components/ButtonText'
 import { TextArea } from '../../components/TextArea'
 import { DishesItem } from '../../components/DishesItem'
 import { Button } from '../../components/Button'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { api } from '../../services/api'
 
 export function AddDishes() {
-  const params = useParams()
   const [newDishIngredients, setNewDishIngredients] = useState([])
   const [newIngredient, setNewIngredient] = useState('')
   const [name, setName] = useState('')
