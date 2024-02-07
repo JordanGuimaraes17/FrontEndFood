@@ -9,12 +9,11 @@ import { ButtonText } from '../../components/ButtonText'
 import { TextArea } from '../../components/TextArea'
 import { DishesItem } from '../../components/DishesItem'
 import { Button } from '../../components/Button'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { api } from '../../services/api'
 
 export function AddDishes() {
-  const params = useParams()
   const [ingredients, setIngredients] = useState([])
   const [newIngredient, setNewIngredient] = useState('')
   const [name, setName] = useState('')
@@ -53,25 +52,34 @@ export function AddDishes() {
   }
   async function handleNewDish() {
     if (!name) {
-      return alert('Type the name')
+      return alert('Digite o nome do prato')
     }
+
+    if (!selectedCategory) {
+      return alert('Por favor, escolha uma categoria')
+    }
+
     if (newIngredient) {
       return alert(
-        'You left one ingredient typed but without adding it. Please click on add or erase it.'
+        'Você deixou um ingrediente digitado, mas não o adicionou. Por favor, clique em adicionar ou apague-o.'
       )
     }
     if (!description) {
-      return alert('Type something about it.')
+      return alert('Digite alguma descrição sobre o prato.')
     }
-    if (!price) {
-      return alert('Fill in the price')
+    if (!price || !/^\d+(\.\d+)?$/.test(price)) {
+      return alert(
+        'Por favor, preencha um preço válido (apenas números inteiros ou decimais com ponto).'
+      )
     }
+
     if (!avatar) {
-      return alert('Please upload/choose one image.')
+      return alert('Por favor, faça upload/escolha uma imagem.')
     }
     if (ingredients.length == 0) {
-      return alert('Please add at least one ingredient.')
+      return alert('Por favor, adicione pelo menos um ingrediente.')
     }
+
     const formData = new FormData()
     formData.append('name', name)
     formData.append('description', description)
@@ -90,16 +98,19 @@ export function AddDishes() {
         if (error.response) {
           alert(error.response.data.message)
         } else {
-          alert('Unable to register')
+          alert('Não foi possível cadastrar o prato')
         }
       })
   }
-
   useEffect(() => {
     async function fetchCategories() {
       try {
         const response = await api.get('/category')
-        setCategories(response.data)
+        // Adicionando manualmente a opção "Selecione uma categoria" ao estado de categorias
+        setCategories([
+          { id: '', name: 'Selecione uma categoria' },
+          ...response.data
+        ])
       } catch (error) {
         console.error('Error fetching categories', error)
       }
