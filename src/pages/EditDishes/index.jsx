@@ -28,7 +28,6 @@ export function EditDishes() {
   const [price, setPrice] = useState('')
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState('')
-  const [ingredients, setIngredients] = useState([])
   const [newIngredient, setNewIngredient] = useState('')
   const [avatarFile, setAvatarFile] = useState(null)
   const [avatar, setAvatar] = useState('')
@@ -83,7 +82,7 @@ export function EditDishes() {
   }
 
   function validatePrice() {
-    if (price === '' || isNaN(price) || parseFloat(price) <= 0) {
+    if (!price || !/^\d+(\.\d+)?$/.test(price)) {
       throw new Error('Por favor, insira um preço válido maior que zero.')
     }
     return true
