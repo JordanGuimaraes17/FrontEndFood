@@ -20,6 +20,7 @@ export function Dishes() {
     price: ''
   })
   const navigate = useNavigate()
+
   function handleClick() {
     navigate(-1)
   }
@@ -61,8 +62,8 @@ export function Dishes() {
             <p>{dishData.description}</p>
 
             {/* Dividindo a string de ingredientes em um array */}
-            {dishData.ingredients.split(', ').map((ingredient, index) => (
-              <Tag key={index} title={ingredient} />
+            {dishData.ingredients.split(',').map((ingredient, index) => (
+              <Tag key={index} title={ingredient.trim()} />
             ))}
 
             <footer>

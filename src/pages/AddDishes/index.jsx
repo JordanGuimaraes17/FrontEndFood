@@ -22,7 +22,7 @@ export function AddDishes() {
   const [price, setPrice] = useState('')
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState('')
-  const [avatarFile, setAvatarFile] = useState(null)
+
   const [avatar, setAvatar] = useState('')
   const navigate = useNavigate()
 
@@ -47,61 +47,52 @@ export function AddDishes() {
     setIngredients(updatedIngredients)
   }
 
-  function validateName() {
-    if (name.trim() === '') {
-      throw new Error('Por favor, preencha o nome do prato.')
-    }
-    return true
-  }
-
-  function validatePrice() {
-    if (price === '' || isNaN(price) || parseFloat(price) <= 0) {
-      throw new Error('Por favor, insira um preço válido maior que zero.')
-    }
-    return true
-  }
-
-  function validateDescription() {
-    if (description.trim() === '') {
-      throw new Error('Por favor, preencha a descrição do prato.')
-    }
-    return true
-  }
-
-  function validateCategory() {
-    if (!selectedCategory) {
-      throw new Error('Por favor, selecione uma categoria para o prato.')
-    }
-    return true
-  }
-
-  function validateIngredients() {
-    if (ingredients.length === 0) {
-      throw new Error('Por favor, adicione pelo menos um ingrediente ao prato.')
-    }
-    return true
-  }
-
-  function validateForm() {
-    try {
-      validateName()
-      validateDescription()
-      validatePrice()
-      validateCategory()
-      validateIngredients()
-
-      return true
-    } catch (error) {
-      alert(error.message)
-      return false
-    }
-  }
-
   function handleChangeAvatar(event) {
     const file = event.target.files[0]
-    setAvatarFile(file)
-    const imagePreview = URL.createObjectURL(file)
-    setAvatar(imagePreview)
+    setAvatar(file)
+  }
+  async function handleNewDish() {
+    if (!name) {
+      return alert('Type the name')
+    }
+    if (newIngredient) {
+      return alert(
+        'You left one ingredient typed but without adding it. Please click on add or erase it.'
+      )
+    }
+    if (!description) {
+      return alert('Type something about it.')
+    }
+    if (!price) {
+      return alert('Fill in the price')
+    }
+    if (!avatar) {
+      return alert('Please upload/choose one image.')
+    }
+    if (ingredients.length == 0) {
+      return alert('Please add at least one ingredient.')
+    }
+    const formData = new FormData()
+    formData.append('name', name)
+    formData.append('description', description)
+    formData.append('price', price)
+    formData.append('ingredients', ingredients.join(','))
+    formData.append('image', avatar)
+    formData.append('category_id', selectedCategory)
+
+    await api
+      .post('/dishes', formData)
+      .then(() => {
+        alert('Prato criado com sucesso')
+        navigate('/')
+      })
+      .catch(error => {
+        if (error.response) {
+          alert(error.response.data.message)
+        } else {
+          alert('Unable to register')
+        }
+      })
   }
 
   useEffect(() => {
@@ -116,35 +107,6 @@ export function AddDishes() {
 
     fetchCategories()
   }, [])
-  async function handleCreateDish() {
-    if (!validateForm()) {
-      return
-    }
-    try {
-      const newDishData = [
-        {
-          name: name,
-          description: description,
-          price: price,
-          ingredients: ingredients,
-          category_id: selectedCategory,
-          avatar: avatarFile
-        }
-      ]
-
-      const response = await api.post('/dishes', newDishData)
-
-      alert('Prato criado com sucesso.')
-
-      navigate(`/dishes/${params.id}`)
-    } catch (error) {
-      if (error.response) {
-        alert(error.response.data.error)
-      } else {
-        alert('Não foi possível criar o prato.')
-      }
-    }
-  }
 
   return (
     <Container>
@@ -175,7 +137,7 @@ export function AddDishes() {
                   <div className="avatar">
                     <label>
                       <GoUpload />
-                      {avatarFile ? avatarFile.name : 'Selecione uma imagem'}
+                      {avatar ? avatar.name : 'Selecione uma imagem'}
                       <input
                         placeholder="Imagem do prato"
                         type="file"
@@ -256,7 +218,7 @@ export function AddDishes() {
             <Button
               className="button"
               title="Salvar alterações"
-              onClick={handleCreateDish}
+              onClick={handleNewDish}
             />
           </form>
         </main>
