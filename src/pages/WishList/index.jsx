@@ -11,6 +11,7 @@ import { api } from '../../services/api'
 
 export function WishList() {
   const navigate = useNavigate()
+
   const [orderDetails, setOrderDetails] = useState([])
   const [totalOrderPrice, setTotalOrderPrice] = useState(0)
 
@@ -23,6 +24,7 @@ export function WishList() {
       try {
         const response = await api.get(`/orders`)
         const { orderDetails, totalOrderPrice } = response.data
+
         setOrderDetails(orderDetails)
         setTotalOrderPrice(totalOrderPrice)
       } catch (error) {
@@ -30,22 +32,6 @@ export function WishList() {
       }
     }
     fetchOrderDetails()
-  }, [])
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const responseDishes = await api.get(`/dishes`)
-        const dishesData = responseDishes.data.map(item => ({
-          ...item,
-          avatar: `${api.defaults.baseURL}/files/${item.avatar}`
-        }))
-      } catch (error) {
-        console.error('Erro ao obter dados dos pratos', error)
-      }
-    }
-
-    fetchData()
   }, [])
 
   return (
@@ -84,7 +70,8 @@ export function WishList() {
                   <tr key={item.id}>
                     <td>
                       <div className="product">
-                        <img src={item.image} alt="" />
+                        {console.log(item.dish_avatar)}
+                        <img src={item.dish_avatar} alt="" />
                         <div className="info">
                           <div className="name">{item.dish_name}</div>
                           <div className="category">{item.category_name}</div>

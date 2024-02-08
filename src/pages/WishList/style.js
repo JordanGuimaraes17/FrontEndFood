@@ -118,8 +118,8 @@ export const Container = styled.div`
     align-items: center;
     img {
       margin-left: 15px;
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      height: 100px;
     }
     .info {
       margin-left: 20px;
