@@ -1,5 +1,5 @@
 // Importe o useState e useEffect do React
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Container } from './style'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import { IoIosClose } from 'react-icons/io'
@@ -9,13 +9,16 @@ import { Button } from '../../components/Button'
 import PolygonSvg from '../../assets/Polygon 1.svg'
 import { useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
+import { useAuth } from '../../hooks/auth'
 
 export function WishList() {
+  const { user } = useAuth()
   const navigate = useNavigate()
 
   const [orderDetails, setOrderDetails] = useState([])
   const [totalOrderPrice, setTotalOrderPrice] = useState(0)
   const [dishImages, setDishImages] = useState({}) // Objeto para armazenar as imagens dos pratos
+  const [userName, setUserName] = useState('')
 
   const handleNavegacao = rota => {
     navigate(rota)
@@ -32,6 +35,8 @@ export function WishList() {
         }))
 
         const { orderDetails, totalOrderPrice } = response.data
+        const { name } = user
+        setUserName(name)
 
         // Criar um objeto para mapear o ID do prato para sua imagem
         const imagesMap = {}
@@ -63,7 +68,7 @@ export function WishList() {
           <img src={PolygonSvg} alt="logo" /> food explorer
         </h3>
         <span>
-          Lista de compras do <b>fernandev</b>
+          Lista de compras do <b>{userName}</b>
         </span>
       </header>
       <main>
