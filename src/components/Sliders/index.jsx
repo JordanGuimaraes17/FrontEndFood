@@ -18,13 +18,13 @@ import 'swiper/css/scrollbar'
 export function Sliders({ category }) {
   const navigate = useNavigate()
   const [dishQuantities, setDishQuantities] = useState({})
-  const [dishesByCategory, setDishesByCategory] = useState({})
+  const [dishesByCategory, setDishesByCategory] = useState([])
 
   const handleClick = (rota, id) => {
     navigate(`${rota}/${id}`)
   }
 
-  const handleAddDish = async id => {
+  const handleAddDish = id => {
     setDishQuantities(prevQuantities => ({
       ...prevQuantities,
       [id]: (prevQuantities[id] || 0) + 1
@@ -47,7 +47,6 @@ export function Sliders({ category }) {
         quantity: dishQuantities[id] || 0
       })
       console.log(response.data) // Exibir resposta da API no console
-      // Lógica adicional, se necessário
     } catch (error) {
       console.error('Erro ao adicionar pedido:', error)
     }
