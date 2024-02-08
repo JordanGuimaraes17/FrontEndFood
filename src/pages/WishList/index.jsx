@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+// Importe o useState e useEffect do React
+import React, { useState, useEffect } from 'react'
 import { Container } from './style'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import { IoIosClose } from 'react-icons/io'
@@ -14,6 +15,7 @@ export function WishList() {
 
   const [orderDetails, setOrderDetails] = useState([])
   const [totalOrderPrice, setTotalOrderPrice] = useState(0)
+  const [dishImages, setDishImages] = useState({}) // Objeto para armazenar as imagens dos pratos
 
   const handleNavegacao = rota => {
     navigate(rota)
@@ -23,10 +25,23 @@ export function WishList() {
     async function fetchOrderDetails() {
       try {
         const response = await api.get(`/orders`)
+        const responseDishes = await api.get(`/dishes`)
+        const dishesData = responseDishes.data.map(item => ({
+          ...item,
+          avatar: `${api.defaults.baseURL}/files/${item.avatar}`
+        }))
+
         const { orderDetails, totalOrderPrice } = response.data
+
+        // Criar um objeto para mapear o ID do prato para sua imagem
+        const imagesMap = {}
+        dishesData.forEach(dish => {
+          imagesMap[dish.id] = dish.avatar
+        })
 
         setOrderDetails(orderDetails)
         setTotalOrderPrice(totalOrderPrice)
+        setDishImages(imagesMap) // Define o objeto de imagens
       } catch (error) {
         console.error('Erro ao obter dados do pedido', error)
       }
@@ -70,8 +85,8 @@ export function WishList() {
                   <tr key={item.id}>
                     <td>
                       <div className="product">
-                        {console.log(item.dish_avatar)}
-                        <img src={item.dish_avatar} alt="" />
+                        <img src={dishImages[item.dish_id]} alt="" />{' '}
+                        {/* Usando a imagem correta do prato */}
                         <div className="info">
                           <div className="name">{item.dish_name}</div>
                           <div className="category">{item.category_name}</div>
