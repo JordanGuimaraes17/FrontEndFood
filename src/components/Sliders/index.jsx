@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container } from './style'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Button } from '../Button'
@@ -25,16 +25,10 @@ export function Sliders({ category }) {
   }
 
   const handleAddDish = async id => {
-    try {
-      const response = await api.post('/orders', { dish_id: id })
-      console.log(response.data) // Exibir resposta da API no console
-      setDishQuantities(prevQuantities => ({
-        ...prevQuantities,
-        [id]: (prevQuantities[id] || 0) + 1
-      }))
-    } catch (error) {
-      console.error('Erro ao adicionar prato:', error)
-    }
+    setDishQuantities(prevQuantities => ({
+      ...prevQuantities,
+      [id]: (prevQuantities[id] || 0) + 1
+    }))
   }
 
   const handleRemoveDish = id => {
@@ -43,6 +37,19 @@ export function Sliders({ category }) {
         ...prevQuantities,
         [id]: prevQuantities[id] - 1
       }))
+    }
+  }
+
+  const handleAddToOrder = async id => {
+    try {
+      const response = await api.post('/orders', {
+        dish_id: id,
+        quantity: dishQuantities[id] || 0
+      })
+      console.log(response.data) // Exibir resposta da API no console
+      // Lógica adicional, se necessário
+    } catch (error) {
+      console.error('Erro ao adicionar pedido:', error)
     }
   }
 
@@ -112,8 +119,14 @@ export function Sliders({ category }) {
                 onClick={() => handleRemoveDish(item.id)}
               />
               <span className="number">{dishQuantities[item.id] || 0} </span>
-              <ButtonText icon={AiOutlinePlus} />
-              <Button title="Incluir" onClick={() => handleAddDish(item.id)} />
+              <ButtonText
+                icon={AiOutlinePlus}
+                onClick={() => handleAddDish(item.id)}
+              />
+              <Button
+                title="Incluir"
+                onClick={() => handleAddToOrder(item.id)}
+              />
             </footer>
           </SwiperSlide>
         ))}
