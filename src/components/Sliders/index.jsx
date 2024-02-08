@@ -24,11 +24,17 @@ export function Sliders({ category }) {
     navigate(`${rota}/${id}`)
   }
 
-  const handleAddDish = id => {
-    setDishQuantities(prevQuantities => ({
-      ...prevQuantities,
-      [id]: (prevQuantities[id] || 0) + 1
-    }))
+  const handleAddDish = async id => {
+    try {
+      const response = await api.post('/orders', { dish_id: id })
+      console.log(response.data) // Exibir resposta da API no console
+      setDishQuantities(prevQuantities => ({
+        ...prevQuantities,
+        [id]: (prevQuantities[id] || 0) + 1
+      }))
+    } catch (error) {
+      console.error('Erro ao adicionar prato:', error)
+    }
   }
 
   const handleRemoveDish = id => {
@@ -106,11 +112,8 @@ export function Sliders({ category }) {
                 onClick={() => handleRemoveDish(item.id)}
               />
               <span className="number">{dishQuantities[item.id] || 0} </span>
-              <ButtonText
-                icon={AiOutlinePlus}
-                onClick={() => handleAddDish(item.id)}
-              />
-              <Button title="Incluir" />
+              <ButtonText icon={AiOutlinePlus} />
+              <Button title="Incluir" onClick={() => handleAddDish(item.id)} />
             </footer>
           </SwiperSlide>
         ))}
