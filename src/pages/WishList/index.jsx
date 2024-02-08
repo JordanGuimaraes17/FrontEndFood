@@ -14,6 +14,10 @@ export function WishList() {
   const [orderDetails, setOrderDetails] = useState([])
   const [totalOrderPrice, setTotalOrderPrice] = useState(0)
 
+  const handleNavegacao = rota => {
+    navigate(rota)
+  }
+
   useEffect(() => {
     async function fetchOrderDetails() {
       try {
@@ -28,9 +32,21 @@ export function WishList() {
     fetchOrderDetails()
   }, [])
 
-  const handleNavegacao = rota => {
-    navigate(rota)
-  }
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const responseDishes = await api.get(`/dishes`)
+        const dishesData = responseDishes.data.map(item => ({
+          ...item,
+          avatar: `${api.defaults.baseURL}/files/${item.avatar}`
+        }))
+      } catch (error) {
+        console.error('Erro ao obter dados dos pratos', error)
+      }
+    }
+
+    fetchData()
+  }, [])
 
   return (
     <Container>
