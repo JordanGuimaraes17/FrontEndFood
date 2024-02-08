@@ -105,7 +105,7 @@ export function Sliders({ category }) {
                 icon={AiOutlineMinus}
                 onClick={() => handleRemoveDish(item.id)}
               />
-              <span>{dishQuantities[item.id] || 0} </span>
+              <span className="number">{dishQuantities[item.id] || 0} </span>
               <ButtonText
                 icon={AiOutlinePlus}
                 onClick={() => handleAddDish(item.id)}

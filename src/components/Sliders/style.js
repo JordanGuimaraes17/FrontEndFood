@@ -44,8 +44,11 @@ export const Container = styled.div`
       font-size: 14px;
       display: flex;
       align-items: center;
-      span {
+      .number {
         font-size: 1.5rem;
+      }
+      span {
+        font-size: 1rem;
         font-weight: 700;
         line-height: 2rem;
       }
