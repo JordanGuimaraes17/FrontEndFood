@@ -17,17 +17,32 @@ import 'swiper/css/scrollbar'
 
 export function Sliders({ category }) {
   const navigate = useNavigate()
-
+  const [dishQuantities, setDishQuantities] = useState({})
   const [dishesByCategory, setDishesByCategory] = useState({})
 
   const handleClick = (rota, id) => {
     navigate(`${rota}/${id}`)
   }
 
+  const handleAddDish = id => {
+    setDishQuantities(prevQuantities => ({
+      ...prevQuantities,
+      [id]: (prevQuantities[id] || 0) + 1
+    }))
+  }
+
+  const handleRemoveDish = id => {
+    if (dishQuantities[id] > 0) {
+      setDishQuantities(prevQuantities => ({
+        ...prevQuantities,
+        [id]: prevQuantities[id] - 1
+      }))
+    }
+  }
+
   useEffect(() => {
     async function fetchData() {
       try {
-        // Obter pratos
         const responseDishes = await api.get(`/dishes`)
         const dishesData = responseDishes.data.map(item => ({
           ...item,
@@ -86,9 +101,15 @@ export function Sliders({ category }) {
             <p>{item.description}</p>
             <span>R$ {item.price} </span>
             <footer>
-              <ButtonText icon={AiOutlineMinus} />
-              <span> 0</span>
-              <ButtonText icon={AiOutlinePlus} />
+              <ButtonText
+                icon={AiOutlineMinus}
+                onClick={() => handleRemoveDish(item.id)}
+              />
+              <span>{dishQuantities[item.id] || 0} </span>
+              <ButtonText
+                icon={AiOutlinePlus}
+                onClick={() => handleAddDish(item.id)}
+              />
               <Button title="Incluir" />
             </footer>
           </SwiperSlide>

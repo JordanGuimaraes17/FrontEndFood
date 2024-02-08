@@ -45,7 +45,7 @@ export const Container = styled.div`
       display: flex;
       align-items: center;
       span {
-        font-size: 1rem;
+        font-size: 1.5rem;
         font-weight: 700;
         line-height: 2rem;
       }
