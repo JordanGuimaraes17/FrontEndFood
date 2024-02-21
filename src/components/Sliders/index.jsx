@@ -8,6 +8,7 @@ import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import { Navigation, Pagination, EffectCoverflow } from 'swiper/modules'
 import { useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
+import { useAuth } from '../../hooks/auth'
 
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
@@ -17,7 +18,7 @@ import 'swiper/css/scrollbar'
 
 export function Sliders({ category }) {
   const navigate = useNavigate()
-  const [dishQuantities, setDishQuantities] = useState({})
+  const { dishQuantities, setDishQuantities } = useAuth({})
   const [dishesByCategory, setDishesByCategory] = useState([])
 
   const handleClick = (rota, id) => {
@@ -25,10 +26,11 @@ export function Sliders({ category }) {
   }
 
   const handleAddDish = id => {
-    setDishQuantities(prevQuantities => ({
-      ...prevQuantities,
-      [id]: (prevQuantities[id] || 0) + 1
-    }))
+    setDishQuantities(prevQuantities => {
+      const updatedQuantities = { ...prevQuantities }
+      updatedQuantities[id] = (updatedQuantities[id] || 0) + 1
+      return updatedQuantities
+    })
   }
 
   const handleRemoveDish = id => {
@@ -42,11 +44,12 @@ export function Sliders({ category }) {
 
   const handleAddToOrder = async id => {
     try {
-      const response = await api.post('/orders', {
-        dish_id: id,
-        quantity: dishQuantities[id] || 0
-      })
-      console.log(response.data) // Exibir resposta da API no console
+      if (dishQuantities[id] > 0) {
+        const response = await api.post('/orders', {
+          dish_id: id,
+          quantity: dishQuantities[id]
+        })
+      }
     } catch (error) {
       console.error('Erro ao adicionar pedido:', error)
     }
@@ -87,7 +90,7 @@ export function Sliders({ category }) {
         spaceBetween={15}
         slidesPerView={3.4}
         centeredSlides={true}
-        loop={false}
+        loop={true}
         navigation
         coverflowEffect={{
           rotate: 0,

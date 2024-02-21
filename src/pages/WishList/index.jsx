@@ -13,15 +13,68 @@ import { useAuth } from '../../hooks/auth'
 
 export function WishList() {
   const { user } = useAuth()
+  const { dishQuantities, setDishQuantities } = useAuth({})
   const navigate = useNavigate()
 
   const [orderDetails, setOrderDetails] = useState([])
   const [totalOrderPrice, setTotalOrderPrice] = useState(0)
-  const [dishImages, setDishImages] = useState({}) // Objeto para armazenar as imagens dos pratos
+  const [dishImages, setDishImages] = useState({}) //
   const [userName, setUserName] = useState('')
 
   const handleNavegacao = rota => {
     navigate(rota)
+  }
+
+  const handleAddDish = id => {
+    setOrderDetails(prevOrderDetails => {
+      const updatedOrderDetails = prevOrderDetails.map(item => {
+        if (item.id === id) {
+          const newQuantity = item.order_quantity + 1
+          const newTotalPrice = item.dish_price * newQuantity
+
+          return {
+            ...item,
+            order_quantity: newQuantity, // Incrementa a quantidade do prato
+            total_price: newTotalPrice // Atualiza o total do prato
+          }
+        }
+        return item
+      })
+
+      const totalPrice = updatedOrderDetails.reduce((total, item) => {
+        return total + item.total_price
+      }, 0)
+
+      setTotalOrderPrice(totalPrice)
+
+      return updatedOrderDetails
+    })
+  }
+
+  const handleRemoveDish = id => {
+    setOrderDetails(prevOrderDetails => {
+      const updatedOrderDetails = prevOrderDetails.map(item => {
+        if (item.id === id && item.order_quantity > 0) {
+          const newQuantity = item.order_quantity - 1
+          const newTotalPrice = item.dish_price * newQuantity
+
+          return {
+            ...item,
+            order_quantity: newQuantity, // Decrementa a quantidade do prato, desde que não seja menor que 0
+            total_price: newTotalPrice // Atualiza o total do prato
+          }
+        }
+        return item
+      })
+
+      const totalPrice = updatedOrderDetails.reduce((total, item) => {
+        return total + item.total_price
+      }, 0)
+
+      setTotalOrderPrice(totalPrice)
+
+      return updatedOrderDetails
+    })
   }
 
   useEffect(() => {
@@ -29,6 +82,15 @@ export function WishList() {
       try {
         const response = await api.get(`/orders`)
         const responseDishes = await api.get(`/dishes`)
+
+        if (
+          !response.data.orderDetails ||
+          response.data.orderDetails.length === 0
+        ) {
+          console.log('O carrinho está vazio.')
+          return
+        }
+
         const dishesData = responseDishes.data.map(item => ({
           ...item,
           avatar: `${api.defaults.baseURL}/files/${item.avatar}`
@@ -38,7 +100,7 @@ export function WishList() {
         const { name } = user
         setUserName(name)
 
-        // Criar um objeto para mapear o ID do prato para sua imagem
+        // Mapear o ID do prato para  imagem
         const imagesMap = {}
         dishesData.forEach(dish => {
           imagesMap[dish.id] = dish.avatar
@@ -46,11 +108,12 @@ export function WishList() {
 
         setOrderDetails(orderDetails)
         setTotalOrderPrice(totalOrderPrice)
-        setDishImages(imagesMap) // Define o objeto de imagens
+        setDishImages(imagesMap) // Objeto de imagens
       } catch (error) {
         console.error('Erro ao obter dados do pedido', error)
       }
     }
+
     fetchOrderDetails()
   }, [])
 
@@ -101,9 +164,15 @@ export function WishList() {
                     <td>{`R$ ${item.dish_price.toFixed(2)}`}</td>
                     <td>
                       <div className="qty">
-                        <ButtonText icon={AiOutlineMinus} />
+                        <ButtonText
+                          icon={AiOutlineMinus}
+                          onClick={() => handleRemoveDish(item.id)}
+                        />
                         <span>{item.order_quantity}</span>
-                        <ButtonText icon={AiOutlinePlus} />
+                        <ButtonText
+                          icon={AiOutlinePlus}
+                          onClick={() => handleAddDish(item.id)}
+                        />
                       </div>
                     </td>
                     <td>{`R$ ${item.total_price.toFixed(2)}`}</td>
