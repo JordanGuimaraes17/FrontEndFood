@@ -13,7 +13,6 @@ import { useAuth } from '../../hooks/auth'
 
 export function WishList() {
   const { user } = useAuth()
-  const { dishQuantities, setDishQuantities } = useAuth({})
   const navigate = useNavigate()
 
   const [orderDetails, setOrderDetails] = useState([])
@@ -26,55 +25,45 @@ export function WishList() {
   }
 
   const handleAddDish = id => {
-    setOrderDetails(prevOrderDetails => {
-      const updatedOrderDetails = prevOrderDetails.map(item => {
-        if (item.id === id) {
-          const newQuantity = item.order_quantity + 1
-          const newTotalPrice = item.dish_price * newQuantity
-
-          return {
-            ...item,
-            order_quantity: newQuantity, // Incrementa a quantidade do prato
-            total_price: newTotalPrice // Atualiza o total do prato
-          }
+    const updatedOrderDetails = orderDetails.map(item => {
+      if (item.id === id) {
+        return {
+          ...item,
+          order_quantity: item.order_quantity + 1,
+          total_price: item.total_price + item.dish_price
         }
-        return item
-      })
-
-      const totalPrice = updatedOrderDetails.reduce((total, item) => {
-        return total + item.total_price
-      }, 0)
-
-      setTotalOrderPrice(totalPrice)
-
-      return updatedOrderDetails
+      }
+      return item
     })
+
+    const totalPrice = updatedOrderDetails.reduce(
+      (total, item) => total + item.total_price,
+      0
+    )
+
+    setOrderDetails(updatedOrderDetails)
+    setTotalOrderPrice(totalPrice)
   }
 
   const handleRemoveDish = id => {
-    setOrderDetails(prevOrderDetails => {
-      const updatedOrderDetails = prevOrderDetails.map(item => {
-        if (item.id === id && item.order_quantity > 0) {
-          const newQuantity = item.order_quantity - 1
-          const newTotalPrice = item.dish_price * newQuantity
-
-          return {
-            ...item,
-            order_quantity: newQuantity, // Decrementa a quantidade do prato, desde que não seja menor que 0
-            total_price: newTotalPrice // Atualiza o total do prato
-          }
+    const updatedOrderDetails = orderDetails.map(item => {
+      if (item.id === id && item.order_quantity > 0) {
+        return {
+          ...item,
+          order_quantity: item.order_quantity - 1,
+          total_price: item.total_price - item.dish_price
         }
-        return item
-      })
-
-      const totalPrice = updatedOrderDetails.reduce((total, item) => {
-        return total + item.total_price
-      }, 0)
-
-      setTotalOrderPrice(totalPrice)
-
-      return updatedOrderDetails
+      }
+      return item
     })
+
+    const totalPrice = updatedOrderDetails.reduce(
+      (total, item) => total + item.total_price,
+      0
+    )
+
+    setOrderDetails(updatedOrderDetails)
+    setTotalOrderPrice(totalPrice)
   }
 
   useEffect(() => {
@@ -100,7 +89,6 @@ export function WishList() {
         const { name } = user
         setUserName(name)
 
-        // Mapear o ID do prato para  imagem
         const imagesMap = {}
         dishesData.forEach(dish => {
           imagesMap[dish.id] = dish.avatar
@@ -108,7 +96,7 @@ export function WishList() {
 
         setOrderDetails(orderDetails)
         setTotalOrderPrice(totalOrderPrice)
-        setDishImages(imagesMap) // Objeto de imagens
+        setDishImages(imagesMap)
       } catch (error) {
         console.error('Erro ao obter dados do pedido', error)
       }
