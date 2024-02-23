@@ -24,46 +24,72 @@ export function WishList() {
     navigate(rota)
   }
 
-  const handleAddDish = id => {
-    const updatedOrderDetails = orderDetails.map(item => {
-      if (item.id === id) {
-        return {
-          ...item,
-          order_quantity: item.order_quantity + 1,
-          total_price: item.total_price + item.dish_price
+  const handleAddDish = async (orderId, dishId, newQuantity) => {
+    console.log('Order ID:', orderId)
+    console.log('Dish ID:', dishId)
+    console.log('Quantidade:', newQuantity)
+    try {
+      // Solicitação para a API
+      await api.put(`/orders/${orderId}`, {
+        dish_id: dishId,
+        newQuantity: newQuantity // Passa a nova quantidade para a API
+      })
+
+      // Atualizar o estado local após a resposta da API
+      const updatedOrderDetails = orderDetails.map(item => {
+        if (item.id === orderId) {
+          return {
+            ...item,
+            order_quantity: item.order_quantity + newQuantity, // Atualiza a quantidade com a nova quantidade
+            total_price: item.total_price + item.dish_price * newQuantity
+          }
         }
-      }
-      return item
-    })
+        return item
+      })
 
-    const totalPrice = updatedOrderDetails.reduce(
-      (total, item) => total + item.total_price,
-      0
-    )
+      const totalPrice = updatedOrderDetails.reduce(
+        (total, item) => total + item.total_price,
+        0
+      )
 
-    setOrderDetails(updatedOrderDetails)
-    setTotalOrderPrice(totalPrice)
+      setOrderDetails(updatedOrderDetails)
+      setTotalOrderPrice(totalPrice)
+    } catch (error) {
+      console.error('Erro ao adicionar prato ao pedido:', error)
+    }
   }
 
-  const handleRemoveDish = id => {
-    const updatedOrderDetails = orderDetails.map(item => {
-      if (item.id === id && item.order_quantity > 0) {
-        return {
-          ...item,
-          order_quantity: item.order_quantity - 1,
-          total_price: item.total_price - item.dish_price
+  const handleRemoveDish = async (orderId, dishId) => {
+    try {
+      await api.delete(`/orders/${orderId}`, {
+        data: {
+          dish_id: dishId,
+          removeAll: false
         }
-      }
-      return item
-    })
+      })
 
-    const totalPrice = updatedOrderDetails.reduce(
-      (total, item) => total + item.total_price,
-      0
-    )
+      // Atualizar o estado local após a resposta da API
+      const updatedOrderDetails = orderDetails.map(item => {
+        if (item.id === orderId && item.order_quantity > 0) {
+          return {
+            ...item,
+            order_quantity: item.order_quantity - 1,
+            total_price: item.total_price - item.dish_price
+          }
+        }
+        return item
+      })
 
-    setOrderDetails(updatedOrderDetails)
-    setTotalOrderPrice(totalPrice)
+      const totalPrice = updatedOrderDetails.reduce(
+        (total, item) => total + item.total_price,
+        0
+      )
+
+      setOrderDetails(updatedOrderDetails)
+      setTotalOrderPrice(totalPrice)
+    } catch (error) {
+      console.error('Erro ao remover prato do pedido:', error)
+    }
   }
 
   useEffect(() => {
@@ -154,12 +180,16 @@ export function WishList() {
                       <div className="qty">
                         <ButtonText
                           icon={AiOutlineMinus}
-                          onClick={() => handleRemoveDish(item.id)}
+                          onClick={() =>
+                            handleRemoveDish(item.id, item.dish_id)
+                          }
                         />
                         <span>{item.order_quantity}</span>
                         <ButtonText
                           icon={AiOutlinePlus}
-                          onClick={() => handleAddDish(item.id)}
+                          onClick={() =>
+                            handleAddDish(item.id, item.dish_id, 1)
+                          }
                         />
                       </div>
                     </td>
