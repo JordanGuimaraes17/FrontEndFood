@@ -92,6 +92,27 @@ export function WishList() {
     }
   }
 
+  const handleRemoveDishAll = async (orderId, dishId) => {
+    try {
+      await api.delete(`/orders/${orderId}`, {
+        data: {
+          dish_id: dishId,
+          removeAll: true
+        }
+      })
+
+      // Remover o prato do estado local
+      const updatedOrderDetails = orderDetails.filter(
+        item => item.id !== orderId
+      )
+      setOrderDetails(updatedOrderDetails)
+
+      console.log('Dish removed successfully.')
+    } catch (error) {
+      console.error('Error removing dish:', error)
+    }
+  }
+
   useEffect(() => {
     async function fetchOrderDetails() {
       try {
@@ -195,7 +216,13 @@ export function WishList() {
                     </td>
                     <td>{`R$ ${item.total_price.toFixed(2)}`}</td>
                     <td>
-                      <ButtonText className="remove" icon={IoIosClose} />
+                      <ButtonText
+                        className="remove"
+                        icon={IoIosClose}
+                        onClick={() =>
+                          handleRemoveDishAll(item.id, item.dish_id)
+                        }
+                      />
                     </td>
                   </tr>
                 ))}
