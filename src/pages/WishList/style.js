@@ -2,28 +2,28 @@ import styled from 'styled-components'
 export const Container = styled.div`
   > header {
     background: ${({ theme }) => theme.COLORS.BACKGROUND_200};
-    font-size: 20px;
-    padding: 20px 30px;
+    font-size: 1.25rem;
+    padding: 1.25rem 1.87rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     h3 {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 1.25rem;
     }
     button {
-      font-size: 18px;
+      font-size: 1.12rem;
     }
   }
 
   main {
-    padding: 0 30px 30px;
+    padding: 0 1.8rem 1.8rem;
     .page-title {
       font-weight: 700;
       margin: 0 auto;
-      font-size: 40px;
-      padding: 40px 0;
+      font-size: 2.5rem;
+      padding: 2.5rem 0;
     }
     .content {
       border-radius: 8px;
@@ -40,9 +40,9 @@ export const Container = styled.div`
           gap: 10px;
 
           button {
-            padding: 10px 15px;
+            padding: 0.62rem 1rem;
             svg {
-              font-size: 18px;
+              font-size: 1.12rem;
             }
           }
         }
@@ -51,33 +51,33 @@ export const Container = styled.div`
         background: ${({ theme }) => theme.COLORS.BACKGROUND_400};
 
         .box {
-          margin-left: 20px;
-          margin-bottom: 15px;
+          margin-left: 1.25rem;
+          margin-bottom: 1rem;
           border: 1px solid ${({ theme }) => theme.COLORS.LIGHT_700};
           header {
-            padding: 15px 20px;
-            font-size: 18px;
+            padding: 1rem 1.12rem;
+            font-size: 1.12rem;
           }
           .info {
-            padding: 20px;
+            padding: 1.25rem;
             > div {
               display: flex;
               justify-content: space-between;
-              margin-bottom: 10px;
+              margin-bottom: 0.62rem;
             }
             > button {
-              font-size: 16px;
+              font-size: 1rem;
               color: ${({ theme }) => theme.COLORS.CAKE_200};
             }
           }
           footer {
-            font-size: 18px;
-            padding: 10px 20px;
+            font-size: 1.12rem;
+            padding: 0.62rem 1.25rem;
             background-color: ${({ theme }) => theme.COLORS.GRAY_300};
           }
         }
         .button-car {
-          margin-left: 20px;
+          margin-left: 1.25rem;
 
           width: 93.5%;
           text-transform: uppercase;
@@ -97,7 +97,7 @@ export const Container = styled.div`
           color: ${({ theme }) => theme.COLORS.LIGHT_400};
           text-transform: uppercase;
           text-align: left;
-          padding: 30px 10px;
+          padding: 1.87rem 1.25rem;
         }
       }
     }
@@ -108,7 +108,7 @@ export const Container = styled.div`
           border: none;
         }
         td {
-          padding: 30px 0;
+          padding: 1.87rem 0;
         }
       }
     }
@@ -118,18 +118,18 @@ export const Container = styled.div`
     align-items: center;
     img {
       margin-left: 15px;
-      width: 100px;
-      height: 100px;
+      width: 6.25rem;
+      height: 6.25rem;
     }
     .info {
-      margin-left: 20px;
+      margin-left: 1.25rem;
     }
     .name {
-      font-size: 20px;
-      margin-bottom: 10px;
+      font-size: 1.25rem;
+      margin-bottom: 0.62rem;
     }
     .category {
-      font-size: 14px;
+      font-size: 0.87rem;
       color: ${({ theme }) => theme.COLORS.LIGHT_500};
     }
   }
