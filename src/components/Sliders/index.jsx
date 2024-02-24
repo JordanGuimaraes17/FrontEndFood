@@ -102,7 +102,10 @@ export function Sliders({ category, searchTerm }) {
         {dishesByCategory[category.id]?.map(
           item =>
             // Verifica se o nome do prato inclui o termo de busca
-            item.name.toLowerCase().includes(searchTerm.toLowerCase()) && (
+            (item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              item.ingredients
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase())) && (
               <SwiperSlide key={item.id} className="slider">
                 <ButtonText
                   icon={GoPencil}
