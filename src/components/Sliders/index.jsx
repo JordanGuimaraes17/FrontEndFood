@@ -16,7 +16,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 
-export function Sliders({ category }) {
+export function Sliders({ category, searchTerm }) {
   const navigate = useNavigate()
   const { dishQuantities, setDishQuantities } = useAuth({})
   const [dishesByCategory, setDishesByCategory] = useState([])
@@ -99,39 +99,45 @@ export function Sliders({ category }) {
           modifier: 2.5
         }}
       >
-        {dishesByCategory[category.id]?.map(item => (
-          <SwiperSlide key={item.id} className="slider">
-            <ButtonText
-              icon={GoPencil}
-              className="svg"
-              onClick={() => handleClick('/editDishes', item.id)}
-            />
-            <img
-              src={item.avatar}
-              alt="slider"
-              onClick={() => handleClick('/dishesAdmin', item.id)}
-              className="slide-item"
-            />
-            <h2>{item.name}</h2>
-            <p>{item.description}</p>
-            <span>R$ {item.price} </span>
-            <footer>
-              <ButtonText
-                icon={AiOutlineMinus}
-                onClick={() => handleRemoveDish(item.id)}
-              />
-              <span className="number">{dishQuantities[item.id] || 0} </span>
-              <ButtonText
-                icon={AiOutlinePlus}
-                onClick={() => handleAddDish(item.id)}
-              />
-              <Button
-                title="Incluir"
-                onClick={() => handleAddToOrder(item.id)}
-              />
-            </footer>
-          </SwiperSlide>
-        ))}
+        {dishesByCategory[category.id]?.map(
+          item =>
+            // Verifica se o nome do prato inclui o termo de busca
+            item.name.toLowerCase().includes(searchTerm.toLowerCase()) && (
+              <SwiperSlide key={item.id} className="slider">
+                <ButtonText
+                  icon={GoPencil}
+                  className="svg"
+                  onClick={() => handleClick('/editDishes', item.id)}
+                />
+                <img
+                  src={item.avatar}
+                  alt="slider"
+                  onClick={() => handleClick('/dishesAdmin', item.id)}
+                  className="slide-item"
+                />
+                <h2>{item.name}</h2>
+                <p>{item.description}</p>
+                <span>R$ {item.price} </span>
+                <footer>
+                  <ButtonText
+                    icon={AiOutlineMinus}
+                    onClick={() => handleRemoveDish(item.id)}
+                  />
+                  <span className="number">
+                    {dishQuantities[item.id] || 0}{' '}
+                  </span>
+                  <ButtonText
+                    icon={AiOutlinePlus}
+                    onClick={() => handleAddDish(item.id)}
+                  />
+                  <Button
+                    title="Incluir"
+                    onClick={() => handleAddToOrder(item.id)}
+                  />
+                </footer>
+              </SwiperSlide>
+            )
+        )}
       </Swiper>
     </Container>
   )

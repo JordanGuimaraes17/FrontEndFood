@@ -9,7 +9,7 @@ import { api } from '../../services/api'
 
 export function Home() {
   const [categories, setCategories] = useState([])
-
+  const [searchTerm, setSearchTerm] = useState('')
   useEffect(() => {
     async function fetchCategories() {
       try {
@@ -22,9 +22,13 @@ export function Home() {
     fetchCategories()
   }, [])
 
+  const handleSearchChange = term => {
+    setSearchTerm(term)
+  }
+
   return (
     <Container>
-      <Header />
+      <Header onSearchChange={handleSearchChange} />
       <Content>
         <main>
           <div className="box">
@@ -43,7 +47,8 @@ export function Home() {
                 title={category.name}
                 className="sliders"
               >
-                <Sliders category={category} />
+                {/* Passando o termo de busca para o componente Sliders */}
+                <Sliders category={category} searchTerm={searchTerm} />
               </Section>
             ))}
           </div>
