@@ -5,12 +5,18 @@ import { Input } from '../Input'
 import PolygonSvg from '../../assets/Polygon 1.svg'
 import { CiLogin, CiSearch } from 'react-icons/ci'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../hooks/auth'
 
 export function Header02() {
   const navigate = useNavigate()
-
+  const { signOut } = useAuth()
   const handleNavegacao = rota => {
     navigate(rota)
+  }
+
+  function handleSignOut() {
+    navigate('/')
+    signOut()
   }
   return (
     <Header>
@@ -22,7 +28,7 @@ export function Header02() {
         title="Novo prato"
         onClick={() => handleNavegacao('/addDishes')}
       />
-      <ButtonText icon={CiLogin} />
+      <ButtonText icon={CiLogin} onClick={handleSignOut} />
     </Header>
   )
 }
