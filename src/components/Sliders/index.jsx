@@ -4,11 +4,18 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Button } from '../Button'
 import { ButtonText } from '../ButtonText'
 import { GoPencil } from 'react-icons/go'
-import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
+import {
+  AiOutlinePlus,
+  AiOutlineMinus,
+  AiOutlineHeart,
+  AiFillHeart
+} from 'react-icons/ai'
+
 import { Navigation, Pagination, EffectCoverflow } from 'swiper/modules'
 import { useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
 import { useAuth } from '../../hooks/auth'
+import { USER_ROLE } from '../../utils/roles'
 
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
@@ -18,11 +25,20 @@ import 'swiper/css/scrollbar'
 
 export function Sliders({ category, searchTerm }) {
   const navigate = useNavigate()
-  const { dishQuantities, setDishQuantities } = useAuth({})
+  const { user } = useAuth()
+  const [dishQuantities, setDishQuantities] = useState({})
   const [dishesByCategory, setDishesByCategory] = useState([])
+  const [favoriteDishes, setFavoriteDishes] = useState({})
 
   const handleClick = (rota, id) => {
     navigate(`${rota}/${id}`)
+  }
+
+  const handleToggleFavorite = id => {
+    setFavoriteDishes(prevState => ({
+      ...prevState,
+      [id]: !prevState[id]
+    }))
   }
 
   const handleAddDish = id => {
@@ -107,17 +123,51 @@ export function Sliders({ category, searchTerm }) {
                 .toLowerCase()
                 .includes(searchTerm.toLowerCase())) && (
               <SwiperSlide key={item.id} className="slider">
-                <ButtonText
-                  icon={GoPencil}
-                  className="svg"
-                  onClick={() => handleClick('/editDishes', item.id)}
-                />
-                <img
-                  src={item.avatar}
-                  alt="slider"
-                  onClick={() => handleClick('/dishesAdmin', item.id)}
-                  className="slide-item"
-                />
+                {user.role === USER_ROLE.ADMIN && (
+                  <>
+                    <ButtonText
+                      icon={GoPencil}
+                      className="svg"
+                      onClick={() => handleClick('/editDishes', item.id)}
+                    />
+                  </>
+                )}
+
+                {user.role === USER_ROLE.CUSTOMER && (
+                  <>
+                    <ButtonText
+                      icon={
+                        favoriteDishes[item.id] ? AiFillHeart : AiOutlineHeart
+                      }
+                      className={`svg ${
+                        favoriteDishes[item.id] ? 'ativo' : ''
+                      }`}
+                      onClick={() => handleToggleFavorite(item.id)}
+                    />
+                  </>
+                )}
+
+                {user.role === USER_ROLE.ADMIN && (
+                  <>
+                    <img
+                      src={item.avatar}
+                      alt="slider"
+                      onClick={() => handleClick('/dishesAdmin', item.id)}
+                      className="slide-item"
+                    />
+                  </>
+                )}
+                {user.role === USER_ROLE.CUSTOMER && (
+                  <>
+                    <img
+                      src={item.avatar}
+                      alt="slider"
+                      onClick={() => handleClick('/dishes', item.id)}
+                      className="slide-item"
+                    />
+                  </>
+                )}
+
                 <h2>{item.name}</h2>
                 <p>{item.description}</p>
                 <span>R$ {item.price} </span>

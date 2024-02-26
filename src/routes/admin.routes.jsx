@@ -6,7 +6,7 @@ import { DishesAdmin } from '../pages/DishesAdmin'
 import { AddDishes } from '../pages/AddDishes'
 import { EditDishes } from '../pages/EditDishes'
 
-export function AppRoutes() {
+export function AdminRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
