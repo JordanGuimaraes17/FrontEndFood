@@ -4,7 +4,6 @@ export const AuthContext = createContext({})
 
 function AuthProvider({ children }) {
   const [data, setData] = useState({})
-  const [dishQuantities, setDishQuantities] = useState({}) //estado para quantidades de pratos
 
   async function signIn({ email, password }) {
     try {
@@ -29,7 +28,7 @@ function AuthProvider({ children }) {
   function signOut() {
     localStorage.removeItem('@foodexplorer:token')
     localStorage.removeItem('@foodexplorer:user')
-    setDishQuantities({})
+
     setData({})
   }
 
@@ -51,9 +50,7 @@ function AuthProvider({ children }) {
         signIn,
         signOut,
 
-        user: data.user,
-        dishQuantities, // quantidades de pratos ao contexto
-        setDishQuantities //  atualizar quantidades de pratos
+        user: data.user
       }}
     >
       {children}

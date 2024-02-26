@@ -26,9 +26,13 @@ import 'swiper/css/scrollbar'
 export function Sliders({ category, searchTerm }) {
   const navigate = useNavigate()
   const { user } = useAuth()
-  const [dishQuantities, setDishQuantities] = useState({})
+  const [dishQuantities, setDishQuantities] = useState(
+    JSON.parse(localStorage.getItem('dishQuantities')) || {}
+  )
   const [dishesByCategory, setDishesByCategory] = useState([])
-  const [favoriteDishes, setFavoriteDishes] = useState({})
+  const [favoriteDishes, setFavoriteDishes] = useState(
+    JSON.parse(localStorage.getItem('favoriteDishes')) || {}
+  )
 
   const handleClick = (rota, id) => {
     navigate(`${rota}/${id}`)
@@ -70,6 +74,14 @@ export function Sliders({ category, searchTerm }) {
       console.error('Erro ao adicionar pedido:', error)
     }
   }
+
+  useEffect(() => {
+    localStorage.setItem('dishQuantities', JSON.stringify(dishQuantities))
+  }, [dishQuantities])
+
+  useEffect(() => {
+    localStorage.setItem('favoriteDishes', JSON.stringify(favoriteDishes))
+  }, [favoriteDishes])
 
   useEffect(() => {
     async function fetchData() {

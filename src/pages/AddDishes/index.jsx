@@ -12,8 +12,10 @@ import { Button } from '../../components/Button'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { api } from '../../services/api'
+import { useAuth } from '../../hooks/auth'
 
 export function AddDishes() {
+  const { signOut } = useAuth()
   const [newDishIngredients, setNewDishIngredients] = useState([])
   const [newIngredient, setNewIngredient] = useState('')
   const [name, setName] = useState('')
@@ -27,6 +29,10 @@ export function AddDishes() {
 
   function handleNavegacao(rota) {
     navigate(rota)
+  }
+  function handleSignOut() {
+    navigate('/')
+    signOut()
   }
 
   function handleAddNewIngredient() {
@@ -129,7 +135,7 @@ export function AddDishes() {
           icon={CiSearch}
         />
         <Button className="new" title="Novo prato" />
-        <ButtonText icon={CiLogin} />
+        <ButtonText icon={CiLogin} onClick={handleSignOut} />
       </Header>
       <Content>
         <main>
