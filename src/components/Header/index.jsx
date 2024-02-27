@@ -39,17 +39,26 @@ export function Header({ onSearchChange }) {
 
   return (
     <Container>
-      <img src={PolygonSvg} alt="logo" />
-      <h1 onClick={() => handleNavegacao('/')}>food explorer</h1>
-      <Input
-        placeholder="Busque por pratos ou ingredientes"
-        icon={CiSearch}
-        onChange={e => {
-          setSearch(e.target.value)
-          // Chamando a função onSearchChange passada como propriedade
-          onSearchChange(e.target.value)
-        }}
-      />
+      <div>
+        <ButtonText icon={CiLogin} />
+      </div>
+      <img className="img01" src={PolygonSvg} alt="logo" />
+      <h1 onClick={() => handleNavegacao('/')}>
+        <img src={PolygonSvg} alt="logo" />
+        food explorer
+      </h1>
+      <div className="input-container">
+        <Input
+          placeholder="Busque por pratos ou ingredientes"
+          icon={CiSearch}
+          onChange={e => {
+            setSearch(e.target.value)
+            // Chamando a função onSearchChange passada como propriedade
+            onSearchChange(e.target.value)
+          }}
+        />
+      </div>
+
       <Button
         className="new"
         icon={CiReceipt}

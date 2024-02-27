@@ -22,15 +22,15 @@ export const Container = styled.button`
     font-size: 1.3rem;
   }
 
-  @media (max-width: ${DEVICE_BREAKPOINTS.XS}) {
-    height: 3rem;
-    padding: 0 0.5rem;
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    height: 2.3rem;
+
     > span {
       font-size: 0.8rem;
     }
 
     > svg {
-      font-size: 1rem;
+      font-size: 1.2rem;
     }
   }
 `

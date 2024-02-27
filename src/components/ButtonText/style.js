@@ -5,7 +5,7 @@ export const Container = styled.button`
   color: ${({ theme, $isactive }) =>
     $isactive ? theme.COLORS.LIGHT_100 : theme.COLORS.TOMATO_100};
   border: none;
-  font-size: 1.6rem;
+  font-size: 1rem;
   display: flex;
   align-items: center;
 `

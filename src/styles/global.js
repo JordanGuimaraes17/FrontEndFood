@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import { DEVICE_BREAKPOINTS } from './deviceBreakpoints'
 export default createGlobalStyle`
 * {
    min-width: 0;
@@ -10,9 +11,16 @@ export default createGlobalStyle`
   *,*::before,*::after{
     box-sizing: border-box;
   }
+  :root{
+    font-size: 16px;
+    @media(max-width: ${DEVICE_BREAKPOINTS.MD}){
+      font-size: 12px;
+
+    }
+  }
   
   body {
-    min-height: 100dvh;
+    min-height: 100vh;
     background-color: ${({ theme }) => theme.COLORS.BACKGROUND_400};
     color: ${({ theme }) => theme.COLORS.LIGHT_300};
     -webkit-font-smoothing: antialiased;

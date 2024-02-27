@@ -11,7 +11,7 @@ import {
   AiFillHeart
 } from 'react-icons/ai'
 
-import { Navigation, Pagination, EffectCoverflow } from 'swiper/modules'
+import { Navigation, Pagination, EffectCoverflow, A11y } from 'swiper/modules'
 import { useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
 import { useAuth } from '../../hooks/auth'
@@ -114,9 +114,8 @@ export function Sliders({ category, searchTerm }) {
     <Container>
       <Swiper
         effect={'coverflow'}
-        modules={[Navigation, Pagination, EffectCoverflow]}
+        modules={[Navigation, Pagination, EffectCoverflow, A11y]}
         spaceBetween={15}
-        slidesPerView={3.4}
         centeredSlides={true}
         loop={true}
         navigation
@@ -125,6 +124,11 @@ export function Sliders({ category, searchTerm }) {
           stretch: 0,
           depth: 100,
           modifier: 2.5
+        }}
+        breakpoints={{
+          320: { slidesPerView: 1.6 },
+          768: { slidesPerView: 3 },
+          1024: { slidesPerView: 3.8 }
         }}
       >
         {dishesByCategory[category.id]?.map(

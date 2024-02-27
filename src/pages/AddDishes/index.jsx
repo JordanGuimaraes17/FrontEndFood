@@ -98,7 +98,7 @@ export function AddDishes() {
       const response = await api.post('/dishes', formData)
       const { dish_id } = response.data
       alert('Prato criado com sucesso')
-      navigate(`/dishes/${dish_id}`)
+      navigate(`/dishesAdmin/${dish_id}`)
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message)

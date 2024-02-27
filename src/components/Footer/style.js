@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
 
 export const Container = styled.footer`
   grid-area: footer;
@@ -16,6 +17,15 @@ export const Container = styled.footer`
   }
   span {
     color: ${({ theme }) => theme.COLORS.LIGHT_200};
-    font-size: 14px;
+    font-size: 0.8rem;
+  }
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+    padding: 0 1.4rem;
+    img {
+      height: 1.5rem;
+    }
+    span {
+      font-size: 0.4rem;
+    }
   }
 `

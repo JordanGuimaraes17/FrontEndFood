@@ -7,7 +7,9 @@ export function Footer() {
         {' '}
         <img src={PolygonSvg} alt="logo" /> food explorer
       </h3>
-      <span>© 2023 - Todos os direitos reservados.</span>
+      <div>
+        <span>© 2023 - Todos os direitos reservados.</span>
+      </div>
     </Container>
   )
 }

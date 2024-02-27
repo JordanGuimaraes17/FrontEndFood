@@ -1,9 +1,13 @@
 import styled from 'styled-components'
+import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
 export const Container = styled.div`
   display: grid;
   grid-template-areas: 'header' 'main' 'footer';
   min-height: 100dvh;
   grid-template-rows: 5.4rem auto 3.5rem;
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+    grid-template-rows: 4rem auto 2.5rem;
+  }
 `
 export const Content = styled.section`
   margin: 0 auto;
@@ -47,5 +51,64 @@ export const Content = styled.section`
   }
   .container {
     padding: 1rem;
+  }
+
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    .box {
+      margin-top: 4rem;
+      height: 10rem;
+    }
+    .box img {
+      width: 20rem;
+      height: 12rem;
+    }
+    .text h2 {
+      font-size: 2rem;
+    }
+  }
+
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    .box {
+      margin-top: 3rem;
+      height: 8rem;
+    }
+    .box img {
+      width: 15rem;
+      height: 9rem;
+    }
+    .text h2 {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+    .box {
+      display: flex;
+      justify-content: end;
+      z-index: -1;
+      margin: 0 auto;
+      width: 23.5rem;
+      margin-top: 3rem;
+      height: 6rem;
+      position: relative;
+    }
+    .text {
+      width: 13rem;
+    }
+    .box img {
+      width: 15rem;
+      position: absolute;
+      left: -3rem;
+      top: 2rem;
+    }
+    .text h2 {
+      font-size: 1rem;
+    }
+    .text span {
+      font-size: 0.6rem;
+    }
+    .container {
+      padding: 0.5rem;
+    }
   }
 `
