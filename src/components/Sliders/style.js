@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
 export const Container = styled.div`
-  width: 70rem;
-
   .slider {
     display: flex;
     justify-content: center;
@@ -76,6 +74,13 @@ export const Container = styled.div`
   }
 
   @media screen and (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+    .slider {
+      footer {
+        span {
+          font-weight: 300;
+        }
+      }
+    }
     p {
       display: none;
     }
@@ -98,10 +103,33 @@ export const Container = styled.div`
 
   @media screen and (min-width: ${DEVICE_BREAKPOINTS.SM}) and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
     width: 20rem;
-    margin: 0 auto;
 
     .slider {
-      min-height: 8rem;
+      min-height: 5rem;
+      h2 {
+        font-size: 1rem;
+      }
+      > span {
+        font-size: 1rem;
+        line-height: 1.2rem;
+      }
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      display: none;
+    }
+    .slide-item {
+      width: 6rem;
+      height: 6rem;
+    }
+  }
+
+  @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
+    width: 50rem;
+
+    .slider {
+      min-height: 20rem;
       h2 {
         font-size: 1.4rem;
       }
@@ -116,12 +144,19 @@ export const Container = styled.div`
       display: none;
     }
     .slide-item {
-      width: 5.5rem;
-      height: 5.5rem;
+      width: 5rem;
+      height: 5rem;
     }
   }
 
-  @media screen and (min-width: ${DEVICE_BREAKPOINTS.MD}) {
-    width: 57rem;
+  @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+    width: 66rem;
+    h2 {
+      font-size: 1.4rem;
+    }
+    .slide-item {
+      width: 10rem;
+      height: 10rem;
+    }
   }
 `

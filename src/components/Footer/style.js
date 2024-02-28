@@ -21,6 +21,9 @@ export const Container = styled.footer`
   }
   @media screen and (max-width: ${DEVICE_BREAKPOINTS.SM}) {
     padding: 0 1.4rem;
+    h3 {
+      font-size: 1rem;
+    }
     img {
       height: 1.5rem;
     }

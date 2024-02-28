@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
 
 export const Container = styled.div`
   display: flex;
@@ -30,5 +31,9 @@ export const Container = styled.div`
     margin-left: 2rem;
     font-size: 1.5rem;
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    height: 2.4rem;
   }
 `

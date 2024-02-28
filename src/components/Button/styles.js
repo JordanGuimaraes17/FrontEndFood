@@ -21,16 +21,18 @@ export const Container = styled.button`
   > svg {
     font-size: 1.3rem;
   }
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    height: 2.4rem;
+  }
 
-  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
-    height: 2.3rem;
-
+  @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+    height: 2.4rem;
     > span {
-      font-size: 0.8rem;
+      font-size: 0.6rem;
     }
 
     > svg {
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
   }
 `

@@ -13,8 +13,8 @@ export const Container = styled.div`
 
   border: ${({ theme, $isnew }) =>
     $isnew ? `1px dashed ${theme.COLORS.LIGHT_600}` : 'none'};
-  border-radius: 8px;
-  padding: 10px 16px;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1rem;
 
   > button {
     display: flex;

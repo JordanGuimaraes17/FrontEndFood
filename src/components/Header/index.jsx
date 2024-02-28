@@ -39,14 +39,17 @@ export function Header({ onSearchChange }) {
 
   return (
     <Container>
-      <div>
+      <div className="menu">
         <ButtonText icon={CiLogin} />
       </div>
+
       <img className="img01" src={PolygonSvg} alt="logo" />
+
       <h1 onClick={() => handleNavegacao('/')}>
-        <img src={PolygonSvg} alt="logo" />
+        <img className="img02" src={PolygonSvg} alt="logo" />
         food explorer
       </h1>
+
       <div className="input-container">
         <Input
           placeholder="Busque por pratos ou ingredientes"

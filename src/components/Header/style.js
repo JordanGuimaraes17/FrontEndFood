@@ -16,29 +16,65 @@ export const Container = styled.header`
   .new {
     width: 17%;
   }
-
-  @media screen and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
-    padding: 0 2rem;
+  @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+    .menu {
+      display: none;
+    }
+    .img02 {
+      display: none;
+    }
   }
 
-  @media screen and (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    h1 {
+      font-size: 1.6rem;
+    }
+
+    .menu {
+      display: none;
+    }
+    .img02 {
+      display: none;
+    }
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    gap: 5rem;
+    .input-container {
+      display: none;
+    }
+    .img02 {
+      display: none;
+    }
+    .menu {
+      display: flex;
+    }
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+    gap: 1rem;
+    padding: 0 1rem;
+
     .img01 {
       display: none;
     }
+    .img02 {
+      display: flex;
+    }
 
     .new {
-      width: 28%;
       height: 2rem;
+      width: 30%;
     }
 
     h1 {
-      gap: 0.6rem;
-      img {
-        height: 1.5rem;
-      }
+      gap: 0.8rem;
       display: flex;
       align-items: center;
       font-size: 1rem;
+      img {
+        height: 1.5rem;
+      }
     }
     .input-container {
       display: none;

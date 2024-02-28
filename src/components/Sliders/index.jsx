@@ -126,9 +126,9 @@ export function Sliders({ category, searchTerm }) {
           modifier: 2.5
         }}
         breakpoints={{
-          320: { slidesPerView: 1.6 },
+          320: { slidesPerView: 1.4 },
           768: { slidesPerView: 3 },
-          1024: { slidesPerView: 3.8 }
+          1024: { slidesPerView: 3.4 }
         }}
       >
         {dishesByCategory[category.id]?.map(

@@ -1,16 +1,23 @@
 import styled from 'styled-components'
+import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
 export const Container = styled.div`
   display: grid;
   grid-template-areas: 'header' 'main' 'footer';
   min-height: 100dvh;
   grid-template-rows: 5.2rem auto 3.3rem;
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    grid-template-rows: 4rem auto 2.5rem;
+  }
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.XL}) {
+    grid-template-rows: 4.2rem auto 3rem;
+  }
 `
 export const Content = styled.section`
   main {
     grid-area: main;
   }
   form {
-    padding: 0 7.68rem;
+    padding: 0 7rem;
     .buttonText {
       margin: 1rem 0 1rem;
       font-size: 1.12rem;
@@ -41,8 +48,7 @@ export const Content = styled.section`
       }
     }
     h2 {
-      margin-bottom: 0.4rem;
-      font-size: 2rem;
+      font-size: 1.6rem;
       font-weight: 500;
       line-height: 2.8rem;
       color: ${({ theme }) => theme.COLORS.LIGHT_300};
@@ -123,6 +129,52 @@ export const Content = styled.section`
     }
     footer button:nth-child(2) {
       background: ${({ theme }) => theme.COLORS.TOMATO_400};
+    }
+  }
+
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    form {
+      padding: 0 1.8rem;
+      h2 {
+        font-size: 1rem;
+      }
+
+      .col-1 {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+    footer {
+      margin-bottom: 1.4rem;
+    }
+  }
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    form {
+      padding: 0.4rem 2.4rem;
+      .buttonText {
+        font-size: 1rem;
+        margin: 0;
+      }
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      .avatar {
+        height: 3rem;
+      }
+
+      .input-wrapper2 {
+        > div {
+          height: 3rem;
+        }
+      }
+      .input-wrapper select {
+        height: 3rem;
+      }
+
+      footer {
+        margin-bottom: 1.4rem;
+      }
     }
   }
 `

@@ -6,8 +6,11 @@ import PolygonSvg from '../../assets/Polygon 1.svg'
 import { CiLogin, CiSearch } from 'react-icons/ci'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
+import { useEffect, useState } from 'react'
+import { api } from '../../services/api'
 
-export function Header02() {
+export function Header02({ onSearchChange }) {
+  const [search, setSearch] = useState('')
   const navigate = useNavigate()
   const { signOut } = useAuth()
   const handleNavegacao = rota => {
@@ -18,11 +21,43 @@ export function Header02() {
     navigate('/')
     signOut()
   }
+  useEffect(() => {
+    async function fetchDishes() {
+      try {
+        const response = await api.get(`/dishes?name=${search}`)
+      } catch (error) {
+        console.error('Erro ao buscar pratos:', error)
+      }
+    }
+
+    if (search !== '') {
+      fetchDishes()
+    }
+  }, [search])
   return (
     <Header>
-      <img src={PolygonSvg} alt="logo" />
-      <h1 onClick={() => handleNavegacao('/')}>food explorer</h1>
-      <Input placeholder="Busque por pratos ou ingredientes" icon={CiSearch} />
+      <div className="menu">
+        <ButtonText icon={CiLogin} />
+      </div>
+      <img className="img01" src={PolygonSvg} alt="logo" />
+
+      <h1 onClick={() => handleNavegacao('/')}>
+        <img className="img02" src={PolygonSvg} alt="logo" />
+        food explorer
+      </h1>
+
+      <div className="input-container">
+        <Input
+          placeholder="Busque por pratos ou ingredientes"
+          icon={CiSearch}
+          onChange={e => {
+            setSearch(e.target.value)
+            // Chamando a função onSearchChange passada como propriedade
+            onSearchChange(e.target.value)
+          }}
+        />
+      </div>
+
       <Button
         className="new"
         title="Novo prato"
