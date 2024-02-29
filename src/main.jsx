@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { AuthProvider } from './hooks/auth'
 
 import { ThemeProvider } from 'styled-components'
-import { darkTheme, lightTheme } from './styles/theme'
+import { darkTheme } from './styles/theme'
 import GlobalStyle from './styles/global.js'
 
 import { Routes } from './routes'

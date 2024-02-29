@@ -53,6 +53,19 @@ export function Dishes() {
     }
   }
 
+  const handleAddToOrder = async id => {
+    try {
+      if (dishQuantities[id] > 0) {
+        const response = await api.post('/orders', {
+          dish_id: id,
+          quantity: dishQuantities[id]
+        })
+      }
+    } catch (error) {
+      console.error('Erro ao adicionar pedido:', error)
+    }
+  }
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -104,7 +117,10 @@ export function Dishes() {
                 icon={AiOutlinePlus}
                 onClick={() => handleAddDish(params.id)}
               />
-              <Button title={`incluir ∙ ${dishData.price}`} />
+              <Button
+                title={`incluir ∙ ${dishData.price}`}
+                onClick={() => handleAddToOrder(params.id)}
+              />
             </footer>
           </div>
         </main>

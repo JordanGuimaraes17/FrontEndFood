@@ -1,6 +1,5 @@
-import { Container, Content, Header } from './style'
-import { CiLogin, CiSearch } from 'react-icons/ci'
-import PolygonSvg from '../../assets/Polygon 1.svg'
+import { Container, Content } from './style'
+import { Header02 } from '../../components/Header02'
 import { Input } from '../../components/Input'
 import { HiOutlineChevronLeft } from 'react-icons/hi2'
 import { Footer } from '../../components/Footer'
@@ -127,16 +126,7 @@ export function AddDishes() {
 
   return (
     <Container>
-      <Header>
-        <img src={PolygonSvg} alt="logo" />
-        <h1 onClick={() => handleNavegacao('/')}>food explorer</h1>
-        <Input
-          placeholder="Busque por pratos ou ingredientes"
-          icon={CiSearch}
-        />
-        <Button className="new" title="Novo prato" />
-        <ButtonText icon={CiLogin} onClick={handleSignOut} />
-      </Header>
+      <Header02 />
       <Content>
         <main>
           <form>

@@ -77,7 +77,11 @@ export const Container = styled.div`
     .slider {
       footer {
         span {
-          font-weight: 300;
+          font-weight: 200;
+          font-size: 0.8rem;
+        }
+        .number {
+          font-size: 1rem;
         }
       }
     }
@@ -102,16 +106,20 @@ export const Container = styled.div`
   }
 
   @media screen and (min-width: ${DEVICE_BREAKPOINTS.SM}) and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
-    width: 20rem;
+    width: 17rem;
 
     .slider {
+      padding: 0.8rem;
       min-height: 5rem;
       h2 {
         font-size: 1rem;
       }
       > span {
-        font-size: 1rem;
+        font-size: 0.8rem;
         line-height: 1.2rem;
+      }
+      footer {
+        margin-bottom: 0.1rem;
       }
     }
 
@@ -120,8 +128,8 @@ export const Container = styled.div`
       display: none;
     }
     .slide-item {
-      width: 6rem;
-      height: 6rem;
+      width: 4rem;
+      height: 4rem;
     }
   }
 

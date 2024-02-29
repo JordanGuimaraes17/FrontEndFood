@@ -26,9 +26,9 @@ export const Container = styled.button`
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
-    height: 2.4rem;
+    height: 2rem;
     > span {
-      font-size: 0.6rem;
+      font-size: 0.7rem;
     }
 
     > svg {

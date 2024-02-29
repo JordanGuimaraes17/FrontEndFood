@@ -1,9 +1,16 @@
 import styled from 'styled-components'
+import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
 export const Container = styled.div`
   display: grid;
   grid-template-areas: 'header' 'main' 'footer';
-  min-height: 100dvh;
+  min-height: 100vh;
   grid-template-rows: 5.2rem auto 3.3rem;
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    grid-template-rows: 4rem auto 2.5rem;
+  }
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.XL}) {
+    grid-template-rows: 4.2rem auto 3rem;
+  }
 `
 export const Content = styled.section`
   main {
@@ -128,20 +135,52 @@ export const Content = styled.section`
       margin-top: 1rem;
     }
   }
-`
-export const Header = styled.header`
-  grid-area: header;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  justify-content: space-between;
-  padding: 0 5rem;
-  background-color: ${({ theme }) => theme.COLORS.BACKGROUND_600};
-  div {
-    flex: 1;
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    form {
+      .button {
+        margin-bottom: 1rem;
+      }
+      padding: 0 1.8rem;
+      h2 {
+        font-size: 1rem;
+      }
+
+      .col-1 {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+    footer {
+      margin-bottom: 1.4rem;
+    }
   }
-  .new {
-    width: 17%;
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    form {
+      padding: 0.4rem 2.4rem;
+      .buttonText {
+        font-size: 1rem;
+        margin: 0;
+      }
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      .avatar {
+        height: 3rem;
+      }
+
+      .input-wrapper2 {
+        > div {
+          height: 3rem;
+        }
+      }
+      .input-wrapper select {
+        height: 3rem;
+      }
+
+      footer {
+        margin-bottom: 1.4rem;
+      }
+    }
   }
 `

@@ -34,6 +34,11 @@ export const Container = styled.div`
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-    height: 2.4rem;
+    height: 3rem;
+  }
+  @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+    svg {
+      margin-left: 1rem;
+    }
   }
 `

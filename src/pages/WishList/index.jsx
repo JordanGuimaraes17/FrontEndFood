@@ -25,9 +25,6 @@ export function WishList() {
   }
 
   const handleAddDish = async (orderId, dishId, newQuantity) => {
-    console.log('Order ID:', orderId)
-    console.log('Dish ID:', dishId)
-    console.log('Quantidade:', newQuantity)
     try {
       // Solicitação para a API
       await api.put(`/orders/${orderId}`, {
@@ -80,12 +77,17 @@ export function WishList() {
         return item
       })
 
-      const totalPrice = updatedOrderDetails.reduce(
+      // Remover o item se a quantidade for zero
+      const filteredOrderDetails = updatedOrderDetails.filter(
+        item => item.order_quantity > 0
+      )
+
+      const totalPrice = filteredOrderDetails.reduce(
         (total, item) => total + item.total_price,
         0
       )
 
-      setOrderDetails(updatedOrderDetails)
+      setOrderDetails(filteredOrderDetails)
       setTotalOrderPrice(totalPrice)
     } catch (error) {
       console.error('Erro ao remover prato do pedido:', error)
@@ -166,7 +168,7 @@ export function WishList() {
           <img src={PolygonSvg} alt="logo" /> food explorer
         </h3>
         <span>
-          Lista de compras do <b>{userName}</b>
+          Lista de compras.<b>{userName}</b>
         </span>
       </header>
       <main>

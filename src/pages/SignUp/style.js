@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
 
 export const Container = styled.div`
   min-height: 100dvh;
@@ -17,6 +18,19 @@ export const Container = styled.div`
       font-size: 2.6rem;
       font-weight: 700;
     }
+  }
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+    > div {
+      h1,
+      img {
+        margin-bottom: 4rem;
+        font-size: 1.6rem;
+      }
+    }
+
+    padding: 2rem;
+    flex-direction: column;
+    justify-content: center;
   }
 `
 export const Form = styled.form`
@@ -40,4 +54,8 @@ export const Form = styled.form`
     line-height: 24px;
     margin: 0 auto;
   }
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+    h1 {
+      font-size: 1.4rem;
+    }
 `

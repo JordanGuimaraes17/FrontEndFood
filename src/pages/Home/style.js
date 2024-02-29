@@ -92,13 +92,17 @@ export const Content = styled.section`
     }
   }
   @media screen and (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+    main {
+      padding: 1rem 1.2rem;
+    }
+
     .box {
       padding: 0.5rem;
       margin-top: 1rem;
       height: 6rem;
     }
     .text {
-      width: 13rem;
+      width: 11rem;
     }
 
     .text h2 {
@@ -106,10 +110,10 @@ export const Content = styled.section`
     }
 
     .box img {
-      height: 9rem;
-      width: 11rem;
+      height: 8rem;
+      width: 9rem;
       left: -1rem;
-      top: 3rem;
+      top: 4rem;
     }
 
     .text span {
