@@ -2,10 +2,24 @@ import styled from 'styled-components'
 import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
 
 export const Container = styled.div`
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: ${({ theme }) => theme.COLORS.BACKGROUND_400};
+  z-index: 999;
   display: grid;
   grid-template-areas: 'head' 'main' 'footer';
   grid-template-rows: auto 1fr auto;
   height: 100vh;
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    &[data-menu-is-open='true'] {
+      transform: translateX(0);
+    }
+  }
 `
 export const Header = styled.header`
   height: 4rem;

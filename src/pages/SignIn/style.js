@@ -19,7 +19,7 @@ export const Container = styled.div`
       font-weight: 700;
     }
   }
-  @media screen and (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
     > div {
       h1,
       img {
@@ -54,7 +54,7 @@ export const Form = styled.form`
     line-height: 24px;
     margin: 0 auto;
   }
-  @media screen and (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.LG}) {
     h1 {
       font-size: 1.4rem;
     }

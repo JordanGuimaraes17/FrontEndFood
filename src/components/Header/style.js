@@ -8,7 +8,7 @@ export const Container = styled.header`
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND_600};
   div {
     svg {
-      font-size: 1.4rem;
+      font-size: 1.8rem;
     }
   }
   .new {

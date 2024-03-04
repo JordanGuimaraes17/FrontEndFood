@@ -9,9 +9,8 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
-import { Menu } from '../menu'
 
-export function Header({ onSearchChange }) {
+export function Header({ onSearchChange, onOpenMenu }) {
   const [search, setSearch] = useState('')
   const { signOut } = useAuth()
   const navigate = useNavigate()
@@ -43,7 +42,7 @@ export function Header({ onSearchChange }) {
     <Container>
       <div className="responsivo">
         <div className="menu">
-          <List />
+          <List onClick={onOpenMenu} />
         </div>
 
         <img className="img01" src={PolygonSvg} alt="logo" />
