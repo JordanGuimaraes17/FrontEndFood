@@ -23,7 +23,7 @@ export const Container = styled.footer`
     font-size: 0.7rem;
   }
   @media screen and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
-    padding: 0.5rem 1rem;
+    padding: 1rem 1rem;
     > h3 {
       font-size: 1rem;
       img {

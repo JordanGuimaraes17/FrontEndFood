@@ -3,7 +3,7 @@ import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
 export const Container = styled.div`
   display: grid;
   grid-template-areas: 'header' 'main' 'footer';
-  min-height: 100dvh;
+  min-height: 100vh;
   grid-template-rows: auto 1fr auto;
 `
 export const Content = styled.section`
@@ -15,6 +15,9 @@ export const Content = styled.section`
     grid-area: main;
     overflow-y: auto;
     max-height: calc(100vh - 9.5rem);
+    @media screen and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+      max-height: calc(100vh - 6rem);
+    }
 
     &::-webkit-scrollbar {
       width: 0; /* Oculta a barra de rolagem no Chrome/Safari/Opera */
@@ -51,10 +54,7 @@ export const Content = styled.section`
     .text h2 {
       font-size: 2rem;
     }
-    .box {
-    }
-    .box img {
-    }
+
     .text span {
       font-size: 0.7rem;
     }
@@ -63,10 +63,6 @@ export const Content = styled.section`
   @media screen and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
     .text h2 {
       font-size: 2rem;
-    }
-    .box {
-    }
-    .box img {
     }
   }
   @media screen and (min-width: ${DEVICE_BREAKPOINTS.XS}) and (max-width: ${DEVICE_BREAKPOINTS.PR}) {
