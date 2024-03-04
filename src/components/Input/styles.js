@@ -4,7 +4,7 @@ import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
 export const Container = styled.div`
   width: 100%;
   display: flex;
-  height: 2.8rem;
+  height: 3.5rem;
 
   align-items: center;
 
@@ -34,10 +34,7 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
   }
 
-  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-    height: 2.6rem;
-  }
-  @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
     svg {
       margin-left: 1rem;
     }

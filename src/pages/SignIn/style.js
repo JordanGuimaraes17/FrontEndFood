@@ -15,22 +15,14 @@ export const Container = styled.div`
       height: 2.9rem;
     }
     h1 {
-      font-size: 2.6rem;
+      font-size: 2rem;
       font-weight: 700;
     }
   }
   @media screen and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
-    > div {
-      h1,
-      img {
-        margin-bottom: 4rem;
-        font-size: 1.6rem;
-      }
-    }
-
-    padding: 2rem;
+    padding: 4rem 2rem;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
   }
 `
 export const Form = styled.form`
@@ -54,9 +46,8 @@ export const Form = styled.form`
     line-height: 24px;
     margin: 0 auto;
   }
-  @media screen and (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-    h1 {
-      font-size: 1.4rem;
-    }
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    padding: 3rem;
+    gap: 3rem;
   }
 `
