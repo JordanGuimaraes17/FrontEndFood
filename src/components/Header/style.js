@@ -2,82 +2,98 @@ import styled from 'styled-components'
 import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
 export const Container = styled.header`
   cursor: pointer;
+
   grid-area: header;
   width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  justify-content: space-between;
-  padding: 0 5rem;
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND_600};
   div {
-    flex: 1;
+    svg {
+      font-size: 1.4rem;
+    }
   }
   .new {
     width: 17%;
   }
-  @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
-    .menu {
-      display: none;
-    }
-    .img02 {
-      display: none;
-    }
+  .responsivo {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
   }
 
-  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-    h1 {
-      font-size: 1.6rem;
-    }
-
-    .menu {
+  @media (min-width: ${DEVICE_BREAKPOINTS.SM}) {
+    .none {
       display: none;
     }
-    .img02 {
-      display: none;
+    .new {
+      width: 30%;
     }
-  }
-
-  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
-    gap: 5rem;
-    .input-container {
-      display: none;
-    }
-    .img02 {
-      display: none;
-    }
-    .menu {
-      display: flex;
-    }
-  }
-
-  @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
-    gap: 1rem;
-    padding: 0 1rem;
 
     .img01 {
       display: none;
     }
-    .img02 {
+    h1 {
+      gap: 1rem;
+      align-items: center;
       display: flex;
+      img {
+        height: 1.2rem;
+      }
+      font-size: 1.4rem;
     }
 
     .new {
-      height: 2rem;
-      width: 30%;
+      height: 2.4rem;
     }
 
+    .input-container {
+      display: none;
+    }
+  }
+  @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
     h1 {
-      gap: 0.8rem;
-      display: flex;
+      gap: 1rem;
       align-items: center;
-      font-size: 1rem;
+      display: flex;
       img {
-        height: 1.5rem;
+        height: 2rem;
       }
+      font-size: 2rem;
+    }
+    .none {
+      display: none;
+    }
+    .img01 {
+      display: none;
     }
     .input-container {
       display: none;
+    }
+    .new {
+      width: 17%;
+    }
+  }
+  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+    .responsivo {
+      .input-container {
+        width: 40%;
+      }
+    }
+    .input-container {
+      display: flex;
+    }
+    .menu {
+      display: none;
+    }
+    .none {
+      display: flex;
+    }
+  }
+  @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+    .responsivo {
+      .input-container {
+        width: 50%;
+      }
     }
   }
 `

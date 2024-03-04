@@ -4,22 +4,17 @@ export const Container = styled.div`
   display: grid;
   grid-template-areas: 'header' 'main' 'footer';
   min-height: 100dvh;
-  grid-template-rows: 5.4rem auto 3.5rem;
-  @media screen and (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-    grid-template-rows: 4.2rem auto 3rem;
-  }
-  @media screen and (max-width: ${DEVICE_BREAKPOINTS.SM}) {
-    grid-template-rows: 4rem auto 2.5rem;
-  }
+  grid-template-rows: auto 1fr auto;
 `
 export const Content = styled.section`
+  width: 80%;
+  padding: 0 0 1rem;
   margin: 0 auto;
 
   main {
-    padding: 1.4rem 2rem;
     grid-area: main;
     overflow-y: auto;
-    max-height: calc(100dvh - 9rem);
+    max-height: calc(100vh - 9.5rem);
 
     &::-webkit-scrollbar {
       width: 0; /* Oculta a barra de rolagem no Chrome/Safari/Opera */
@@ -32,92 +27,63 @@ export const Content = styled.section`
   }
 
   .box {
-    display: flex;
-    justify-content: end;
+    gap: 2rem;
     display: flex;
     align-items: center;
-    margin-top: 6rem;
-    height: 13rem;
+    margin-top: 7rem;
     background: ${({ theme }) => theme.COLORS.BACKGROUND_600};
-    position: relative;
-    overflow: visible;
-    padding: 0 12rem;
   }
   .box img {
-    width: 57rem;
-    height: 18rem;
-    margin-top: -5rem;
-    position: absolute;
-    left: -16rem;
+    width: 40%;
+    margin-top: -6rem;
     object-fit: contain;
   }
   .text h2 {
-    font-weight: 500;
+    font-weight: 300;
     font-size: 2rem;
   }
   .text span {
-    font-size: 0.87rem;
+    font-size: 1rem;
     color: ${({ theme }) => theme.COLORS.LIGHT_400};
-  }
-  .container {
-    padding: 1rem;
   }
 
   @media screen and (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-    .box {
-      margin-top: 4rem;
-      height: 9rem;
-      justify-content: end;
-      padding: 0 4.3rem;
-    }
-    .box img {
-      width: 60rem;
-      height: 13rem;
-      left: -21rem;
-      top: 1rem;
-    }
-  }
-  @media screen and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
-    .box {
-      padding: 4rem;
-      justify-content: end;
-    }
-
     .text h2 {
       font-size: 2rem;
     }
+    .box {
+    }
     .box img {
-      width: 45rem;
-      left: -12rem;
+    }
+    .text span {
+      font-size: 0.7rem;
     }
   }
-  @media screen and (max-width: ${DEVICE_BREAKPOINTS.SM}) {
-    main {
-      padding: 1rem 1.2rem;
-    }
 
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    .text h2 {
+      font-size: 2rem;
+    }
     .box {
-      padding: 0.5rem;
-      margin-top: 1rem;
-      height: 6rem;
+    }
+    .box img {
+    }
+  }
+  @media screen and (min-width: ${DEVICE_BREAKPOINTS.XS}) and (max-width: ${DEVICE_BREAKPOINTS.PR}) {
+    .box {
+      margin-top: 2rem;
+      gap: 0.5rem;
+    }
+    .box img {
+      margin-top: -0.5rem;
     }
     .text {
-      width: 11rem;
-    }
-
-    .text h2 {
-      font-size: 1rem;
-    }
-
-    .box img {
-      height: 8rem;
-      width: 9rem;
-      left: -1rem;
-      top: 4rem;
-    }
-
-    .text span {
-      font-size: 0.6rem;
+      h2 {
+        font-size: 1rem;
+      }
+      span {
+        font-size: 0.5rem;
+      }
     }
   }
 `

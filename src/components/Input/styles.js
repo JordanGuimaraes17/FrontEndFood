@@ -2,8 +2,9 @@ import styled from 'styled-components'
 import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
 
 export const Container = styled.div`
+  width: 100%;
   display: flex;
-  height: 3rem;
+  height: 2.8rem;
 
   align-items: center;
 
@@ -34,7 +35,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-    height: 3rem;
+    height: 2.6rem;
   }
   @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
     svg {

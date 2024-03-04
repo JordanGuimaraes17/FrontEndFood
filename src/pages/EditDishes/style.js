@@ -143,9 +143,10 @@ export const Content = styled.section`
         flex-direction: column;
         gap: 0;
       }
-    }
-    footer {
-      margin-bottom: 1.4rem;
+      footer {
+        aside {
+        }
+      }
     }
   }
   @media screen and (max-width: ${DEVICE_BREAKPOINTS.LG}) {

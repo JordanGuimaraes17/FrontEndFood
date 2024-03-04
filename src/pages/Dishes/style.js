@@ -66,7 +66,6 @@ export const Content = styled.section`
     padding: 2rem 2rem;
   }
   @media screen and (min-width: ${DEVICE_BREAKPOINTS.LG}) {
-    padding: 1rem 2rem;
     main {
       > img {
         width: 20rem;
@@ -94,8 +93,7 @@ export const Content = styled.section`
   }
   @media screen and (max-width: ${DEVICE_BREAKPOINTS.SM}) {
     main {
-      gap: 1rem;
-
+      align-items: center;
       justify-content: center;
       flex-direction: column;
 
@@ -104,12 +102,14 @@ export const Content = styled.section`
         height: 14rem;
       }
       div {
-        margin: 0 auto;
-
+        justify-content: center;
         p {
           line-height: 1.5rem;
           font-size: 1rem;
         }
+      }
+      footer {
+        justify-content: center;
       }
     }
   }

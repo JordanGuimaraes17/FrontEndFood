@@ -3,7 +3,7 @@ import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
 
 export const Container = styled.footer`
   grid-area: footer;
-  padding: 1rem 5rem;
+  padding: 0.5rem 2rem;
   width: 100%;
   display: flex;
   align-items: center;
@@ -11,24 +11,29 @@ export const Container = styled.footer`
   color: ${({ theme }) => theme.COLORS.LIGHT_700};
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND_600};
   > h3 {
+    img {
+      height: 2rem;
+    }
     display: flex;
     align-items: center;
     gap: 1rem;
   }
   span {
     color: ${({ theme }) => theme.COLORS.LIGHT_200};
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
-  @media screen and (max-width: ${DEVICE_BREAKPOINTS.SM}) {
-    padding: 0 1.4rem;
-    h3 {
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    padding: 0.5rem 1rem;
+    > h3 {
       font-size: 1rem;
-    }
-    img {
-      height: 1.5rem;
+      img {
+        height: 1rem;
+      }
+
+      gap: 0.5rem;
     }
     span {
-      font-size: 0.4rem;
+      font-size: 0.5rem;
     }
   }
 `

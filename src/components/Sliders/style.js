@@ -7,7 +7,7 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     text-align: center;
-    min-height: 28rem;
+    max-height: 28rem;
     cursor: pointer;
     padding: 1.5rem;
     background: ${({ theme }) => theme.COLORS.BACKGROUND_300};
@@ -72,72 +72,26 @@ export const Container = styled.div`
       font-size: 2rem;
     }
   }
-
-  @media screen and (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    padding: 0.5rem 0rem 1rem;
     .slider {
-      footer {
-        span {
-          font-weight: 200;
-          font-size: 0.8rem;
-        }
-        .number {
-          font-size: 1rem;
-        }
-      }
-    }
-    p {
-      display: none;
-    }
-    h2 {
-      font-size: 0.8rem;
-
-      line-height: 1rem;
-    }
-
-    > span {
-      font-size: 0.8rem;
-      line-height: 0.8rem;
-    }
-
-    .swiper-button-next,
-    .swiper-button-prev {
-      display: none;
-    }
-  }
-
-  @media screen and (min-width: ${DEVICE_BREAKPOINTS.SM}) and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
-    width: 17rem;
-
-    .slider {
-      padding: 0.8rem;
-      min-height: 5rem;
       h2 {
-        font-size: 1rem;
+        font-size: 1.4rem;
       }
       > span {
-        font-size: 0.8rem;
-        line-height: 1.2rem;
+        font-size: 1.2rem;
+        line-height: 2rem;
       }
-      footer {
-        margin-bottom: 0.1rem;
-      }
-    }
-
-    .swiper-button-next,
-    .swiper-button-prev {
-      display: none;
     }
     .slide-item {
-      width: 4rem;
-      height: 4rem;
+      width: 5rem;
+      height: 5rem;
     }
   }
 
-  @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
-    width: 50rem;
-
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    padding: 0.5rem 0rem 1rem;
     .slider {
-      min-height: 20rem;
       h2 {
         font-size: 1.4rem;
       }
@@ -157,14 +111,32 @@ export const Container = styled.div`
     }
   }
 
-  @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
-    width: 66rem;
-    h2 {
-      font-size: 1.4rem;
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+    .slider {
+      gap: 0.3rem;
+      padding: 0.5rem 0rem 0.8rem;
+      footer {
+        span {
+          font-weight: 200;
+          font-size: 0.8rem;
+        }
+        .number {
+          font-size: 1rem;
+        }
+      }
     }
-    .slide-item {
-      width: 10rem;
-      height: 10rem;
+    p {
+      display: none;
+    }
+
+    > span {
+      font-size: 0.8rem;
+      line-height: 0.8rem;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      display: none;
     }
   }
 `

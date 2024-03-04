@@ -138,6 +138,7 @@ export const Content = styled.section`
   @media screen and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
     form {
       .button {
+        width: 100%;
         margin-bottom: 1rem;
       }
       padding: 0 1.8rem;

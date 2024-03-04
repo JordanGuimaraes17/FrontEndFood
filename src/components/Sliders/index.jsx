@@ -126,7 +126,7 @@ export function Sliders({ category, searchTerm }) {
           modifier: 2.5
         }}
         breakpoints={{
-          320: { slidesPerView: 1.4 },
+          320: { slidesPerView: 1.6 },
           768: { slidesPerView: 3 },
           1024: { slidesPerView: 3.4 }
         }}
