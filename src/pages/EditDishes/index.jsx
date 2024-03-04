@@ -12,8 +12,11 @@ import { useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { Menu } from '../../components/menu'
 
 export function EditDishes() {
+  const [searchTerm, setSearchTerm] = useState('')
+  const [menuIsOpen, setMenuIsOpen] = useState(false)
   const [dishData, setDishData] = useState({
     name: '',
     description: '',
@@ -37,6 +40,10 @@ export function EditDishes() {
   const handleNavegacao = rota => {
     navigate(rota)
   }
+  const handleSearchChange = term => {
+    setSearchTerm(term)
+  }
+
   function handleAddIngredient() {
     if (newIngredient.trim() !== '') {
       setDishData(prevData => ({
@@ -222,7 +229,11 @@ export function EditDishes() {
 
   return (
     <Container>
-      <Header02 />
+      <Menu menuIsOpen={menuIsOpen} onCloseMenu={() => setMenuIsOpen(false)} />
+      <Header02
+        onOpenMenu={() => setMenuIsOpen(true)}
+        onSearchChange={handleSearchChange}
+      />
       <Content>
         <main>
           <form>

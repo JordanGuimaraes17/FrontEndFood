@@ -8,8 +8,9 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
+import { List } from '@phosphor-icons/react'
 
-export function Header02({ onSearchChange }) {
+export function Header02({ onSearchChange, onOpenMenu }) {
   const [search, setSearch] = useState('')
   const navigate = useNavigate()
   const { signOut } = useAuth()
@@ -37,7 +38,7 @@ export function Header02({ onSearchChange }) {
   return (
     <Header>
       <div className="menu">
-        <ButtonText icon={CiLogin} />
+        <List onClick={onOpenMenu} />
       </div>
       <img className="img01" src={PolygonSvg} alt="logo" />
 

@@ -11,10 +11,11 @@ import { Button } from '../../components/Button'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { api } from '../../services/api'
-import { useAuth } from '../../hooks/auth'
+import { Menu } from '../../components/menu'
 
 export function AddDishes() {
-  const { signOut } = useAuth()
+  const [searchTerm, setSearchTerm] = useState('')
+  const [menuIsOpen, setMenuIsOpen] = useState(false)
   const [newDishIngredients, setNewDishIngredients] = useState([])
   const [newIngredient, setNewIngredient] = useState('')
   const [name, setName] = useState('')
@@ -28,10 +29,6 @@ export function AddDishes() {
 
   function handleNavegacao(rota) {
     navigate(rota)
-  }
-  function handleSignOut() {
-    navigate('/')
-    signOut()
   }
 
   function handleAddNewIngredient() {
@@ -106,6 +103,9 @@ export function AddDishes() {
       }
     }
   }
+  const handleSearchChange = term => {
+    setSearchTerm(term)
+  }
 
   useEffect(() => {
     async function fetchCategories() {
@@ -126,7 +126,11 @@ export function AddDishes() {
 
   return (
     <Container>
-      <Header02 />
+      <Menu menuIsOpen={menuIsOpen} onCloseMenu={() => setMenuIsOpen(false)} />
+      <Header02
+        onOpenMenu={() => setMenuIsOpen(true)}
+        onSearchChange={handleSearchChange}
+      />
       <Content>
         <main>
           <form>

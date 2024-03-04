@@ -164,7 +164,7 @@ export const Container = styled.div`
     }
   }
 
-  @media screen and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.LG}) {
     main {
       padding: 0 4rem 1.2rem;
       .page-title {
@@ -177,7 +177,7 @@ export const Container = styled.div`
       }
     }
   }
-  @media screen and (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+  @media screen and (max-width: ${DEVICE_BREAKPOINTS.MD}) {
     > header {
       padding: 1rem 1rem;
       font-size: 1rem;

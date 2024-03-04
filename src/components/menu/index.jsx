@@ -1,3 +1,5 @@
+// No componente Menu
+
 import { ButtonText } from '../ButtonText'
 import { Footer } from '../Footer'
 import { Input } from '../Input'
@@ -7,34 +9,29 @@ import { Container, Header, Content } from './style'
 import { useAuth } from '../../hooks/auth'
 import { USER_ROLE } from '../../utils/roles'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { api } from '../../services/api'
+import { useState } from 'react'
 
 export function Menu({ menuIsOpen, onCloseMenu, onSearchChange }) {
   const { user, signOut } = useAuth()
   const [search, setSearch] = useState('')
   const navigate = useNavigate()
+
   const handleNavegacao = rota => {
     navigate(rota)
   }
+
   function handleSignOut() {
     navigate('/')
     signOut()
   }
 
-  useEffect(() => {
-    async function fetchDishes() {
-      try {
-        const response = await api.get(`/dishes?name=${search}`)
-      } catch (error) {
-        console.error('Erro ao buscar pratos:', error)
-      }
-    }
-
-    if (search !== '') {
-      fetchDishes()
-    }
-  }, [search])
+  // Função para lidar com a busca de pratos
+  const handleSearch = () => {
+    // Chama a função onSearchChange passando o termo de pesquisa
+    onSearchChange(search)
+    // Navega para a página inicial
+    navigate('/')
+  }
 
   return (
     <Container data-menu-is-open={menuIsOpen}>
@@ -49,11 +46,9 @@ export function Menu({ menuIsOpen, onCloseMenu, onSearchChange }) {
           <Input
             placeholder="Busque por pratos ou ingredientes"
             icon={MagnifyingGlass}
-            onChange={e => {
-              setSearch(e.target.value)
-              // Chamando a função onSearchChange passada como propriedade
-              onSearchChange(e.target.value)
-            }}
+            onChange={e => setSearch(e.target.value)}
+            // Adiciona a chamada para handleSearch quando o ícone de pesquisa é clicado
+            onIconClick={handleSearch}
           />
 
           {user.role === USER_ROLE.ADMIN && (
